@@ -1,0 +1,9 @@
+<h2>Commandes</h2>
+
+<p>{{ message }}</p>
+
+<ul>
+  <li *ngFor="let order of orders">
+    {{ order | json }}
+  </li>
+</ul>

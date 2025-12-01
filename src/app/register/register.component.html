@@ -1,0 +1,29 @@
+<h2>Créer un compte</h2>
+
+<form (ngSubmit)="onSubmit()">
+  <label>
+    Prénom
+    <input type="text" name="firstname" [(ngModel)]="firstname" required />
+  </label>
+
+  <label>
+    Nom
+    <input type="text" name="lastname" [(ngModel)]="lastname" required />
+  </label>
+
+  <label>
+    Email
+    <input type="email" name="email" [(ngModel)]="email" required />
+  </label>
+
+  <label>
+    Mot de passe
+    <input type="password" name="password" [(ngModel)]="password" required minlength="6" />
+  </label>
+
+  <button type="submit" [disabled]="loading">
+    {{ loading ? 'Création...' : "S'inscrire" }}
+  </button>
+</form>
+
+<p *ngIf="message">{{ message }}</p>
