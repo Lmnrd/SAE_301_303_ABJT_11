@@ -1,0 +1,22 @@
+<h2>Créer une commande</h2>
+
+<div>
+  <input type="text" placeholder="Nom de l'article" [(ngModel)]="nom_article">
+  <input type="number" placeholder="Quantité" [(ngModel)]="quantite">
+  <input type="number" placeholder="Prix unitaire" [(ngModel)]="prix_unitaire">
+
+  <button (click)="ajouterArticle()">Ajouter article</button>
+</div>
+
+<h3>Articles ajoutés :</h3>
+<ul>
+  <li *ngFor="let art of articles">
+    {{ art.nom_article }} — {{ art.quantite }} × {{ art.prix_unitaire }}€
+  </li>
+</ul>
+
+<button (click)="validerCommande()" [disabled]="articles.length === 0">
+  Valider la commande
+</button>
+
+<p>{{ message }}</p>

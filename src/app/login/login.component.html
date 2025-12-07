@@ -1,0 +1,17 @@
+<h2>Connexion</h2>
+
+<form (ngSubmit)="onSubmit()">
+  <label>
+    Email
+    <input type="email" [(ngModel)]="email" name="email" required />
+  </label>
+
+  <label>
+    Mot de passe
+    <input type="password" [(ngModel)]="password" name="password" required />
+  </label>
+
+  <button type="submit">Se connecter</button>
+</form>
+
+<p *ngIf="message">{{ message }}</p>
