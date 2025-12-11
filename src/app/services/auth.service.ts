@@ -1,4 +1,3 @@
-// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -23,7 +22,7 @@ interface RegisterResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost/SAes/test_front/sae_301_303/src/api'; // à adapter à ton URL réelle
+  private baseUrl = 'http://localhost/SAes/SAE_301_303_ABJT_11/src/api';
 
   constructor(private http: HttpClient) {}
 
