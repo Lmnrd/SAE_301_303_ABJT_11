@@ -1,29 +1,44 @@
-<h2>Créer un compte</h2>
+<div class="page-inscription">
+  <div class="carte-globale">
+    <div class="panneau-gauche">
+      <img src="assets/logo_blanc.png" alt="It'SUSHI Logo" class="logo" />
+    </div>
 
-<form (ngSubmit)="onSubmit()">
-  <label>
-    Prénom
-    <input type="text" name="firstname" [(ngModel)]="firstname" required />
-  </label>
+    <div class="panneau-droit">
+      <div class="entete-texte">
+        <h2>Bonjour</h2>
+        <p class="sous-titre">Bienvenue sur It'SUSHI - Créez votre compte</p>
+        <div class="separateur"></div>
+      </div>
 
-  <label>
-    Nom
-    <input type="text" name="lastname" [(ngModel)]="lastname" required />
-  </label>
+      <form (ngSubmit)="onSubmit()">
+        <div class="groupe-champ">
+          <label>Prénom</label>
+          <input type="text" name="firstname" [(ngModel)]="firstname" placeholder="Votre Prénom" required />
+        </div>
 
-  <label>
-    Email
-    <input type="email" name="email" [(ngModel)]="email" required />
-  </label>
+        <div class="groupe-champ">
+          <label>Nom</label>
+          <input type="text" name="lastname" [(ngModel)]="lastname" placeholder="Votre Nom" required />
+        </div>
 
-  <label>
-    Mot de passe
-    <input type="password" name="password" [(ngModel)]="password" required minlength="6" />
-  </label>
+        <div class="groupe-champ">
+          <label>Votre Email</label>
+          <input type="email" name="email" [(ngModel)]="email" placeholder="It'SUSHI@gmail.com" required />
+        </div>
 
-  <button type="submit" [disabled]="loading">
-    {{ loading ? 'Création...' : "S'inscrire" }}
-  </button>
-</form>
+        <div class="groupe-champ">
+          <label>Votre mot de passe</label>
+          <input type="password" name="password" [(ngModel)]="password" placeholder="**************" required
+            minlength="6" />
+        </div>
 
-<p *ngIf="message">{{ message }}</p>
+        <button type="submit" [disabled]="loading" class="bouton-valider">
+          {{ loading ? 'Création...' : "S'inscrire" }}
+        </button>
+      </form>
+
+      <p *ngIf="message" class="message-erreur">{{ message }}</p>
+    </div>
+  </div>
+</div>
