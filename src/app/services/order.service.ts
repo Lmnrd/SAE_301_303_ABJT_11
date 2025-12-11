@@ -12,7 +12,7 @@ interface OrdersResponse {
   providedIn: 'root'
 })
 export class OrderService {
-  private baseUrl = 'http://localhost/SAes/test_front/sae_301_303/src/api'; // idem que plus haut
+  private baseUrl = 'http://localhost/SAes/SAE_301_303_ABJT_11/src/api';
 
   constructor(private http: HttpClient) {}
 
