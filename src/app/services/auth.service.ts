@@ -1,10 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+interface User {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+}
 
 interface LoginResponse {
   message: string;
   token: string;
+  user: User;
 }
 
 interface RegisterPayload {
@@ -16,6 +25,7 @@ interface RegisterPayload {
 
 interface RegisterResponse {
   message: string;
+  user: User;
 }
 
 @Injectable({
@@ -30,7 +40,13 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${this.baseUrl}/users/login.php`, {
       email,
       password
-    });
+    }).pipe(
+      // pipe = intercepte la réponse et stocke l'user/token avant de passer les données au composant
+      tap(res => {
+        localStorage.setItem('user', JSON.stringify(res.user));
+        localStorage.setItem('token', res.token);
+      })
+    );
   }
 
   register(payload: RegisterPayload): Observable<RegisterResponse> {
@@ -40,6 +56,21 @@ export class AuthService {
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       }
+    ).pipe(
+      // pipe = intercepte la réponse et stocke l'user avant de passer les données au composant
+      tap(res => {
+        localStorage.setItem('user', JSON.stringify(res.user));
+      })
     );
+  }
+
+  getCurrentUser(): User | null {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
   }
 }

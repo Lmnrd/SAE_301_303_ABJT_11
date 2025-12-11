@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -10,9 +11,6 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-
-
-
 export class RegisterComponent {
   firstname = '';
   lastname = '';
@@ -21,7 +19,10 @@ export class RegisterComponent {
   message = '';
   loading = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   onSubmit() {
     if (this.loading) {
@@ -30,13 +31,6 @@ export class RegisterComponent {
 
     this.loading = true;
     this.message = '';
-
-    console.log('Register payload', {
-      firstname: this.firstname,
-      lastname: this.lastname,
-      email: this.email,
-      password: this.password
-    });
 
     this.authService
       .register({
@@ -49,13 +43,14 @@ export class RegisterComponent {
         next: (res) => {
           this.message = res.message;
           this.resetForm();
+          this.router.navigate(['/home']);
         },
         error: (err) => {
           this.message = err.error?.message || "Impossible de créer le compte";
+        },
+        complete: () => {
+          this.loading = false;
         }
-      })
-      .add(() => {
-        this.loading = false;
       });
   }
 
@@ -64,8 +59,4 @@ export class RegisterComponent {
     this.lastname = '';
     this.email = '';
     this.password = '';
-  }
-
-  
-
-}
+  }}

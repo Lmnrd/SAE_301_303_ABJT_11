@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommandesService, ArticleCommande } from '../services/commandes.service';
+import { AuthService } from '../services/auth.service';
 
 type MenuItem = {
   id: number;
@@ -33,17 +34,23 @@ export class CommandesComponent implements OnInit {
     articles: ArticleCommande[];
   }[] = [];
   message = '';
+  userName = '';
 
   private readonly menuUrl = 'assets/data/commandes.json';
 
   constructor(
     private commandesService: CommandesService,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
-    this.chargerCatalogue();
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      this.userName = `${user.firstname} ${user.lastname}`;
+    }
 
+    this.chargerCatalogue();
     this.chargerCommandes();
   }
 
@@ -82,7 +89,7 @@ export class CommandesComponent implements OnInit {
     const article = this.selection[itemId];
     if (!article) return;
 
-    const qte = Math.max(1, quantite); // minimum 1
+    const qte = Math.max(1, quantite);
     this.selection[itemId] = { ...article, quantite: qte };
   }
 
@@ -91,21 +98,23 @@ export class CommandesComponent implements OnInit {
   }
 
   validerCommande() {
+    const user = this.authService.getCurrentUser();
+    
+    if (!user) {
+      this.message = 'Veuillez vous connecter pour passer une commande.';
+      return;
+    }
+
     const articles = this.articlesSelectionnes;
     if (articles.length === 0) {
       this.message = 'Sélectionnez au moins un article.';
       return;
     }
 
-    this.commandesService.creerCommande(articles).subscribe({
+    this.commandesService.creerCommande(articles, user.id).subscribe({
       next: (res) => {
         this.message = `${res.message} — ID : ${res.commande_id}`;
-        this.selection = {}; // reset
-        this.chargerCommandes();
-      },
-      error: (err) => {
-        console.error("Erreur backend :", err);
-        this.message = err.error?.message || "Impossible de créer la commande";
+        this.selection = {};
       }
     });
   }

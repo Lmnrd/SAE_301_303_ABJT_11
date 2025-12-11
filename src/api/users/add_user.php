@@ -2,10 +2,10 @@
 require_once __DIR__ . '/../manager/UserManager.php';
 
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: http://localhost:4200"); // autorise le front Angular local
-header("Access-Control-Allow-Headers: Content-Type, Authorization"); // autorise l'envoi des entêtes JSON/token
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); // méthodes permises pour cette ressource
-header("Access-Control-Allow-Credentials: true"); // permet l'envoi des cookies/credentials
+header("Access-Control-Allow-Origin: http://localhost:4200");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Credentials: true");
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(204);
@@ -35,7 +35,7 @@ if ($manager->findUserByEmail($data['email'])) {
 
 $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
 
-$manager->insertUser(
+$userId = $manager->insertUser(
     $data['firstname'],
     $data['lastname'],
     $data['email'],
@@ -43,4 +43,13 @@ $manager->insertUser(
 );
 
 http_response_code(201);
-echo json_encode(["message" => "Utilisateur créé"]);
+echo json_encode([
+    "message" => "Utilisateur créé",
+    "user" => [
+        "id" => $userId,
+        "firstname" => $data['firstname'],
+        "lastname" => $data['lastname'],
+        "email" => $data['email']
+    ]
+]);
+

@@ -30,11 +30,11 @@ export class CommandesService {
 
   getCommandes(): Observable<Commande[]> {
     return this.http.get<Commande[]>(`${this.baseUrl}/get_commandes.php`);
-  } //affiche les commandes précédentes
+  }
 
-  creerCommande(articles: ArticleCommande[]): Observable<ReponseCommande> {
+  creerCommande(articles: ArticleCommande[], userId: number): Observable<ReponseCommande> {
     return this.http.post<ReponseCommande>(`${this.baseUrl}/add_commande.php`, {
-      articles
-    });
+      articles,
+      id_user: userId    });
   }
 }
