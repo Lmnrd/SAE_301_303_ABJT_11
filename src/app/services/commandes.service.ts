@@ -8,6 +8,13 @@ export interface ArticleCommande {
   prix_unitaire: number;
 }
 
+export interface Commande {
+  id: number;
+  date_commande: string;
+  montant_total: number;
+  articles: ArticleCommande[];
+}
+
 export interface ReponseCommande {
   message: string;
   commande_id: number;
@@ -17,21 +24,17 @@ export interface ReponseCommande {
   providedIn: 'root'
 })
 export class CommandesService {
-
-  private baseUrl = 'http://localhost/SAes/test_front/sae_301_303/src/api/commandes';
+  private readonly baseUrl = 'http://localhost/SAes/SAE_301_303_ABJT_11/src/api/commandes';
 
   constructor(private http: HttpClient) {}
 
-  // Récupérer toutes les commandes
-  getCommandes(): Observable<ArticleCommande[]> {
-    return this.http.get<ArticleCommande[]>(`${this.baseUrl}/get_commandes.php`);
-  }
+  getCommandes(): Observable<Commande[]> {
+    return this.http.get<Commande[]>(`${this.baseUrl}/get_commandes.php`);
+  } //affiche les commandes précédentes
 
-  // Créer une nouvelle commande
   creerCommande(articles: ArticleCommande[]): Observable<ReponseCommande> {
-    return this.http.post<ReponseCommande>(
-      `${this.baseUrl}/add_commande.php`,
-      { articles }
-    );
+    return this.http.post<ReponseCommande>(`${this.baseUrl}/add_commande.php`, {
+      articles
+    });
   }
 }

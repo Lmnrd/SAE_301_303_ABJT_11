@@ -1,22 +1,54 @@
 <h2>Créer une commande</h2>
 
-<div>
-  <input type="text" placeholder="Nom de l'article" [(ngModel)]="nom_article">
-  <input type="number" placeholder="Quantité" [(ngModel)]="quantite">
-  <input type="number" placeholder="Prix unitaire" [(ngModel)]="prix_unitaire">
+<section *ngIf="menu.length">
+  <h3>Catalogue</h3>
+  <div *ngFor="let item of menu">
+    <label>
+      <input
+        type="checkbox"
+        [checked]="isSelected(item.id)"
+        (change)="toggleArticle(item, $any($event.target).checked)"
+      >
+      <strong>{{ item.nom }}</strong>
+      <span>({{ item.pieces || '?' }} pièces) — {{ item.prix }} €</span>
+    </label>
 
-  <button (click)="ajouterArticle()">Ajouter article</button>
-</div>
+    <div *ngIf="isSelected(item.id)" style="margin-left: 1.5rem;">
+      <label>
+        Quantité :
+        <input
+          type="number"
+          min="1"
+          [value]="selection[item.id].quantite || 1"
+          (input)="changerQuantite(item.id, +$any($event.target).value)"
+        >
+      </label>
+      <div *ngIf="item.aliments?.length">
+        <small>Composition :</small>
+        <ul>
+          <li *ngFor="let ali of item.aliments">
+            {{ ali.nom }} ({{ ali.quantite }})
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h3>Articles ajoutés :</h3>
-<ul>
-  <li *ngFor="let art of articles">
-    {{ art.nom_article }} — {{ art.quantite }} × {{ art.prix_unitaire }}€
-  </li>
-</ul>
-
-<button (click)="validerCommande()" [disabled]="articles.length === 0">
+<button (click)="validerCommande()" [disabled]="articlesSelectionnes.length === 0">
   Valider la commande
 </button>
 
 <p>{{ message }}</p>
+
+<section *ngIf="commandes.length">
+  <h3>Commandes enregistrées</h3>
+  <div *ngFor="let cmd of commandes">
+    <strong>Commande #{{ cmd.id }}</strong> — {{ cmd.date_commande }} — Total : {{ cmd.montant_total }} €
+    <ul>
+      <li *ngFor="let art of cmd.articles">
+        {{ art.nom_article }} — {{ art.quantite }} × {{ art.prix_unitaire }} €
+      </li>
+    </ul>
+  </div>
+</section>
