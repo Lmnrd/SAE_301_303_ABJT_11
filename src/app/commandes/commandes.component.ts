@@ -62,7 +62,9 @@ export class CommandesComponent implements OnInit {
   }
 
   private chargerCommandes() {
-    this.commandesService.getCommandes().subscribe({
+    const user = this.authService.getCurrentUser();
+    const idUser = user ? user.id : undefined;
+    this.commandesService.getCommandes(idUser).subscribe({
       next: (data) => (this.commandes = data),
       error: (err) => console.error('Erreur chargement commandes :', err)
     });
@@ -117,5 +119,9 @@ export class CommandesComponent implements OnInit {
         this.selection = {};
       }
     });
+  }
+
+  userIsLoggedIn(): boolean {
+    return !!this.authService.getCurrentUser();
   }
 }
