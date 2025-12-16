@@ -1,0 +1,16 @@
+<h2>Mon compte</h2>
+
+<div *ngIf="user; else notLoggedIn">
+  <div class="account-info">
+    <h3>Informations personnelles</h3>
+    <p><strong>Prénom :</strong> {{ user.firstname }}</p>
+    <p><strong>Nom :</strong> {{ user.lastname }}</p>
+    <p><strong>Email :</strong> {{ user.email }}</p>
+  </div>
+
+  <button (click)="logout()" class="logout-btn">Se déconnecter</button>
+</div>
+
+<ng-template #notLoggedIn>
+  <p>Vous n'êtes pas connecté. <a routerLink="/login">Se connecter</a></p>
+</ng-template>

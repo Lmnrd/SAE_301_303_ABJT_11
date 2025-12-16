@@ -17,7 +17,8 @@ export class OrderService {
   constructor(private http: HttpClient) {}
 
   getOrders(): Observable<OrdersResponse> {
-    const token = localStorage.getItem('token') || '';
+    // récupère le token depuis sessionStorage pour l'authentification
+    const token = sessionStorage.getItem('token') || '';
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`

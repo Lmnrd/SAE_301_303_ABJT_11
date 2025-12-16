@@ -43,8 +43,10 @@ export class AuthService {
     }).pipe(
       // pipe = intercepte la réponse et stocke l'user/token avant de passer les données au composant
       tap(res => {
-        localStorage.setItem('user', JSON.stringify(res.user));
-        localStorage.setItem('token', res.token);
+        // utilise sessionStorage pour déconnexion auto à la fermeture de la page
+        // sessionStorage se vide automatiquement quand l'onglet se ferme
+        sessionStorage.setItem('user', JSON.stringify(res.user));
+        sessionStorage.setItem('token', res.token);
       })
     );
   }
@@ -59,18 +61,21 @@ export class AuthService {
     ).pipe(
       // pipe = intercepte la réponse et stocke l'user avant de passer les données au composant
       tap(res => {
-        localStorage.setItem('user', JSON.stringify(res.user));
+        // stockage en sessionStorage pour déconnexion auto
+        sessionStorage.setItem('user', JSON.stringify(res.user));
       })
     );
   }
 
   getCurrentUser(): User | null {
-    const user = localStorage.getItem('user');
+    // récupère l'utilisateur depuis sessionStorage
+    const user = sessionStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
 
   logout() {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    // supprimer les données de sessionStorage pour déconnecter
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
   }
 }
