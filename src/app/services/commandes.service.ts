@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface ArticleCommande {
@@ -28,8 +28,12 @@ export class CommandesService {
 
   constructor(private http: HttpClient) {}
 
-  getCommandes(): Observable<Commande[]> {
-    return this.http.get<Commande[]>(`${this.baseUrl}/get_commandes.php`);
+  getCommandes(idUser?: number): Observable<Commande[]> {
+    let params = new HttpParams();
+    if (idUser) {
+      params = params.set('id_user', idUser.toString());
+    }
+    return this.http.get<Commande[]>(`${this.baseUrl}/get_commandes.php`, { params });
   }
 
   creerCommande(articles: ArticleCommande[], userId: number): Observable<ReponseCommande> {

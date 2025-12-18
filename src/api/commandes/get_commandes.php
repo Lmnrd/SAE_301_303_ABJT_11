@@ -9,6 +9,8 @@ $db = new Database();
 $pdo = $db->getConnection();
 
 try {
+    $id_user = isset($_GET['id_user']) ? (int)$_GET['id_user'] : null;
+
     $sql = "
         SELECT 
             c.id AS commande_id,
@@ -19,10 +21,18 @@ try {
             a.prix_unitaire
         FROM commandes c
         LEFT JOIN articles_commande a ON a.commande_id = c.id
-        ORDER BY c.id DESC, a.id ASC
     ";
 
-    $stmt = $pdo->query($sql);
+    $params = [];
+    if ($id_user) {
+        $sql .= " WHERE c.id_user = ?";
+        $params[] = $id_user;
+    }
+
+    $sql .= " ORDER BY c.id DESC, a.id ASC";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $commandes = [];

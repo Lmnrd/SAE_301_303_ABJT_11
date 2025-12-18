@@ -41,8 +41,8 @@
 
 <p>{{ message }}</p>
 
-<section *ngIf="commandes.length">
-  <h3>Commandes enregistrées</h3>
+<section *ngIf="commandes.length && userIsLoggedIn()">
+  <h3>Commandes enregistrées sur votre compte</h3>
   <div *ngFor="let cmd of commandes">
     <strong>Commande #{{ cmd.id }}</strong> — {{ cmd.date_commande }} — Total : {{ cmd.montant_total }} €
     <ul>
