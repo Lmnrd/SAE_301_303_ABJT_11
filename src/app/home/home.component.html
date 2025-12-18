@@ -6,4 +6,8 @@
   <a routerLink="/register">Créer un compte</a>
   <a routerLink="/commandes">Voir les commandes</a>
   <a routerLink="/compte">Page compte</a>
+  <button (click)="logout()" class="logout-btn">
+    Se déconnecter
+    {{ user ? '(' + user.firstname + ')' : '' }}
+  </button>
 </nav>

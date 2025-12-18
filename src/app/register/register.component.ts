@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -22,7 +23,7 @@ export class RegisterComponent {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   onSubmit() {
     if (this.loading) {
@@ -59,4 +60,5 @@ export class RegisterComponent {
     this.lastname = '';
     this.email = '';
     this.password = '';
-  }}
+  }
+}

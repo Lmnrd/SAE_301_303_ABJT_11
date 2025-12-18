@@ -13,7 +13,7 @@ import { AuthService } from '../services/auth.service';
 export class CompteComponent implements OnInit {
   user: any = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     // Récupère l'utilisateur actuel depuis sessionStorage
@@ -25,6 +25,6 @@ export class CompteComponent implements OnInit {
     // supprime les données de sessionStorage et redirige vers login OU ACCUEIL CAR PAS OBLIGE DE SE CONNECTER
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('token');
-    this.router.navigate(['/login']); // A VOIR : rediriger vers login ou accueil ?
+    this.router.navigate(['/home']); // A VOIR : rediriger vers login ou accueil ?
   }
 }

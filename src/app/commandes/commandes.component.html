@@ -4,11 +4,8 @@
   <h3>Catalogue</h3>
   <div *ngFor="let item of menu">
     <label>
-      <input
-        type="checkbox"
-        [checked]="isSelected(item.id)"
-        (change)="toggleArticle(item, $any($event.target).checked)"
-      >
+      <input type="checkbox" [checked]="isSelected(item.id)"
+        (change)="toggleArticle(item, $any($event.target).checked)">
       <strong>{{ item.nom }}</strong>
       <span>({{ item.pieces || '?' }} pièces) — {{ item.prix }} €</span>
     </label>
@@ -16,12 +13,8 @@
     <div *ngIf="isSelected(item.id)" style="margin-left: 1.5rem;">
       <label>
         Quantité :
-        <input
-          type="number"
-          min="1"
-          [value]="selection[item.id].quantite || 1"
-          (input)="changerQuantite(item.id, +$any($event.target).value)"
-        >
+        <input type="number" min="1" [value]="selection[item.id].quantite || 1"
+          (input)="changerQuantite(item.id, +$any($event.target).value)">
       </label>
       <div *ngIf="item.aliments?.length">
         <small>Composition :</small>
@@ -34,12 +27,17 @@
     </div>
   </div>
 </section>
+<div class="total-commande">
+  <strong>Montant total de la commande : {{ total_commande | number:'1.2-2' }} €</strong>
+</div>
 
 <button (click)="validerCommande()" [disabled]="articlesSelectionnes.length === 0">
   Valider la commande
 </button>
 
 <p>{{ message }}</p>
+
+<!-- AFFICHAGE DES COMMANDES PRECEDENTES DU CLIENT CONNECTE -->
 
 <section *ngIf="commandes.length && userIsLoggedIn()">
   <h3>Commandes enregistrées sur votre compte</h3>

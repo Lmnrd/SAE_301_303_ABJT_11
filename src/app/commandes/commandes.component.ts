@@ -42,7 +42,7 @@ export class CommandesComponent implements OnInit {
     private commandesService: CommandesService,
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit() {
     const user = this.authService.getCurrentUser();
@@ -99,9 +99,13 @@ export class CommandesComponent implements OnInit {
     return Object.values(this.selection);
   }
 
+  get total_commande(): number {
+    return this.articlesSelectionnes.reduce((acc, article) => acc + article.prix_unitaire * article.quantite, 0);
+  }
+
   validerCommande() {
     const user = this.authService.getCurrentUser();
-    
+
     if (!user) {
       this.message = 'Veuillez vous connecter pour passer une commande.';
       return;
