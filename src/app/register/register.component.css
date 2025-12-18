@@ -16,12 +16,10 @@
     background-color: white;
     border-radius: 30px;
     overflow: hidden;
-    /* To clip the left panel corners */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     padding: 30px;
 }
 
-/* Left Panel - Logo Area */
 .panneau-gauche {
     flex: 1;
     background-color: #161616;
@@ -32,14 +30,12 @@
     border-radius: 5%;
 }
 
-/* You may need to adjust image size based on actual asset */
 .logo {
     width: 60%;
     max-width: 250px;
     height: auto;
 }
 
-/* Right Panel - Form Area */
 .panneau-droit {
     flex: 1;
     padding: 50px;
