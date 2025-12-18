@@ -1,0 +1,52 @@
+<div class="panier-container">
+    <h2>Votre Panier</h2>
+
+    <div *ngIf="articles.length > 0; else emptyCart">
+        <div class="cart-items">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Article</th>
+                        <th>Quantité</th>
+                        <th>Prix Unitaire</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of articles">
+                        <td>{{ item.nom_article }}</td>
+                        <td>{{ item.quantite }}</td>
+                        <td>{{ item.prix_unitaire | number:'1.2-2' }} €</td>
+                        <td>{{ (item.prix_unitaire * item.quantite) | number:'1.2-2' }} €</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right"><strong>Total Général</strong></td>
+                        <td><strong>{{ total | number:'1.2-2' }} €</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="actions" *ngIf="!orderSuccess">
+            <button class="btn-clear" (click)="viderPanier()">Vider le panier</button>
+            <button class="btn-confirm" (click)="confirmerCommande()">Confirmer la commande</button>
+        </div>
+    </div>
+
+    <ng-template #emptyCart>
+        <div class="empty-message" *ngIf="!orderSuccess">
+            <p>Votre panier est vide.</p>
+            <button (click)="retour()">Retour au catalogue</button>
+        </div>
+    </ng-template>
+
+    <div *ngIf="message" class="message-banner" [class.success]="orderSuccess">
+        {{ message }}
+    </div>
+
+    <div *ngIf="orderSuccess" class="post-order">
+        <button (click)="retour()">Retour au catalogue</button>
+    </div>
+</div>

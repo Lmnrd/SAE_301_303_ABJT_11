@@ -24,9 +24,9 @@ export interface ReponseCommande {
   providedIn: 'root'
 })
 export class CommandesService {
-  private readonly baseUrl = 'http://localhost/SAes/SAE_301_303_ABJT_11/src/api/commandes';
+  private readonly baseUrl = 'http://localhost/SAE_301_303_ABJT_11/src/api/commandes';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getCommandes(idUser?: number): Observable<Commande[]> {
     let params = new HttpParams();
@@ -39,6 +39,7 @@ export class CommandesService {
   creerCommande(articles: ArticleCommande[], userId: number): Observable<ReponseCommande> {
     return this.http.post<ReponseCommande>(`${this.baseUrl}/add_commande.php`, {
       articles,
-      id_user: userId    });
+      id_user: userId
+    });
   }
 }

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommandesService, ArticleCommande } from '../services/commandes.service';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 type MenuItem = {
   id: number;
@@ -41,7 +42,8 @@ export class CommandesComponent implements OnInit {
   constructor(
     private commandesService: CommandesService,
     private http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -104,25 +106,16 @@ export class CommandesComponent implements OnInit {
   }
 
   validerCommande() {
-    const user = this.authService.getCurrentUser();
-
-    if (!user) {
-      this.message = 'Veuillez vous connecter pour passer une commande.';
-      return;
-    }
-
-    const articles = this.articlesSelectionnes;
-    if (articles.length === 0) {
+    if (this.articlesSelectionnes.length === 0) {
       this.message = 'Sélectionnez au moins un article.';
       return;
     }
 
-    this.commandesService.creerCommande(articles, user.id).subscribe({
-      next: (res) => {
-        this.message = `${res.message} — ID : ${res.commande_id}`;
-        this.selection = {};
-      }
-    });
+    // On garde en local (sessionStorage) pour le passer à la page panier
+    sessionStorage.setItem('temp_panier', JSON.stringify(this.articlesSelectionnes));
+
+    // On redirige vers le panier
+    this.router.navigate(['/panier']);
   }
 
   userIsLoggedIn(): boolean {

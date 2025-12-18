@@ -32,9 +32,9 @@ interface RegisterResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost/SAes/SAE_301_303_ABJT_11/src/api';
+  private baseUrl = 'http://localhost/SAE_301_303_ABJT_11/src/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.baseUrl}/users/login.php`, {
