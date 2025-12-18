@@ -4,11 +4,11 @@
 <nav>
   <a routerLink="/login">Se connecter</a>
   <a routerLink="/register">Créer un compte</a>
-  <a routerLink="/commandes">Voir les commandes</a>
+  <a routerLink="/commandes">Passer une commande</a>
   <a routerLink="/compte">Page compte</a>
   <button (click)="logout()" class="logout-btn">
     Se déconnecter
-    {{ user ? '(' + user.firstname + ')' : '' }}
+    <!-- {{ user ? '(' + user.firstname + ')' : '' }}  PAS OBLIGE  -->
   </button>
 </nav>
 
