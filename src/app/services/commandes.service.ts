@@ -28,6 +28,10 @@ export class CommandesService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Récupère la liste des commandes.
+   * Si un ID utilisateur est fourni, filtre les commandes pour cet utilisateur.
+   */
   getCommandes(idUser?: number): Observable<Commande[]> {
     let params = new HttpParams();
     if (idUser) {
@@ -36,6 +40,10 @@ export class CommandesService {
     return this.http.get<Commande[]>(`${this.baseUrl}/get_commandes.php`, { params });
   }
 
+  /**
+   * Crée une nouvelle commande pour un utilisateur donné.
+   * Envoie la liste des articles et l'ID utilisateur à l'API PHP.
+   */
   creerCommande(articles: ArticleCommande[], userId: number): Observable<ReponseCommande> {
     return this.http.post<ReponseCommande>(`${this.baseUrl}/add_commande.php`, {
       articles,

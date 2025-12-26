@@ -1,16 +1,135 @@
-<h2>Mon compte</h2>
+<div class="account-container">
+  <div class="account-card">
 
-<div *ngIf="user; else notLoggedIn">
-  <div class="account-info">
-    <h3>Informations personnelles</h3>
-    <p><strong>Prénom :</strong> {{ user.firstname }}</p>
-    <p><strong>Nom :</strong> {{ user.lastname }}</p>
-    <p><strong>Email :</strong> {{ user.email }}</p>
+    <!-- Left Panel: Logo (Common for both states) -->
+    <div class="card-left">
+      <div class="logo-box">
+        <img src="assets/logo_blanc.png" alt="It'SUSHI Logo" class="card-logo">
+      </div>
+    </div>
+
+    <!-- Right Panel: Content -->
+    <div class="card-right">
+
+      <!-- LOGGED IN STATE -->
+      <div *ngIf="user; else notLoggedInBlock" class="logged-in-content">
+        <!-- Removed "Bonjour" header to match accordion mockup style or keep it small? Mockup has "Mes informations" top left. 
+             Actually mockup shows "Mes informations" as the first headers. I will remove the big greeting to match the "clean" accordion look 
+             or keep it small. Let's keep the greeting but maybe smaller or just rely on accordions.
+             Mockup doesn't show "Bonjour", so I'll prioritize the accordions.
+        -->
+
+        <!-- Accordion: Mes informations -->
+        <div class="accordion-section">
+          <div class="accordion-header" (click)="toggleSection('mes-informations')">
+            <h3>Mes informations</h3>
+            <span class="chevron" [class.open]="openSection === 'mes-informations'">&#9660;</span>
+          </div>
+          <div class="accordion-content" *ngIf="openSection === 'mes-informations'">
+            <form>
+              <div class="form-group">
+                <label>Nom</label>
+                <input type="text" [value]="user.firstname + ' ' + user.lastname" placeholder="Nom Prénom">
+              </div>
+              <div class="form-group">
+                <label>Adresse e-mail</label>
+                <input type="email" [value]="user.email" placeholder="exemple@mail.com">
+              </div>
+              <div class="form-group">
+                <label>Numéro de téléphone</label>
+                <input type="tel" value="+33 12 34 56 78 90">
+              </div>
+              <button type="button" class="action-btn orange-btn">Modifier mes informations</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Accordion: Mes commandes -->
+        <div class="accordion-section">
+          <div class="accordion-header" (click)="toggleSection('mes-commandes')">
+            <h3>Mes commandes</h3>
+            <span class="chevron" [class.open]="openSection === 'mes-commandes'">&#9660;</span>
+          </div>
+          <div class="accordion-content" *ngIf="openSection === 'mes-commandes'">
+            <!-- Mock Order 1 -->
+            <div class="order-item">
+              <div class="order-header">
+                <span>02/12/2025 - 12:10</span>
+                <a href="#" class="order-link">Voir les détails de la commande</a>
+              </div>
+              <div class="order-details">
+                <p>Boxes :</p>
+                <p>Suppléments :</p>
+                <p>Prix :</p>
+              </div>
+              <div class="order-action">
+                <strong>Repasser la commande</strong>
+              </div>
+            </div>
+
+            <!-- Mock Order 2 -->
+            <div class="order-item">
+              <div class="order-header">
+                <span>02/12/2025 - 12:10</span>
+                <a href="#" class="order-link">Voir les détails de la commande</a>
+              </div>
+              <div class="order-details">
+                <p>Boxes :</p>
+                <p>Suppléments :</p>
+                <p>Prix :</p>
+              </div>
+              <div class="order-actions-btn">
+                <button class="action-btn orange-btn">Repasser une commande</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion: Confidentialité et sécurité -->
+        <div class="accordion-section">
+          <div class="accordion-header" (click)="toggleSection('confidentialite')">
+            <h3>Confidentialité et sécurité</h3>
+            <span class="chevron" [class.open]="openSection === 'confidentialite'">&#9660;</span>
+          </div>
+          <div class="accordion-content" *ngIf="openSection === 'confidentialite'">
+            <form>
+              <div class="form-group">
+                <label>Mot de passe</label>
+                <input type="password" value="**********">
+              </div>
+              <div class="form-group">
+                <label>Adresse de livraison</label>
+                <input type="text" value="1 Rue de Meaux, 77100 Meaux">
+              </div>
+              <div class="form-group">
+                <label>Coordonnées Bancaires</label>
+                <input type="text" value="**** **** **** **01">
+              </div>
+              <div class="form-group rgpd">
+                <label>RGPD</label>
+                <span>Lire</span>
+              </div>
+              <button type="button" class="action-btn orange-btn">Modifier mes informations</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- NOT LOGGED IN STATE -->
+      <ng-template #notLoggedInBlock>
+        <div class="guest-content">
+          <h2>Bienvenue</h2>
+          <p>Connectez-vous pour accéder à votre compte.</p>
+
+          <div class="auth-buttons">
+            <a routerLink="/login" class="auth-btn login-btn">Se connecter</a>
+            <a routerLink="/register" class="auth-btn register-btn">Créer un compte</a>
+          </div>
+        </div>
+      </ng-template>
+
+    </div>
+
   </div>
-
-  <button (click)="logout()" class="logout-btn">Se déconnecter</button>
 </div>
-
-<ng-template #notLoggedIn>
-  <p>Vous n'êtes pas connecté. <a routerLink="/login">Se connecter</a></p>
-</ng-template>

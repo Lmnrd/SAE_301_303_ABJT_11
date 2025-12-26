@@ -36,21 +36,21 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  // Connexion de l'utilisateur
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.baseUrl}/users/login.php`, {
       email,
       password
     }).pipe(
-      // pipe = intercepte la réponse et stocke l'user/token avant de passer les données au composant
       tap(res => {
-        // utilise sessionStorage pour déconnexion auto à la fermeture de la page
-        // sessionStorage se vide automatiquement quand l'onglet se ferme
+        // Stockage de l'utilisateur et du token pour la session
         sessionStorage.setItem('user', JSON.stringify(res.user));
         sessionStorage.setItem('token', res.token);
       })
     );
   }
 
+  // Inscription d'un nouvel utilisateur
   register(payload: RegisterPayload): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(
       `${this.baseUrl}/users/add_user.php`,
@@ -59,22 +59,21 @@ export class AuthService {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       }
     ).pipe(
-      // pipe = intercepte la réponse et stocke l'user avant de passer les données au composant
       tap(res => {
-        // stockage en sessionStorage pour déconnexion auto
+        // Connexion automatique après inscription
         sessionStorage.setItem('user', JSON.stringify(res.user));
       })
     );
   }
 
+  // Récupérer l'utilisateur connecté
   getCurrentUser(): User | null {
-    // récupère l'utilisateur depuis sessionStorage
     const user = sessionStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
 
+  // Déconnexion
   logout() {
-    // supprimer les données de sessionStorage pour déconnecter
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('token');
   }

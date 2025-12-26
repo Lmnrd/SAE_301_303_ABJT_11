@@ -1,7 +1,57 @@
-<h1>SAE 301-303</h1>
-<nav>
-  <a routerLink="/login"></a>
-  <a routerLink="/commandes"></a>
-</nav>
+<header>
+  <div class="logo-space">
+    <!-- Empty left space or Logo if needed later -->
+  </div>
+  <nav class="main-nav">
+    <a routerLink="/panier" class="icon-link">
+      <!-- Cart Icon SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="feather feather-shopping-bag">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+    </a>
+    <a routerLink="/compte" class="icon-link">
+      <!-- User Icon SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="feather feather-user">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+    </a>
+    <button class="burger-menu" (click)="toggleMenu()">
+      <!-- Burger Menu Icon SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </nav>
+</header>
 
-<router-outlet></router-outlet>
+<!-- Overlay Menu -->
+<div class="menu-overlay" *ngIf="isMenuOpen">
+  <button class="close-btn" (click)="toggleMenu()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+  <div class="menu-links">
+    <a routerLink="/login" (click)="toggleMenu()">Se connecter</a>
+    <a routerLink="/register" (click)="toggleMenu()">S'inscrire</a>
+  </div>
+</div>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<app-footer></app-footer>

@@ -12,19 +12,6 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomeComponent {
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  constructor() { }
 
-  get user() {
-    return this.authService.getCurrentUser();
-  }
-
-  logout() {
-    // Utilise la méthode logout du service si elle existe, ou fait le ménage ici
-    this.authService.logout();
-    // Redirige vers /home (rafraîchit la vue)
-    this.router.navigate(['/home']);
-  }
 }

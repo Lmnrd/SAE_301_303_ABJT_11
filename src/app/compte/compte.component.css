@@ -1,28 +1,256 @@
-.account-info {
-  border: 1px solid #ccc;
-  padding: 20px;
-  margin: 20px 0;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+/* Main Container */
+.account-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 150px);
+  /* Adjust based on header/footer */
+  background-color: #1a1a1a;
+  /* Match global dark theme */
+  padding: 40px 20px;
 }
 
-.account-info h3 {
-  margin-top: 0;
+/* Card Structure */
+.account-card {
+  display: flex;
+  width: 900px;
+  max-width: 100%;
+  background-color: white;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  min-height: 500px;
 }
 
-.account-info p {
-  margin: 10px 0;
+/* Left Panel (Logo) */
+.card-left {
+  flex: 1;
+  background-color: #161616;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
 }
 
-.logout-btn {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+.logo-box {
+  width: 80%;
+  max-width: 250px;
+}
+
+.card-logo {
+  width: 100%;
+  height: auto;
+}
+
+/* Right Panel (Content) */
+.card-right {
+  flex: 1.5;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  color: black;
+  /* Text on white bg */
+}
+
+/* Typography */
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  columns: #000;
+}
+
+/* Accordion Styles */
+.accordion-section {
+  margin-bottom: 20px;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
+  padding: 10px 0;
 }
 
-.logout-btn:hover {
-  background-color: #c82333;
+.accordion-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  padding-left: 10px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 1rem;
+  color: #333;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-bottom-color: #ff8c00;
+}
+
+.rgpd {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Order List Styles */
+.order-item {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.order-link {
+  color: #ff8c00;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.order-details p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.order-actions-btn {
+  margin-top: 15px;
+  text-align: right;
+}
+
+/* Action Buttons */
+.action-btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-block;
+}
+
+.orange-btn {
+  background-color: #ff8c00;
+  color: white;
+}
+
+.orange-btn:hover {
+  background-color: #e67e00;
+}
+
+
+/* Guest Content (Not Logged In) */
+.guest-content p {
+  margin-bottom: 30px;
+  color: #666;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.auth-btn {
+  display: block;
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.login-btn {
+  background-color: #333;
+  color: white;
+}
+
+.login-btn:hover {
+  background-color: #555;
+}
+
+.register-btn {
+  background-color: #ff8c00;
+  color: white;
+}
+
+.register-btn:hover {
+  background-color: #e67e00;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .account-card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .card-left {
+    padding: 30px;
+    min-height: 200px;
+  }
+
+  .card-logo {
+    max-width: 150px;
+  }
+
+  .card-right {
+    padding: 30px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

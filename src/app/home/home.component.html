@@ -1,17 +1,24 @@
-<h2>Bienvenue</h2>
-<p>It'Sushi</p>
+<div class="hero-section">
+  <div class="hero-left">
+    <h1>À PROPOS DE NOUS</h1>
+  </div>
+  <div class="hero-right">
+    <div class="content-wrapper">
+      <div class="sushi-images">
+        <!-- Using logo_blanc.png as the main visual elemnt as per plan, though mock up has more complex image. 
+              The user mentioned "logo_blanc.png" in directory listing earlier, assuming it's the one. -->
+        <img src="assets/logo_blanc.png" alt="USHI Logo" class="brand-logo">
+      </div>
 
-<nav>
-  <a routerLink="/login">Se connecter</a>
-  <a routerLink="/register">Créer un compte</a>
-  <a routerLink="/commandes">Passer une commande</a>
-  <a routerLink="/compte">Page compte</a>
-  <button (click)="logout()" class="logout-btn">
-    Se déconnecter
-    <!-- {{ user ? '(' + user.firstname + ')' : '' }}  PAS OBLIGE  -->
-  </button>
-</nav>
-
-<body>
-  <h1>A propos de nous</h1>
-</body>
+      <div class="text-content">
+        <h2>De la nourriture appétissante<br>pour un maximum de saveurs</h2>
+        <p>
+          Bienvenue sur <strong>It'SUSHI</strong>, ici nous vous proposons une expérience d'authentique sushi créé par
+          notre chef sushi. Nos ingrédients sont de grandes qualités et nos poissons frais sont livrés dans la journée
+          directement depuis les côtes afin de garantir un parallèle entre goût et qualité.
+        </p>
+        <a routerLink="/about" class="see-more">voir plus &rarr;</a>
+      </div>
+    </div>
+  </div>
+</div>

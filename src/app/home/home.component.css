@@ -1,0 +1,95 @@
+/* Hero Container */
+.hero-section {
+    display: flex;
+    min-height: calc(100vh - 80px);
+    /* Adjust for header height */
+    color: white;
+}
+
+/* Left Side */
+.hero-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    /* Center vertically */
+    justify-content: center;
+    /* Center horizontally */
+    padding: 50px;
+}
+
+.hero-left h1 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+/* Right Side */
+.hero-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+}
+
+.content-wrapper {
+    max-width: 500px;
+}
+
+.brand-logo {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+    /* Adjust if the logo needs specific sizing */
+    max-height: 200px;
+}
+
+.text-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.text-content p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 30px;
+    text-align: justify;
+}
+
+.see-more {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-left: 10%;
+    transition: color 0.3s;
+}
+
+.see-more:hover {
+    color: #ff8c00;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .hero-section {
+        flex-direction: column;
+    }
+
+    .hero-left {
+        padding: 30px 20px;
+        align-items: flex-start;
+    }
+
+    .hero-left h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-right {
+        padding: 20px;
+    }
+}

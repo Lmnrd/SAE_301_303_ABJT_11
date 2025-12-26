@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommandesService, ArticleCommande } from '../services/commandes.service';
 import { AuthService } from '../services/auth.service';
+import { PanierService } from '../services/panier.service'; // Import PanierService
 import { Router } from '@angular/router';
 
 type MenuItem = {
@@ -40,9 +41,10 @@ export class CommandesComponent implements OnInit {
   private readonly menuUrl = 'assets/data/commandes.json';
 
   constructor(
-    private commandesService: CommandesService,
+    private commandeService: CommandesService, // Renamed for consistency if needed, but keeping existing usage
     private http: HttpClient,
     private authService: AuthService,
+    private panierService: PanierService, // Inject Service
     private router: Router,
   ) { }
 
@@ -66,7 +68,7 @@ export class CommandesComponent implements OnInit {
   private chargerCommandes() {
     const user = this.authService.getCurrentUser();
     const idUser = user ? user.id : undefined;
-    this.commandesService.getCommandes(idUser).subscribe({
+    this.commandeService.getCommandes(idUser).subscribe({
       next: (data) => (this.commandes = data),
       error: (err) => console.error('Erreur chargement commandes :', err)
     });
@@ -111,10 +113,10 @@ export class CommandesComponent implements OnInit {
       return;
     }
 
-    // On garde en local (sessionStorage) pour le passer à la page panier
-    sessionStorage.setItem('temp_panier', JSON.stringify(this.articlesSelectionnes));
+    // Utilisation du Service Panier pour ajouter les articles
+    this.panierService.ajouterArticles(this.articlesSelectionnes);
 
-    // On redirige vers le panier
+    // Redirection vers le panier
     this.router.navigate(['/panier']);
   }
 

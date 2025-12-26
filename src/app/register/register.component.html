@@ -36,6 +36,9 @@
         <button type="submit" [disabled]="loading" class="bouton-valider">
           {{ loading ? 'Création...' : "S'inscrire" }}
         </button>
+
+        <a routerLink="/login" class="bouton-login">Se connecter</a>
+
       </form>
 
       <p *ngIf="message" class="message-erreur">{{ message }}</p>
