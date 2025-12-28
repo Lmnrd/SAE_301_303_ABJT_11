@@ -1,24 +1,130 @@
+<!-- HERO -->
 <div class="hero-section">
   <div class="hero-left">
     <h1>À PROPOS DE NOUS</h1>
   </div>
+
   <div class="hero-right">
     <div class="content-wrapper">
-      <div class="sushi-images">
-        <!-- Using logo_blanc.png as the main visual elemnt as per plan, though mock up has more complex image. 
-              The user mentioned "logo_blanc.png" in directory listing earlier, assuming it's the one. -->
-        <img src="assets/logo_blanc.png" alt="USHI Logo" class="brand-logo">
-      </div>
+      <img src="assets/logo_blanc.png" class="brand-logo" alt="Logo It'Sushi">
 
       <div class="text-content">
         <h2>De la nourriture appétissante<br>pour un maximum de saveurs</h2>
         <p>
-          Bienvenue sur <strong>It'SUSHI</strong>, ici nous vous proposons une expérience d'authentique sushi créé par
-          notre chef sushi. Nos ingrédients sont de grandes qualités et nos poissons frais sont livrés dans la journée
-          directement depuis les côtes afin de garantir un parallèle entre goût et qualité.
+          Bienvenue sur <strong>It'SUSHI</strong>, nous vous proposons une expérience
+          sushi authentique avec des produits frais.
         </p>
-        <a routerLink="/about" class="see-more">voir plus &rarr;</a>
+        <a routerLink="/about" class="see-more">voir plus →</a>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- BOXES -->
+<section class="boxes-section">
+  <div class="boxes-container">
+    <div class="boxes-grid">
+
+      <div *ngFor="let box of boxes" class="box-card">
+
+        <div class="box-header">
+          <span class="brand-name">IT'SUSHI</span>
+
+          <button class="add-to-cart-btn"
+                  title="Ajouter au panier"
+                  (click)="openQuantityModal(box)">
+            🛒
+          </button>
+        </div>
+
+        <div class="box-image">
+          <img [src]="'assets/images/' + box.image + '.png'"
+               [alt]="box.nom"
+               class="product-image">
+        </div>
+
+        <div class="box-details">
+          <h3 class="box-name">{{ box.nom }}</h3>
+          <p class="box-info">{{ box.pieces }} pièces</p>
+
+          <div class="box-flavors">
+            <span *ngFor="let saveur of box.saveurs" class="flavor-tag">
+              {{ saveur }}
+            </span>
+          </div>
+
+          <p class="box-price">{{ box.prix | currency:'EUR' }}</p>
+          <br>
+
+          <button (click)="openDetails(box)">Détails</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MODAL DETAILS -->
+<div class="modal-overlay"
+     *ngIf="isDetailsModalOpen"
+     (click)="closeDetailsModal()">
+
+  <div class="modal-content"
+       (click)="$event.stopPropagation()">
+
+    <button class="close-btn"
+            (click)="closeDetailsModal()">✕</button>
+
+    <h2>{{ selectedBox?.nom }}</h2>
+    <p>{{ selectedBox?.details }}</p>
+
+    <h3>Composition ({{ selectedBox?.pieces }} pièces)</h3>
+    <ul>
+      <li *ngFor="let aliment of selectedBox?.aliments">
+        {{ aliment.quantite }} × {{ aliment.nom }}
+      </li>
+    </ul>
+
+    <h3>Saveurs</h3>
+    <div>
+      <span *ngFor="let saveur of selectedBox?.saveurs"
+            class="flavor-tag">
+        {{ saveur }}
+      </span>
+    </div>
+
+    <p class="box-price">
+      {{ selectedBox?.prix | currency:'EUR' }}
+    </p>
+
+  </div>
+</div>
+
+<!-- MODAL QUANTITE -->
+<div class="modal-overlay"
+     *ngIf="isQuantityModalOpen"
+     (click)="closeQuantityModal()">
+
+  <div class="modal-content quantity-modal"
+       (click)="$event.stopPropagation()">
+
+    <button class="close-btn"
+            (click)="closeQuantityModal()">✕</button>
+
+    <h2>Ajouter au panier</h2>
+    <p>{{ selectedBoxForCart?.nom }}</p>
+
+    <div class="quantity-controls">
+      <button (click)="decreaseQty()">−</button>
+      <span>{{ quantite }}</span>
+      <button (click)="increaseQty()">+</button>
+    </div>
+
+    <button class="confirm-btn"
+            (click)="confirmAddToCart()">
+      Ajouter ({{ quantite * (selectedBoxForCart?.prix || 0) | currency:'EUR' }})
+    </button>
+
   </div>
 </div>

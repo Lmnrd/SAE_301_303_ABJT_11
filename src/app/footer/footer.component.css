@@ -52,6 +52,16 @@
     color: white;
 }
 
+.menu-link {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.menu-link:hover {
+    color: white;
+}
+
 .footer-contact-info {
     flex: 1;
     text-align: right;

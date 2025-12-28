@@ -5,6 +5,7 @@
         "pieces": 12,
         "prix": 12.50,
         "image": "tasty-blend",
+        "details": "Une box savoureuse combinant une variété de californias, sushis et springs pour une expérience gustative équilibrée.",
         "aliments": [
             {
                 "nom": "California Saumon Avocat",
@@ -66,7 +67,8 @@
             "cheese"
         ],
         "prix": 15.90,
-        "image": "amateur-mix"
+        "image": "amateur-mix",
+        "details": "Une box variée pour les amateurs de saveurs diverses, combinant makis, springs et californias."
     },
     {
         "id": 3,
@@ -91,7 +93,8 @@
             "avocat"
         ],
         "prix": 12.50,
-        "image": "saumon-original"
+        "image": "saumon-original",
+        "details": "Une box classique pour les amateurs de saumon, avec une combinaison de californias et sushis."
     },
     {
         "id": 4,
@@ -121,7 +124,8 @@
             "avocat"
         ],
         "prix": 15.90,
-        "image": "salmon-lovers"
+        "image": "salmon-lovers",
+        "details": "Une box généreuse pour les vrais amateurs de saumon, avec une variété de californias, springs et sushis."
     },
     {
         "id": 5,
@@ -141,7 +145,8 @@
             "saumon"
         ],
         "prix": 15.90,
-        "image": "salmon-classic"
+        "image": "salmon-classic",
+        "details": "Une box simple et délicieuse pour les amateurs de saumon, avec 10 sushis au saumon frais."
     },
     {
         "id": 6,
@@ -175,7 +180,8 @@
             "avocat"
         ],
         "prix": 15.90,
-        "image": "master-mix"
+        "image": "master-mix",
+        "details": "Une box équilibrée avec une sélection de sushis et californias pour les amateurs de saumon et de thon."
     },
     {
         "id": 7,
@@ -206,7 +212,8 @@
             "cheese"
         ],
         "prix": 15.90,
-        "image": "sunrise"
+        "image": "sunrise",
+        "details": "Un mélange savoureux de makis et de californias, parfait pour les amateurs de saumon et de thon."
     },
     {
         "id": 8,
@@ -241,7 +248,9 @@
             "cheese"
         ],
         "prix": 15.90,
-        "image": "sando-box-chicken-katsu"
+        "image": "sando-box-chicken-katsu",
+        "details": "Une box gourmande combinant le croustillant du chicken katsu avec la fraîcheur des makis et californias."
+
     },
     {
         "id": 9,
@@ -271,7 +280,8 @@
             "avocat"
         ],
         "prix": 15.90,
-        "image": "sando-box-salmon-aburi"
+        "image": "sando-box-salmon-aburi",
+        "details": "Une box raffinée mettant en avant le saumon aburi accompagné de californias classiques."
     },
     {
         "id": 10,
@@ -306,7 +316,8 @@
             "cheese"
         ],
         "prix": 19.90,
-        "image": "super-salmon"
+        "image": "super-salmon",
+        "details": "Une box généreuse pour les amateurs de saumon, avec une variété de makis et de springs."
     },
     {
         "id": 11,
@@ -343,7 +354,8 @@
             "avocat"
         ],
         "prix": 19.90,
-        "image": "california-dream"
+        "image": "california-dream",
+        "details": "Un rêve californien avec une sélection de californias variés, parfait pour partager."
     },
     {
         "id": 12,
@@ -384,7 +396,8 @@
             "seriole lalandi"
         ],
         "prix": 24.50,
-        "image": "gourmet-mix"
+        "image": "gourmet-mix",
+        "details": "Une box gourmande avec une sélection raffinée de springs, rolls et californias pour les palais exigeants."
     },
     {
         "id": 13,
@@ -424,6 +437,7 @@
             "cheese"
         ],
         "prix": 24.50,
-        "image": "fresh-mix"
+        "image": "fresh-mix",
+        "details": "Une box fraîcheur combinant des makis, californias et sushis pour une expérience gustative variée."
     }
 ]

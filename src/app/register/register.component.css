@@ -12,10 +12,10 @@
 .carte-globale {
     display: flex;
     width: 900px;
-    height: 550px;
+    min-height: 600px;
     background-color: white;
     border-radius: 30px;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     padding: 30px;
 }
@@ -38,11 +38,12 @@
 
 .panneau-droit {
     flex: 1;
-    padding: 50px;
+    padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: #fff;
+    overflow-y: auto;
 }
 
 /* Typography */
@@ -155,19 +156,30 @@ input::placeholder {
     .carte-globale {
         flex-direction: column;
         width: 90%;
-        height: auto;
+        min-height: auto;
         max-width: 400px;
+        padding: 20px;
     }
 
     .panneau-gauche {
-        height: 150px;
+        height: 120px;
+        margin-bottom: 20px;
     }
 
     .logo {
-        width: 120px;
+        width: 100px;
     }
 
     .panneau-droit {
-        padding: 30px;
+        padding: 20px;
+        justify-content: flex-start;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .sous-titre {
+        font-size: 0.85rem;
     }
 }

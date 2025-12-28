@@ -6,6 +6,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-family: sans-serif;
+  color: black;
 }
 
 h2 {
@@ -64,7 +65,7 @@ button {
 }
 
 .btn-confirm {
-  background-color: #ca611a;
+  background-color: #ff8c00;
   color: white;
 }
 
