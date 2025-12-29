@@ -89,7 +89,9 @@ export class HomeComponent implements OnInit {
   }
 
   increaseQty(): void {
-    this.quantite++;
+    if (this.quantite < 10) {
+      this.quantite++;
+    }
   }
 
   decreaseQty(): void {
@@ -101,6 +103,22 @@ export class HomeComponent implements OnInit {
   confirmAddToCart(): void {
     if (!this.selectedBoxForCart) return;
 
+    const panierActuel = this.panierService.getPanier();
+
+    // Calculer le total actuel des produits dans le panier
+    const totalActuel = panierActuel.reduce((sum, item) => sum + item.quantite, 0);
+
+    // Vérifier si l'ajout dépasse la limite de 10
+    if (totalActuel + this.quantite > 10) {
+      const placeRestante = 10 - totalActuel;
+      if (placeRestante <= 0) {
+        alert('Votre panier est plein (maximum 10 produits).');
+      } else {
+        alert(`Vous ne pouvez ajouter que ${placeRestante} produit(s) supplémentaire(s). (Maximum 10 au total)`);
+      }
+      return;
+    }
+
     const article = {
       commande_id: 0,
       nom_article: this.selectedBoxForCart.nom,
@@ -109,7 +127,6 @@ export class HomeComponent implements OnInit {
       id_user: 0
     };
 
-    const panierActuel = this.panierService.getPanier();
     this.panierService.ajouterArticles([...panierActuel, article]);
 
     alert(`${this.quantite} × ${this.selectedBoxForCart.nom} ajouté(s) au panier`);
