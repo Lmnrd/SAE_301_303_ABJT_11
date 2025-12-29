@@ -60,7 +60,7 @@ export class PanierComponent implements OnInit {
   }
 
   retour() {
-    this.router.navigate(['/commandes']);
+    this.router.navigate(['/home']);
   }
 
   retour_menu() {
