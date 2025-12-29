@@ -38,11 +38,19 @@ export class HomeComponent implements OnInit {
   selectedBoxForCart: Box | null = null;
   isQuantityModalOpen = false;
   quantite = 1;
+  quantite_total = 0; // Compteur pour le nombre total d'articles
 
-  constructor(private panierService: PanierService) {}
+  constructor(private panierService: PanierService) { }
 
   ngOnInit(): void {
     this.loadBoxes();
+    this.updateQuantiteTotal();
+  }
+
+  // Met à jour le compteur global basé sur le panier
+  updateQuantiteTotal(): void {
+    const panier = this.panierService.getPanier();
+    this.quantite_total = panier.reduce((acc, art) => acc + art.quantite, 0);
   }
 
   loadBoxes(): void {
@@ -93,17 +101,16 @@ export class HomeComponent implements OnInit {
     if (!this.selectedBoxForCart) return;
 
     const article = {
-      commande_id: 0,
       nom_article: this.selectedBoxForCart.nom,
       quantite: this.quantite,
-      prix_unitaire: this.selectedBoxForCart.prix,
-      id_user: 0
+      prix_unitaire: this.selectedBoxForCart.prix
     };
 
     const panierActuel = this.panierService.getPanier();
     this.panierService.ajouterArticles([...panierActuel, article]);
 
     alert(`${this.quantite} × ${this.selectedBoxForCart.nom} ajouté(s) au panier`);
+    this.updateQuantiteTotal(); // On recalcule le total après l'ajout
 
     this.closeQuantityModal();
   }

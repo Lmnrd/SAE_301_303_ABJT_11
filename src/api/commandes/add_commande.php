@@ -26,11 +26,13 @@ try {
 
     $montant_total = 0;
     foreach ($data['articles'] as $article) {
-        $montant_total += $article['quantite'] * $article['prix_unitaire'];
+        $montant_total += (float)$article['quantite'] * (float)$article['prix_unitaire'];
     }
 
     $stmt = $pdo->prepare("INSERT INTO commandes (date_commande, montant_total, id_user) VALUES (NOW(), ?, ?)");
-    $stmt->execute([$montant_total, $data['id_user']]);
+    if (!$stmt->execute([$montant_total, (int)$data['id_user']])) {
+        throw new Exception("Erreur lors de l'insertion dans la table commandes");
+    }
 
     $commande_id = $pdo->lastInsertId();
 
@@ -40,24 +42,34 @@ try {
     ");
 
     foreach ($data['articles'] as $article) {
-        $stmt->execute([
-            $commande_id,
+        $res = $stmt->execute([
+            (int)$commande_id,
             $article['nom_article'],
-            $article['quantite'],
-            $article['prix_unitaire'],
-            $data['id_user']
+            (int)$article['quantite'],
+            (float)$article['prix_unitaire'],
+            (int)$data['id_user']
         ]);
+        if (!$res) {
+            throw new Exception("Erreur lors de l'insertion d'un article (" . $article['nom_article'] . ")");
+        }
     }
 
     $pdo->commit();
 
     echo json_encode([
+        "status" => "success",
         "message" => "Commande créée avec succès",
-        "commande_id" => $commande_id
+        "commande_id" => $commande_id,
+        "articles_count" => count($data['articles'])
     ]);
 
 } catch (Exception $e) {
-    $pdo->rollBack();    http_response_code(500);    echo json_encode([
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
+    http_response_code(500);
+    echo json_encode([
+        "status" => "error",
         "message" => "Erreur lors de l’enregistrement",
         "erreur" => $e->getMessage()
     ]);

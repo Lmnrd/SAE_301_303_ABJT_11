@@ -32,7 +32,7 @@ interface RegisterResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost/SAE_301_303_ABJT_11-master/src/api';
+  private baseUrl = 'http://localhost/SAE_301_303_ABJT_11/src/api';
 
   constructor(private http: HttpClient) { }
 

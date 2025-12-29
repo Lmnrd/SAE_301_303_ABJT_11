@@ -22,6 +22,7 @@
 
 <!-- BOXES -->
 <section class="boxes-section">
+  <h1>PASSER COMMANDE</h1><br><br>
   <div class="boxes-container">
     <div class="boxes-grid">
 
@@ -30,17 +31,13 @@
         <div class="box-header">
           <span class="brand-name">IT'SUSHI</span>
 
-          <button class="add-to-cart-btn"
-                  title="Ajouter au panier"
-                  (click)="openQuantityModal(box)">
+          <button class="add-to-cart-btn" title="Ajouter au panier" (click)="openQuantityModal(box)">
             🛒
           </button>
         </div>
 
         <div class="box-image">
-          <img [src]="'assets/images/' + box.image + '.png'"
-               [alt]="box.nom"
-               class="product-image">
+          <img [src]="'assets/images/' + box.image + '.png'" [alt]="box.nom" class="product-image">
         </div>
 
         <div class="box-details">
@@ -66,15 +63,11 @@
 </section>
 
 <!-- MODAL DETAILS -->
-<div class="modal-overlay"
-     *ngIf="isDetailsModalOpen"
-     (click)="closeDetailsModal()">
+<div class="modal-overlay" *ngIf="isDetailsModalOpen" (click)="closeDetailsModal()">
 
-  <div class="modal-content"
-       (click)="$event.stopPropagation()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
 
-    <button class="close-btn"
-            (click)="closeDetailsModal()">✕</button>
+    <button class="close-btn" (click)="closeDetailsModal()">✕</button>
 
     <h2>{{ selectedBox?.nom }}</h2>
     <p>{{ selectedBox?.details }}</p>
@@ -88,11 +81,10 @@
 
     <h3>Saveurs</h3>
     <div>
-      <span *ngFor="let saveur of selectedBox?.saveurs"
-            class="flavor-tag">
+      <span *ngFor="let saveur of selectedBox?.saveurs" class="flavor-tag">
         {{ saveur }}
       </span>
-    </div>
+    </div><br>
 
     <p class="box-price">
       {{ selectedBox?.prix | currency:'EUR' }}
@@ -102,15 +94,11 @@
 </div>
 
 <!-- MODAL QUANTITE -->
-<div class="modal-overlay"
-     *ngIf="isQuantityModalOpen"
-     (click)="closeQuantityModal()">
+<div class="modal-overlay" *ngIf="isQuantityModalOpen" (click)="closeQuantityModal()">
 
-  <div class="modal-content quantity-modal"
-       (click)="$event.stopPropagation()">
+  <div class="modal-content quantity-modal" (click)="$event.stopPropagation()">
 
-    <button class="close-btn"
-            (click)="closeQuantityModal()">✕</button>
+    <button class="close-btn" (click)="closeQuantityModal()">✕</button>
 
     <h2>Ajouter au panier</h2>
     <p>{{ selectedBoxForCart?.nom }}</p>
@@ -121,8 +109,7 @@
       <button (click)="increaseQty()">+</button>
     </div>
 
-    <button class="confirm-btn"
-            (click)="confirmAddToCart()">
+    <button class="confirm-btn" (click)="confirmAddToCart()">
       Ajouter ({{ quantite * (selectedBoxForCart?.prix || 0) | currency:'EUR' }})
     </button>
 
