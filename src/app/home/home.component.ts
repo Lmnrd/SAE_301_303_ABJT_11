@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { PanierService } from '../services/panier.service';
 
 interface Aliment {
@@ -39,21 +40,21 @@ export class HomeComponent implements OnInit {
   isQuantityModalOpen = false;
   quantite = 1;
 
-  constructor(private panierService: PanierService) {}
+  constructor(private panierService: PanierService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.loadBoxes();
   }
 
   loadBoxes(): void {
-    fetch('assets/data/commandes.json')
-      .then(res => res.json())
-      .then((data: Box[]) => {
+    this.http.get<Box[]>('assets/data/commandes.json').subscribe({
+      next: (data) => {
         this.boxes = data;
-      })
-      .catch(err =>
-        console.error('Erreur lors du chargement des boxes :', err)
-      );
+      },
+      error: (err) => {
+        console.error('Erreur lors du chargement des boxes :', err);
+      }
+    });
   }
 
   /* ===== MODAL DETAILS ===== */
