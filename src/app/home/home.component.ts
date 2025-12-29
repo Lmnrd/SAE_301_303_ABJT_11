@@ -68,6 +68,14 @@ export class HomeComponent implements OnInit {
     this.selectedBox = null;
   }
 
+  addToCartFromDetails(): void {
+    if (this.selectedBox) {
+      const box = this.selectedBox;
+      this.closeDetailsModal();
+      this.openQuantityModal(box);
+    }
+  }
+
   /* ===== MODAL QUANTITE ===== */
   openQuantityModal(box: Box): void {
     this.selectedBoxForCart = box;

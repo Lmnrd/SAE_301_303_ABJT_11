@@ -457,7 +457,7 @@
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -497,6 +497,7 @@
         opacity: 0;
         transform: scale(0.95);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -545,4 +546,28 @@
 
 .confirm-btn:hover {
     background: #ff8c00;
+}
+
+/* Bouton Ajouter au panier dans modal détails */
+.add-to-cart-modal-btn {
+    width: 100%;
+    padding: 14px 20px;
+    margin-top: 20px;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.add-to-cart-modal-btn:hover {
+    background: #ff8c00;
+    transform: translateY(-2px);
 }
