@@ -16,11 +16,22 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'sae_301_303';
   isMenuOpen = false;
+  isCartOpen = false; // État d'ouverture du mini-panier
 
   constructor(private panierService: PanierService, private authService: AuthService, private router: Router) { }
 
   get quantiteTotale(): number {
     return this.panierService.getPanier().reduce((acc, art) => acc + art.quantite, 0);
+  }
+
+  // Récupérer les articles du panier pour l'affichage
+  get panierArticles() {
+    return this.panierService.getPanier();
+  }
+
+  // Calculer le prix total du panier
+  get totalPanier(): number {
+    return this.panierService.calculerTotal();
   }
 
   get user() {
@@ -35,5 +46,12 @@ export class AppComponent {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+    if (this.isMenuOpen) this.isCartOpen = false; // Fermer le panier si on ouvre le menu
+  }
+
+  // Ouvrir/Fermer le mini-panier
+  toggleCart() {
+    this.isCartOpen = !this.isCartOpen;
+    if (this.isCartOpen) this.isMenuOpen = false; // Fermer le menu si on ouvre le panier
   }
 }

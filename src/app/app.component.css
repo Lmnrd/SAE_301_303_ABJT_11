@@ -85,8 +85,9 @@ header {
 }
 
 /* Burger Menu Overlay */
-/* Burger Menu Overlay */
-.menu-overlay {
+/* Burger Menu & Cart Overlay Shared Styles */
+.menu-overlay,
+.cart-overlay {
     backdrop-filter: blur(15px);
     position: fixed;
     top: 0;
@@ -98,10 +99,105 @@ header {
     z-index: 2000;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
     animation: slideInRight 0.3s ease-out;
+}
+
+/* Burger Menu Specific Alignment */
+.menu-overlay {
+    justify-content: center;
+    align-items: center;
+}
+
+/* Cart Overlay Specific Alignment */
+.cart-overlay {
+    padding: 80px 20px 20px 20px;
+    /* Top padding for close button space */
+    color: white;
+}
+
+.cart-overlay h2 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.item-price {
+    font-size: 0.85rem;
+    color: #ff8c00;
+}
+
+.item-qty {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.empty-msg {
+    text-align: center;
+    color: #999;
+    margin-top: 50px;
+}
+
+.cart-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.view-cart-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #ff8c00;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.view-cart-btn:hover {
+    background-color: #e07b00;
 }
 
 .close-btn {

@@ -5,7 +5,7 @@
     </a>
   </div>
   <nav class="main-nav">
-    <a routerLink="/panier" class="icon-link">
+    <a (click)="toggleCart()" class="icon-link" style="cursor: pointer;">
       <!-- Cart Icon SVG -->
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -38,7 +38,7 @@
   </nav>
 </header>
 
-<!-- Overlay Menu -->
+<!-- Overlay Menu (Burger) -->
 <div class="menu-overlay" *ngIf="isMenuOpen">
   <button class="close-btn" (click)="toggleMenu()">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -62,6 +62,41 @@
       <a routerLink="/compte" (click)="toggleMenu()">Compte</a>
     </ng-container>
     <a routerLink="/panier" (click)="toggleMenu()">Panier</a>
+  </div>
+</div>
+
+<!-- Overlay Panier (Mini-Cart) -->
+<div class="cart-overlay" *ngIf="isCartOpen">
+  <button class="close-btn" (click)="toggleCart()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <h2>Votre Panier</h2>
+
+  <div class="cart-items" *ngIf="panierArticles.length > 0; else emptyCart">
+    <div class="cart-item" *ngFor="let item of panierArticles">
+      <div class="item-info">
+        <span class="item-name">{{ item.nom_article }}</span>
+        <span class="item-price">{{ item.prix_unitaire | currency:'EUR' }}</span>
+      </div>
+      <div class="item-qty">Qté: {{ item.quantite }}</div>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <p class="empty-msg">Votre panier est vide.</p>
+  </ng-template>
+
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total:</span>
+      <span>{{ totalPanier | currency:'EUR' }}</span>
+    </div>
+    <a routerLink="/panier" class="view-cart-btn" (click)="toggleCart()">Voir le panier complet</a>
   </div>
 </div>
 
