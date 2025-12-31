@@ -42,7 +42,7 @@ export class PanierComponent implements OnInit {
 
     this.commandeService.creerCommande(this.articles, user.id).subscribe({
       next: (res) => {
-        this.message = `Commande réussie ! (ID: ${res.commande_id})`;
+        this.message = `Commande réussie !`;
         this.orderSuccess = true;
         this.panierService.viderPanier(); // Vider le panier via le service
         this.articles = [];
