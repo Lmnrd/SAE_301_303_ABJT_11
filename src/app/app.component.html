@@ -1,6 +1,8 @@
 <header>
   <div class="logo-space">
-    <!-- Empty left space or Logo if needed later -->
+    <a routerLink="/" class="navbar-logo-link">
+      <img src="assets/logo_blanc.png" alt="It'SUSHI Logo" class="navbar-logo">
+    </a>
   </div>
   <nav class="main-nav">
     <a routerLink="/panier" class="icon-link">
@@ -47,8 +49,19 @@
   </button>
   <div class="menu-links">
     <a routerLink="/" (click)="toggleMenu()">Accueil</a>
-    <a routerLink="/login" (click)="toggleMenu()">Se connecter</a>
-    <a routerLink="/register" (click)="toggleMenu()">S'inscrire</a>
+
+    <!-- Si non connecté -->
+    <ng-container *ngIf="!user">
+      <a routerLink="/login" (click)="toggleMenu()">Se connecter</a>
+      <a routerLink="/register" (click)="toggleMenu()">S'inscrire</a>
+    </ng-container>
+
+    <!-- Si connecté -->
+    <ng-container *ngIf="user">
+      <a (click)="logout()" style="cursor: pointer;">Se déconnecter</a>
+      <a routerLink="/compte" (click)="toggleMenu()">Compte</a>
+    </ng-container>
+    <a routerLink="/panier" (click)="toggleMenu()">Panier</a>
   </div>
 </div>
 

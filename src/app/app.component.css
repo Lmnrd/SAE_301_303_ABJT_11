@@ -30,9 +30,9 @@ header {
     z-index: 1000;
 }
 
-.logo-space {
-    width: 50px;
-    /* Placeholder */
+.navbar-logo {
+    height: 50px;
+    width: auto;
 }
 
 /* Navigation & Icons */
@@ -53,11 +53,12 @@ header {
     justify-content: center;
     padding: 5px;
     transition: color 0.3s;
+    width: 50px;
+    height: 50px;
 }
 
 .icon-link {
     position: relative;
-    /* Pour positionner le badge */
 }
 
 .cart-badge {
@@ -80,15 +81,18 @@ header {
 
 .icon-link:hover,
 .burger-menu:hover {
-    color: #ccc;
+    color: #ff8c00;
 }
 
 /* Burger Menu Overlay */
+/* Burger Menu Overlay */
 .menu-overlay {
+    backdrop-filter: blur(15px);
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    bottom: 0;
+    width: 300px;
     height: 100%;
     background-color: rgba(26, 26, 26, 0.95);
     z-index: 2000;
@@ -96,44 +100,55 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    animation: fadeIn 0.3s ease-out;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+    animation: slideInRight 0.3s ease-out;
 }
 
 .close-btn {
     position: absolute;
     top: 25px;
-    right: 40px;
+    right: 25px;
     background: none;
     border: none;
     color: white;
     cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #ff8c00;
+    transform: rotate(90deg);
 }
 
 .menu-links {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 35px;
     text-align: center;
+    width: 100%;
 }
 
 .menu-links a {
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-decoration: none;
     transition: color 0.3s;
-    font-weight: 300;
+    font-weight: 500;
+    letter-spacing: 1px;
 }
 
 .menu-links a:hover {
     color: #ff8c00;
 }
 
-@keyframes fadeIn {
+@keyframes slideInRight {
     from {
+        transform: translateX(100%);
         opacity: 0;
     }
 
     to {
+        transform: translateX(0);
         opacity: 1;
     }
 }

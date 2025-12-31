@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { CommandesComponent } from './commandes/commandes.component';
+// import { CommandesComponent } from './commandes/commandes.component';
 import { CompteComponent } from './compte/compte.component';
 import { PanierComponent } from './panier/panier.component';
 import { AboutComponent } from './about/about.component';
@@ -12,7 +12,8 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'commandes', component: CommandesComponent },
+  { path: 'commandes', redirectTo: '/home', pathMatch: 'full' },
+
   { path: 'compte', component: CompteComponent },
   { path: 'panier', component: PanierComponent },
   { path: 'about', component: AboutComponent }

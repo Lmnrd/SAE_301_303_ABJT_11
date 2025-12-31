@@ -18,7 +18,7 @@
 }
 
 .hero-left h1 {
-    font-size: 3.5rem;
+    font-size: 4rem;
     font-weight: 300;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -592,5 +592,5 @@ h1 {
     font-weight: 300;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-left: 6%;
+    text-align: center;
 }
