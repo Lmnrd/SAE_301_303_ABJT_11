@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 18 déc. 2025 à 09:23
+-- Généré le : jeu. 01 jan. 2026 à 23:07
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -68,7 +68,29 @@ INSERT INTO `articles_commande` (`id`, `commande_id`, `nom_article`, `quantite`,
 (25, 7, 'Super Salmon', 1, 19.90, 7),
 (26, 8, 'Tasty Blend', 6, 12.50, 11),
 (27, 8, 'Saumon Original', 1, 12.50, 11),
-(28, 8, 'Master Mix', 1, 15.90, 11);
+(28, 8, 'Master Mix', 1, 15.90, 11),
+(29, 9, 'Master Mix', 1, 15.90, 11),
+(30, 9, 'Sunrise', 1, 15.90, 11),
+(31, 9, 'Sando Box Salmon Aburi', 1, 15.90, 11),
+(32, 10, 'Tasty Blend', 1, 12.50, 11),
+(33, 10, 'Amateur Mix', 1, 15.90, 11),
+(34, 10, 'Salmon Classic', 1, 15.90, 11),
+(35, 10, 'Sunrise', 1, 15.90, 11),
+(37, 12, 'Amateur Mix', 4, 15.90, 13),
+(38, 13, 'Saumon Original', 4, 12.50, 12),
+(39, 14, 'Amateur Mix', 3, 15.90, 12),
+(40, 14, 'Salmon Lovers', 4, 15.90, 12),
+(41, 15, 'Amateur Mix', 4, 15.90, 12),
+(42, 15, 'Master Mix', 8, 15.90, 12),
+(43, 16, 'Amateur Mix', 15, 15.90, 12),
+(44, 17, 'Master Mix', 2, 15.90, 12),
+(45, 17, 'Sunrise', 1, 15.90, 12),
+(46, 17, 'Salmon Classic', 1, 15.90, 12),
+(47, 17, 'Sando Box Chicken Katsu', 1, 15.90, 12),
+(48, 17, 'Super Salmon', 1, 19.90, 12),
+(49, 18, 'Amateur Mix', 1, 15.90, 12),
+(50, 18, 'Saumon Original', 4, 12.50, 12),
+(51, 18, 'Salmon Lovers', 6, 15.90, 12);
 
 -- --------------------------------------------------------
 
@@ -95,7 +117,16 @@ INSERT INTO `commandes` (`id`, `date_commande`, `montant_total`, `id_user`) VALU
 (5, '2025-12-16 08:43:23', 72.70, 3),
 (6, '2025-12-16 09:05:20', 44.30, 6),
 (7, '2025-12-16 09:12:01', 48.30, 7),
-(8, '2025-12-18 09:14:04', 103.40, 11);
+(8, '2025-12-18 09:14:04', 103.40, 11),
+(9, '2025-12-18 09:42:31', 47.70, 11),
+(10, '2025-12-18 09:44:56', 60.20, 11),
+(12, '2025-12-28 16:29:13', 63.60, 13),
+(13, '2025-12-29 22:41:13', 50.00, 12),
+(14, '2025-12-29 22:43:44', 111.30, 12),
+(15, '2025-12-29 22:45:35', 190.80, 12),
+(16, '2025-12-29 22:49:31', 238.50, 12),
+(17, '2025-12-29 22:53:36', 99.40, 12),
+(18, '2025-12-29 23:18:44', 161.30, 12);
 
 -- --------------------------------------------------------
 
@@ -110,15 +141,9 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `api_token` varchar(255) DEFAULT NULL
+  `api_token` varchar(255) DEFAULT NULL,
+  `type_compte` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `users`
---
-
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `created_at`, `api_token`) VALUES
-(11, 'Liam', 'Andouard', 'andouardliam@gmail.com', '$2y$10$rZNEyQ1AG.T/Ai4hl0WU1.mGB0Haafnvulgv2mc0tNiosMVhpbgzW', '2025-12-18 08:13:24', NULL);
 
 --
 -- Index pour les tables déchargées
@@ -154,19 +179,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `articles_commande`
 --
 ALTER TABLE `articles_commande`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
