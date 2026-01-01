@@ -8,6 +8,7 @@ interface User {
   firstname: string;
   lastname: string;
   email: string;
+  type_compte?: boolean | string;
 }
 
 interface LoginResponse {
@@ -21,6 +22,7 @@ interface RegisterPayload {
   lastname: string;
   email: string;
   password: string;
+  type_compte: boolean | string;
 }
 
 interface RegisterResponse {

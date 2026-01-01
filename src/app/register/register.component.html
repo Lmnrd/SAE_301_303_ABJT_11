@@ -33,6 +33,11 @@
             minlength="6" />
         </div>
 
+        <div class="groupe-champ">
+          <label>Compte étudiant</label>
+          <input type="checkbox" name="type_compte" [(ngModel)]="type_compte" />
+        </div>
+
         <button type="submit" [disabled]="loading" class="bouton-valider">
           {{ loading ? 'Création...' : "S'inscrire" }}
         </button>

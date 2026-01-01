@@ -18,6 +18,7 @@ export class RegisterComponent {
   lastname = '';
   email = '';
   password = '';
+  type_compte = false;
   message = '';
   loading = false;
 
@@ -39,7 +40,8 @@ export class RegisterComponent {
         firstname: this.firstname,
         lastname: this.lastname,
         email: this.email,
-        password: this.password
+        password: this.password,
+        type_compte: this.type_compte
       })
       .subscribe({
         next: (res) => {
@@ -61,5 +63,6 @@ export class RegisterComponent {
     this.lastname = '';
     this.email = '';
     this.password = '';
+    this.type_compte = false;
   }
 }

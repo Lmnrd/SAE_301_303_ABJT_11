@@ -10,16 +10,17 @@ class UserManager {
         $this->pdo = $db->getConnection();
     }
 
-    public function insertUser($firstname, $lastname, $email, $hashedPassword) {
-        $sql = "INSERT INTO users (firstname, lastname, email, password)
-                VALUES (:firstname, :lastname, :email, :password)";
+    public function insertUser($firstname, $lastname, $email, $hashedPassword, $type_compte) {
+        $sql = "INSERT INTO users (firstname, lastname, email, password, type_compte)
+                VALUES (:firstname, :lastname, :email, :password, :type_compte)";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
             ':firstname' => $firstname,
             ':lastname' => $lastname,
             ':email' => $email,
-            ':password' => $hashedPassword
+            ':password' => $hashedPassword,
+            ':type_compte' => $type_compte
         ]);
         return $this->pdo->lastInsertId();
     }

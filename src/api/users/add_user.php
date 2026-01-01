@@ -18,6 +18,7 @@ if (
     !isset($data['firstname']) || empty($data['firstname']) ||
     !isset($data['lastname'])  || empty($data['lastname'])  ||
     !isset($data['email'])     || empty($data['email'])     ||
+    !isset($data['type_compte']) ||
     !isset($data['password'])  || empty($data['password'])
 ) {
     http_response_code(400);
@@ -35,11 +36,15 @@ if ($manager->findUserByEmail($data['email'])) {
 
 $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
 
+// Conversion du boolean front en string pour la BDD
+$typeCompteStr = $data['type_compte'] ? 'etudiant' : 'normal';
+
 $userId = $manager->insertUser(
     $data['firstname'],
     $data['lastname'],
     $data['email'],
-    $hashedPassword
+    $hashedPassword,
+    $typeCompteStr
 );
 
 http_response_code(201);
@@ -49,7 +54,8 @@ echo json_encode([
         "id" => $userId,
         "firstname" => $data['firstname'],
         "lastname" => $data['lastname'],
-        "email" => $data['email']
+        "email" => $data['email'],
+        "type_compte" => $typeCompteStr
     ]
 ]);
 

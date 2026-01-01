@@ -43,6 +43,7 @@ echo json_encode([
         "id" => (int)$user['id'],
         "firstname" => $user['firstname'],
         "lastname" => $user['lastname'],
-        "email" => $user['email']
+        "email" => $user['email'],
+        "type_compte" => $user['type_compte']
     ]
 ]);
