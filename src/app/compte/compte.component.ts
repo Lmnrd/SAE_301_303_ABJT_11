@@ -31,9 +31,7 @@ export class CompteComponent implements OnInit {
   }
 
   logout() {
-    // supprime les données de sessionStorage et redirige vers login OU ACCUEIL CAR PAS OBLIGE DE SE CONNECTER
-    sessionStorage.removeItem('user');
-    sessionStorage.removeItem('token');
-    this.router.navigate(['/home']); // A VOIR : rediriger vers login ou accueil ?
+    this.authService.logout();
+    this.router.navigate(['/home']);
   }
 }

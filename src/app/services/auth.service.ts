@@ -76,7 +76,6 @@ export class AuthService {
 
   // Déconnexion
   logout() {
-    sessionStorage.removeItem('user');
-    sessionStorage.removeItem('token');
+    sessionStorage.clear();
   }
 }
