@@ -13,12 +13,6 @@
 
       <!-- LOGGED IN STATE -->
       <div *ngIf="user; else notLoggedInBlock" class="logged-in-content">
-        <!-- Removed "Bonjour" header to match accordion mockup style or keep it small? Mockup has "Mes informations" top left. 
-             Actually mockup shows "Mes informations" as the first headers. I will remove the big greeting to match the "clean" accordion look 
-             or keep it small. Let's keep the greeting but maybe smaller or just rely on accordions.
-             Mockup doesn't show "Bonjour", so I'll prioritize the accordions.
-        -->
-
         <!-- Accordion: Mes informations -->
         <div class="accordion-section">
           <div class="accordion-header" (click)="toggleSection('mes-informations')">
@@ -28,16 +22,21 @@
           <div class="accordion-content" *ngIf="openSection === 'mes-informations'">
             <form>
               <div class="form-group">
+                <label>Prénom</label>
+                <input type="text" [value]="user.firstname" readonly>
+              </div>
+              <div class="form-group">
                 <label>Nom</label>
-                <input type="text" [value]="user.firstname + ' ' + user.lastname" placeholder="Nom Prénom">
+                <input type="text" [value]="user.lastname" readonly>
               </div>
               <div class="form-group">
                 <label>Adresse e-mail</label>
-                <input type="email" [value]="user.email" placeholder="exemple@mail.com">
+                <input type="email" [value]="user.email" readonly>
               </div>
               <div class="form-group">
-                <label>Numéro de téléphone</label>
-                <input type="tel" value="+33 12 34 56 78 90">
+                <label>Type de compte</label>
+                <input type="text" [value]="user.type_compte" readonly
+                  style="text-transform: capitalize; font-weight: bold; color: #ff8c00;">
               </div>
               <button type="button" class="action-btn orange-btn">Modifier mes informations</button>
             </form>

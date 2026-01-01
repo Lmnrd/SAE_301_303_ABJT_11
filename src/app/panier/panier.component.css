@@ -166,3 +166,16 @@ button {
   background-color: #ff8c00;
   color: white;
 }
+
+.remise-row td {
+  color: #2ecc71 !important;
+  font-size: 0.9rem;
+  font-style: italic;
+  padding: 0.5rem 1.2rem;
+}
+
+.total-final-row td {
+  font-size: 1.2rem;
+  border-top: 2px solid #ff8c00;
+  color: white;
+}

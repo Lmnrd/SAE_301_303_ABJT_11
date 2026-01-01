@@ -22,8 +22,20 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="3" class="text-right"><strong>Total Général</strong></td>
-                        <td><strong>{{ total | number:'1.2-2' }} €</strong></td>
+                        <td colspan="3" class="text-right">Sous-total</td>
+                        <td>{{ detailsTotal.total | number:'1.2-2' }} €</td>
+                    </tr>
+                    <tr *ngIf="detailsTotal.remiseSomme > 0" class="remise-row">
+                        <td colspan="3" class="text-right">Remise commande > 50€ (1.5%)</td>
+                        <td>-{{ detailsTotal.remiseSomme | number:'1.2-2' }} €</td>
+                    </tr>
+                    <tr *ngIf="detailsTotal.remiseEtudiant > 0" class="remise-row">
+                        <td colspan="3" class="text-right">Remise Étudiant (10%)</td>
+                        <td>-{{ detailsTotal.remiseEtudiant | number:'1.2-2' }} €</td>
+                    </tr>
+                    <tr class="total-final-row">
+                        <td colspan="3" class="text-right"><strong>Total Final</strong></td>
+                        <td><strong>{{ detailsTotal.totalFinal | number:'1.2-2' }} €</strong></td>
                     </tr>
                 </tfoot>
             </table>

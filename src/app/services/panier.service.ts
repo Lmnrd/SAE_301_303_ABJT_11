@@ -41,10 +41,48 @@ export class PanierService {
     }
 
     /**
-     * Calcule le montant total du panier
+     * Calcule le montant total du panier (avant remises)
      */
     calculerTotal(): number {
         const articles = this.getPanier();
         return articles.reduce((total, art) => total + (art.prix_unitaire * art.quantite), 0);
+    }
+
+    /**
+     * Calcule la remise de 1.5% si le total dépasse un certain seuil (ex: 50€)
+     */
+    getRemiseSomme(total: number): number {
+        const SEUIL = 50; // Somme à partir de laquelle on applique 1.5%
+        if (total >= SEUIL) {
+            return total * 0.015;
+        }
+        return 0;
+    }
+
+    /**
+     * Calcule la remise étudiant (ex: 10%)
+     */
+    getRemiseEtudiant(total: number, isEtudiant: boolean): number {
+        if (isEtudiant) {
+            return total * 0.10; // 10% de remise étudiant
+        }
+        return 0;
+    }
+
+    /**
+     * Calcule le total final après toutes les remises
+     */
+    calculerTotalFinal(isEtudiant: boolean = false): { total: number, remiseSomme: number, remiseEtudiant: number, totalFinal: number } {
+        const total = this.calculerTotal();
+        const remiseSomme = this.getRemiseSomme(total);
+        const remiseEtudiant = this.getRemiseEtudiant(total, isEtudiant);
+        const totalFinal = total - remiseSomme - remiseEtudiant;
+
+        return {
+            total,
+            remiseSomme,
+            remiseEtudiant,
+            totalFinal: totalFinal > 0 ? totalFinal : 0
+        };
     }
 }

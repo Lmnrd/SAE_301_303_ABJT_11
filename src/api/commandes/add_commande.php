@@ -29,6 +29,24 @@ try {
         $montant_total += (float)$article['quantite'] * (float)$article['prix_unitaire'];
     }
 
+    // Récupérer le type de compte de l'utilisateur pour les remises
+    $stmtUser = $pdo->prepare("SELECT type_compte FROM users WHERE id = ?");
+    $stmtUser->execute([(int)$data['id_user']]);
+    $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+    $isEtudiant = ($user && $user['type_compte'] === 'etudiant');
+
+    // 1. Remise de 1.5% si > 50€
+    if ($montant_total >= 50) {
+        $remiseSomme = $montant_total * 0.015;
+        $montant_total -= $remiseSomme;
+    }
+
+    // 2. Remise étudiant (10%)
+    if ($isEtudiant) {
+        $remiseEtudiant = $montant_total * 0.10;
+        $montant_total -= $remiseEtudiant;
+    }
+
     $stmt = $pdo->prepare("INSERT INTO commandes (date_commande, montant_total, id_user) VALUES (NOW(), ?, ?)");
     if (!$stmt->execute([$montant_total, (int)$data['id_user']])) {
         throw new Exception("Erreur lors de l'insertion dans la table commandes");

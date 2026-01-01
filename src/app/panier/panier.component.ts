@@ -29,8 +29,14 @@ export class PanierComponent implements OnInit {
     this.articles = this.panierService.getPanier();
   }
 
+  get detailsTotal() {
+    const user = this.authService.getCurrentUser();
+    const isEtudiant = user?.type_compte === 'etudiant';
+    return this.panierService.calculerTotalFinal(isEtudiant);
+  }
+
   get total(): number {
-    return this.panierService.calculerTotal();
+    return this.detailsTotal.totalFinal;
   }
 
   confirmerCommande() {
