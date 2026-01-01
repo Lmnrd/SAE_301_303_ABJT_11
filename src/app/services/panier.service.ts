@@ -13,6 +13,9 @@ export class PanierService {
      * Récupère le panier actuel depuis le sessionStorage
      */
     getPanier(): ArticleCommande[] {
+        if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+            return [];
+        }
         const data = sessionStorage.getItem(this.CLE_SESSION);
         return data ? JSON.parse(data) : [];
     }
@@ -21,9 +24,9 @@ export class PanierService {
      * Ajoute des articles au panier
      */
     ajouterArticles(nouveauxArticles: ArticleCommande[]) {
-        // On pourrait fusionner si l'article existe déjà, mais pour rester simple on remplace ou on ajoute.
-        // Ici, le comportement actuel semblait être de remplacer temporairement pour la commande.
-        // Simplification : On écrase le panier temporaire avec la nouvelle sélection (comportement 'Valider la commande' actuel).
+        if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+            return;
+        }
         sessionStorage.setItem(this.CLE_SESSION, JSON.stringify(nouveauxArticles));
     }
 
@@ -31,6 +34,9 @@ export class PanierService {
      * Vide le panier
      */
     viderPanier() {
+        if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+            return;
+        }
         sessionStorage.removeItem(this.CLE_SESSION);
     }
 

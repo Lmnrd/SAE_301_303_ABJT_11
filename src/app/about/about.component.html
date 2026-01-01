@@ -1,2 +1,115 @@
-<h1>A PROPOS DE NOUS</h1>
-<button (click)="retour()">Retour au menu</button>
+
+  <!-- INTRO / BRAND SECTION -->
+    <!-- OUR STORY SECTION -->
+    <section class="story-section">
+      <h2 class="story-title">Notre histoire</h2>
+
+      <div class="story-row">
+        <div class="story-image">
+          <img src="assets/images/illustration1.jpeg" alt="Préparation sushi" />
+        </div>
+        <div class="story-text">
+          <p><strong>Bienvenue sur It'SUSHI</strong>, ici nous vous proposons une expérience d'authentique sushi créée par notre chef sushi. Nos ingrédients sont de grande qualité et nos poissons frais sont livrés dans la journée directement depuis les côtes afin de garantir un parallèle entre goût et qualité.</p>
+
+          <p>Nos boxes sont conçues pour les amoureux de sushi qui cherchent l'équilibre parfait entre fraîcheur, variété et praticité. Chaque box rassemble une sélection choisie par nos chefs, préparée à la main avec des ingrédients de qualité et emballée pour conserver toutes les saveurs.</p>
+        </div>
+      </div>
+
+      <div class="story-row">
+        <div class="story-text">
+          <h3>Pourquoi nos boxes ?</h3>
+          <p>Des poissons provenant de sources responsables, du riz assaisonné à la perfection, des légumes croquants et des sauces maison. Nos boxes existent en tailles variées — du classique à la découverte — pour satisfaire les petites faims comme les grandes tablées.</p>
+
+          <p>Nous privilégions des emballages recyclables, travaillons avec des pêcheurs locaux quand c'est possible et réduisons le gaspillage par des portions adaptées. Notre promesse : une expérience gustative responsable et mémorable.</p>
+        </div>
+        <div class="story-image">
+          <img src="assets/images/illustration2.png" alt="Assortiment sushi" />
+        </div>
+      </div>
+
+      <p class="story-cta">Découvrez nos boxes, composez la vôtre et faites-vous livrer en quelques clics.</p>
+    </section>
+
+    <div *ngIf="isBrowser" class="dashboard-section">
+    <h2 class="dashboard-title">Tableau de Bord</h2>
+    
+    <div class="dashboard-grid">
+      <!-- Commandes Chart -->
+      <div class="dashboard-card">
+        <h3>Commandes</h3>
+        <div class="chart-container">
+          <canvas baseChart
+            [data]="commandesChartData"
+            [options]="commandesChartOptions"
+            type="line">
+          </canvas>
+        </div>
+      </div>
+
+      <!-- Chiffre d'Affaire Chart -->
+      <div class="dashboard-card">
+        <h3>Chiffre d'Affaire</h3>
+        <div class="chart-container">
+          <canvas baseChart
+            [data]="chiffreAffaireChartData"
+            [options]="chiffreAffaireChartOptions"
+            type="line">
+          </canvas>
+        </div>
+      </div>
+
+      <!-- Revenu Chart -->
+      <!-- Revenu chart removed -->
+    </div>
+  </div>
+
+<div class="about-container">
+  <div class="about-content">
+    <div class="about-left">
+      <div class="about-logo">
+        <p class="logo-text">It'<span class="logo-sushi">S</span>USHI</p>
+        <p class="logo-subtitle">est à votre disposition</p>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <div class="contact-form">
+        <h1 class="form-title">Nous contacter</h1>
+
+        <form (ngSubmit)="onSubmit()" [formGroup]="contactForm">
+          <div class="form-group">
+            <label for="name">Entrer votre Nom & Prénom</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Votre Nom & Prénom"
+              formControlName="name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Entrer votre Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Votre Email"
+              formControlName="email"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Entrer votre Message</label>
+            <textarea
+              id="message"
+              placeholder="Votre Message"
+              formControlName="message"
+              rows="6"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

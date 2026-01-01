@@ -1,0 +1,56 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DashboardService {
+  private apiUrl = 'http://localhost/SAE_301_303_ABJT_11/src/api';
+
+  constructor(private http: HttpClient) { }
+
+  getCommandesData(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/commandes/get_commandes.php`).pipe(
+      map((data: any) => this.transformCommandesData(data)),
+      catchError(error => {
+        console.error('Erreur lors du chargement des commandes:', error);
+        // Retourner des données par défaut en cas d'erreur
+        return of({
+          commandes: [5, 10, 8, 15, 12, 20, 25, 18, 22, 19, 14, 11],
+          chiffreAffaire: [30, 45, 65, 85],
+          revenu: [5000, 3000, 2500, 2000, 1000]
+        });
+      })
+    );
+  }
+
+  private transformCommandesData(data: any): any {
+    // Transformer les données des commandes en données pour les graphiques
+    const commandes = new Array(12).fill(0);
+    const chiffreAffaire = new Array(4).fill(0);
+    const revenu = new Array(5).fill(0);
+
+    if (Array.isArray(data)) {
+      data.forEach((commande: any) => {
+        const date = new Date(commande.date);
+        const month = date.getMonth();
+        const quarter = Math.floor(month / 3);
+        
+        // Compter les commandes par mois
+        commandes[month]++;
+        
+        // Ajouter au chiffre d'affaire
+        chiffreAffaire[quarter] += commande.montant || 0;
+        
+        // Ajouter au revenu (premiers 5 mois)
+        if (month < 5) {
+          revenu[month] += commande.montant || 0;
+        }
+      });
+    }
+
+    return { commandes, chiffreAffaire, revenu };
+  }
+}

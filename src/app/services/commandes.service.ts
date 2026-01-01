@@ -24,7 +24,7 @@ export interface ReponseCommande {
   providedIn: 'root'
 })
 export class CommandesService {
-  private readonly baseUrl = 'http://localhost/SAE_301_303_ABJT_11/src/api/commandes';
+  private readonly baseUrl = 'http://localhost/SAE_301_303_ABJT_11-master/src/api/commandes';
 
   constructor(private http: HttpClient) { }
 
