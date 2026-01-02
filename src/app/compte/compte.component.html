@@ -1,19 +1,21 @@
+<!-- ce fichier contient la page de compte de l'utilisateur -->
+
 <div class="account-container">
   <div class="account-card">
 
-    <!-- Left Panel: Logo (Common for both states) -->
+    <!-- partie gauche avec le logo -->
     <div class="card-left">
       <div class="logo-box">
         <img src="assets/logo_blanc.png" alt="It'SUSHI Logo" class="card-logo">
       </div>
     </div>
 
-    <!-- Right Panel: Content -->
+    <!-- partie droite avec le contenu et les informations de l'utilisateur -->
     <div class="card-right">
 
-      <!-- LOGGED IN STATE -->
+      <!-- conditions de vérifications de la connexion de l'utilisateur -->
       <div *ngIf="user; else notLoggedInBlock" class="logged-in-content">
-        <!-- Accordion: Mes informations -->
+        <!-- si connecté, affiche les informations de l'utilisateur -->
         <div class="accordion-section">
           <div class="accordion-header" (click)="toggleSection('mes-informations')">
             <h3>Mes informations</h3>
@@ -43,14 +45,13 @@
           </div>
         </div>
 
-        <!-- Accordion: Mes commandes -->
+        <!-- si connecté, affiche les commandes de l'utilisateur -->
         <div class="accordion-section">
           <div class="accordion-header" (click)="toggleSection('mes-commandes')">
             <h3>Mes commandes</h3>
             <span class="chevron" [class.open]="openSection === 'mes-commandes'">&#9660;</span>
           </div>
           <div class="accordion-content" *ngIf="openSection === 'mes-commandes'">
-            <!-- Mock Order 1 -->
             <div class="order-item">
               <div class="order-header">
                 <span>02/12/2025 - 12:10</span>
@@ -66,7 +67,6 @@
               </div>
             </div>
 
-            <!-- Mock Order 2 -->
             <div class="order-item">
               <div class="order-header">
                 <span>02/12/2025 - 12:10</span>
@@ -84,7 +84,7 @@
           </div>
         </div>
 
-        <!-- Accordion: Confidentialité et sécurité -->
+        <!--toujours si connecté, affiche les informations de confidentialité et sécurité -->
         <div class="accordion-section">
           <div class="accordion-header" (click)="toggleSection('confidentialite')">
             <h3>Confidentialité et sécurité</h3>
@@ -115,12 +115,11 @@
 
       </div>
 
-      <!-- NOT LOGGED IN STATE -->
+      <!-- si utilisateur pas connecté, affiche le bloc de connexion -->
       <ng-template #notLoggedInBlock>
         <div class="guest-content">
           <h2>Bienvenue</h2>
           <p>Connectez-vous pour accéder à votre compte.</p>
-
           <div class="auth-buttons">
             <a routerLink="/login" class="auth-btn login-btn">Se connecter</a>
             <a routerLink="/register" class="auth-btn register-btn">Créer un compte</a>

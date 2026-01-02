@@ -1,3 +1,7 @@
+// ce fichier contient le composant home
+// il contient la liste des boxes et les modals de détails et de quantité
+// il permet de charger les boxes depuis un fichier json
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -31,18 +35,20 @@ export class HomeComponent implements OnInit {
 
   boxes: Box[] = [];
 
-  /* Modal Détails */
+  /* sert à ouvrir le modal de détails */
   selectedBox: Box | null = null;
   isDetailsModalOpen = false;
 
-  /* Modal Quantité */
+  /* sert à ouvrir le modal de quantité */
   selectedBoxForCart: Box | null = null;
   isQuantityModalOpen = false;
   quantite = 1;
 
   constructor(private panierService: PanierService, private http: HttpClient) { }
+  // sert à initialiser le panier et le http
 
   ngOnInit(): void {
+    // cette fonction sert à charger les boxes
     this.loadBoxes();
   }
 
@@ -57,18 +63,20 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  /* ===== MODAL DETAILS ===== */
   openDetails(box: Box): void {
+    // cette fonction sert à ouvrir le modal de détails
     this.selectedBox = box;
     this.isDetailsModalOpen = true;
   }
 
   closeDetailsModal(): void {
+    // cette fonction sert à fermer le modal de détails
     this.isDetailsModalOpen = false;
     this.selectedBox = null;
   }
 
   addToCartFromDetails(): void {
+    // cette fonction sert à ajouter une box au panier
     if (this.selectedBox) {
       const box = this.selectedBox;
       this.closeDetailsModal();
@@ -76,39 +84,43 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  /* ===== MODAL QUANTITE ===== */
   openQuantityModal(box: Box): void {
+    // cette fonction sert à ouvrir le modal de quantité
     this.selectedBoxForCart = box;
     this.quantite = 1;
     this.isQuantityModalOpen = true;
   }
 
   closeQuantityModal(): void {
+    // cette fonction sert à fermer le modal de quantité
     this.isQuantityModalOpen = false;
     this.selectedBoxForCart = null;
   }
 
   increaseQty(): void {
+    // cette fonction sert à augmenter la quantité
     if (this.quantite < 10) {
       this.quantite++;
     }
   }
 
   decreaseQty(): void {
+    // cette fonction sert à diminuer la quantité
     if (this.quantite > 1) {
       this.quantite--;
     }
   }
 
   confirmAddToCart(): void {
+    // cette fonction sert à ajouter une box au panier
     if (!this.selectedBoxForCart) return;
 
     const panierActuel = this.panierService.getPanier();
 
-    // Calculer le total actuel des produits dans le panier
+    // calculer le total actuel des produits dans le panier
     const totalActuel = panierActuel.reduce((sum, item) => sum + item.quantite, 0);
 
-    // Vérifier si l'ajout dépasse la limite de 10
+    // vérifier si l'ajout dépasse la limite de 10 et indique si c'est le cas
     if (totalActuel + this.quantite > 10) {
       const placeRestante = 10 - totalActuel;
       if (placeRestante <= 0) {
@@ -127,7 +139,9 @@ export class HomeComponent implements OnInit {
       id_user: 0
     };
 
-    this.panierService.ajouterArticles([...panierActuel, article]);
+    panierActuel.push(article);
+    this.panierService.ajouterArticles(panierActuel);
+    // on ajoute l'article au tableau puis on met à jour le panier
 
     alert(`${this.quantite} × ${this.selectedBoxForCart.nom} ajouté(s) au panier`);
 

@@ -1,7 +1,9 @@
+<!--ce fichier contient le footer, qui apparait sur toutes les pages -->
+
 <footer class="site-footer">
     <div class="footer-content">
         <div class="footer-logo">
-            <!-- Using the same logo as header/home, clickable to go to home -->
+            <!-- le logo permet de retourner sur la page d'accueil -->
             <a routerLink="/" class="logo-placeholder" aria-label="Accueil">
                 <img src="assets/logo_blanc.png" alt="USHI Logo" style="height: 60px;">
             </a>
@@ -22,9 +24,15 @@
             </div>
             <div class="column">
                 <h4>À propos</h4>
+                <ul>
+                    <li><a routerLink="/about" class="menu-link">A propos</a></li>
+                </ul>
             </div>
             <div class="column">
                 <h4>Contact</h4>
+                <ul>
+                    <li><a routerLink="/contact" class="menu-link">Contact</a></li>
+                </ul>
             </div>
         </div>
 
@@ -32,7 +40,6 @@
             <p class="email">it'sushi&#64;gmail.com</p>
             <p class="phone">+33 6 00 00 00 00</p>
             <div class="social-icons">
-                <!-- Placeholder icons -->
                 <span>🐦</span>
                 <span>📘</span>
                 <span>📷</span>

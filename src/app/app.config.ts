@@ -1,3 +1,5 @@
+// ce fichier est utilisé pour configurer le serveur de rendu côté serveur
+
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { routes } from './app.routes';

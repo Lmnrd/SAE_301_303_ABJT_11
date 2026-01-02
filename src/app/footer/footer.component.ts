@@ -1,3 +1,5 @@
+// le fichier footer.component.ts ne nécessite aucune fonction spécifique
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';

@@ -1,3 +1,7 @@
+// fichier PHP qui permet de récupérer les commandes d'un utilisateur connecté
+// il permet de recevoir l'id de l'utilisateur et de récupérer ses commandes
+// il permet de retourner les commandes de l'utilisateur
+
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");

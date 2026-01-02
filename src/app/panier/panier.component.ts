@@ -1,8 +1,15 @@
+// ce fichier contient le composant panier
+// il permet de gérer le panier de l'utilisateur
+// il permet de confirmer une commande
+// il permet de vider le panier
+// il permet de retourner au catalogue / menu
+
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommandesService, ArticleCommande } from '../services/commandes.service';
 import { AuthService } from '../services/auth.service';
-import { PanierService } from '../services/panier.service'; // Import PanierService
+import { PanierService } from '../services/panier.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,8 +20,11 @@ import { Router } from '@angular/router';
   styleUrl: './panier.component.css'
 })
 export class PanierComponent implements OnInit {
+  // articles est un tableau d'articles
   articles: ArticleCommande[] = [];
+  // message est un message qui s'affiche en haut de la page
   message = '';
+  // orderSuccess est un boolean qui indique si la commande a été confirmée
   orderSuccess = false;
 
   constructor(
@@ -25,32 +35,35 @@ export class PanierComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Récupérer le panier via le service
+    // récupérer le panier via le service
     this.articles = this.panierService.getPanier();
   }
 
   get detailsTotal() {
+    // récupérer le total final
     const user = this.authService.getCurrentUser();
-    const isEtudiant = user?.type_compte === 'etudiant';
-    return this.panierService.calculerTotalFinal(isEtudiant);
+    const isEtudiant = user?.type_compte === 'etudiant'; // si l'utilisateur est étudiant
+    return this.panierService.calculerTotalFinal(isEtudiant); // retourner le total final
   }
 
   get total(): number {
+    // récupérer le total final après les autres calculs
     return this.detailsTotal.totalFinal;
   }
 
   confirmerCommande() {
+    // confirmer la commande finale
     const user = this.authService.getCurrentUser();
-    if (!user) {
+    if (!user) { // si l'utilisateur n'est pas connecté
       this.message = 'Veuillez vous connecter pour valider votre commande.';
       return;
     }
 
-    this.commandeService.creerCommande(this.articles, user.id).subscribe({
+    this.commandeService.creerCommande(this.articles, user.id).subscribe({ // créer la commande finale
       next: (res) => {
         this.message = `Commande réussie !`;
         this.orderSuccess = true;
-        this.panierService.viderPanier(); // Vider le panier via le service
+        this.panierService.viderPanier(); // vider le panier via le service
         this.articles = [];
       },
       error: (err) => {
@@ -65,9 +78,11 @@ export class PanierComponent implements OnInit {
     this.articles = [];
   }
 
-  retour() {
-    this.router.navigate(['/home']);
-  }
+
+  // pas utile si on ne garde pas le commande.component
+  // retour() {
+  //   this.router.navigate(['/commande']);
+  // }
 
   retour_menu() {
     this.router.navigate(['/home']);

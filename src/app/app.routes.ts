@@ -1,8 +1,11 @@
+// ce fichier est utilisé pour configurer les routes de l'application
+
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 // import { CommandesComponent } from './commandes/commandes.component';
+// supprimé car non utilisé mais gardé en cas de besoin futur
 import { CompteComponent } from './compte/compte.component';
 import { PanierComponent } from './panier/panier.component';
 import { AboutComponent } from './about/about.component';

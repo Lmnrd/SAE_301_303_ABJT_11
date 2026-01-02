@@ -1,10 +1,13 @@
+// fichier PHP qui permet de recevoir les informations de la commande et de les stocker dans la base de données
+// permet ensuite d'afficher les détails des box précédemment commandées par l'utilisateur connecté
+
 <?php
 require_once __DIR__ . '/../manager/UserManager.php';
 require_once __DIR__ . '/../manager/OrderManager.php';
 
 header("Content-Type: application/json");
 
-// 1 - Vérifier token
+// vérifie le token
 $headers = getallheaders();
 
 if (!isset($headers["Authorization"])) {
@@ -23,7 +26,8 @@ if (!$user) {
     exit;
 }
 
-// 2 - Récupérer la payload
+// récupère la payload
+// payload = c'est l'objet JSON qui contient par exemple la liste des sushis, les quantités et le prix.
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (!isset($data["items"]) || !is_array($data["items"])) {
@@ -38,7 +42,7 @@ $orderManager = new OrderManager();
 try {
     $pdo->beginTransaction();
 
-    // 3 - Limite : max 10 articles
+    // limite : max 10 articles
     $totalQty = 0;
     foreach ($data["items"] as $item) {
         $totalQty += $item["quantity"];
@@ -49,12 +53,12 @@ try {
         exit;
     }
 
-    // 4 - Créer la commande
+    // créer la commande
     $orderId = $orderManager->createOrder($user["id"]);
 
     $total = 0;
 
-    // 5 - Créer les items
+    // créer les items
     foreach ($data["items"] as $item) {
 
         if (!isset($item["box_id"]) || !isset($item["quantity"])) {
@@ -74,7 +78,7 @@ try {
         $total += $qty * $unitPrice;
     }
 
-    // 6 - Update total
+    // update total
     $orderManager->updateTotal($orderId, $total);
 
     $pdo->commit();

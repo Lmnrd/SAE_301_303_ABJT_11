@@ -36,7 +36,9 @@ if ($manager->findUserByEmail($data['email'])) {
 
 $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
 
-// Conversion du boolean front en string pour la BDD
+// conversion du boolean front en string pour la BDD
+// quand on coche ou non la case, on envoie un boolean true ou false
+// on le convertit en string "etudiant" ou "normal"
 $typeCompteStr = $data['type_compte'] ? 'etudiant' : 'normal';
 
 $userId = $manager->insertUser(
