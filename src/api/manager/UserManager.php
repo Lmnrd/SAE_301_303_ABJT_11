@@ -1,6 +1,7 @@
+<?php
 // fichier PHP qui permet de gérer les utilisateurs
 // il permet de recevoir les informations de l'utilisateur et de les stocker dans la base de données
-<?php
+
 require_once __DIR__ . '/../config/db.php';
 
 class UserManager {

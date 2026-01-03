@@ -1,7 +1,7 @@
+<?php
 // fichier PHP qui permet de recevoir les informations de la commande et de les stocker dans la base de données
 // permet ensuite d'afficher les détails des box précédemment commandées par l'utilisateur connecté
 
-<?php
 require_once __DIR__ . '/../manager/UserManager.php';
 require_once __DIR__ . '/../manager/OrderManager.php';
 

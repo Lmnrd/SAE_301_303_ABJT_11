@@ -32,25 +32,32 @@ export class DashboardService {
     const chiffreAffaire = new Array(4).fill(0);
     const revenu = new Array(5).fill(0);
 
+    console.log('Données reçues de l\'API:', data);
+
     if (Array.isArray(data)) {
       data.forEach((commande: any) => {
-        const date = new Date(commande.date);
+        // Utiliser date_commande au lieu de date (format API)
+        const date = new Date(commande.date_commande);
         const month = date.getMonth();
         const quarter = Math.floor(month / 3);
-        
+
         // Compter les commandes par mois
         commandes[month]++;
-        
-        // Ajouter au chiffre d'affaire
-        chiffreAffaire[quarter] += commande.montant || 0;
-        
+
+        // Utiliser montant_total au lieu de montant (format API)
+        const montant = commande.montant_total || 0;
+
+        // Ajouter au chiffre d'affaire par trimestre
+        chiffreAffaire[quarter] += montant;
+
         // Ajouter au revenu (premiers 5 mois)
         if (month < 5) {
-          revenu[month] += commande.montant || 0;
+          revenu[month] += montant;
         }
       });
     }
 
+    console.log('Statistiques calculées:', { commandes, chiffreAffaire, revenu });
     return { commandes, chiffreAffaire, revenu };
   }
 }

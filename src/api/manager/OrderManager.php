@@ -1,7 +1,7 @@
+<?php
 // fichier PHP qui permet de gérer les commandes
 // il permet de recevoir les informations de la commande et de les stocker dans la base de données
 
-<?php
 require_once __DIR__ . '/../config/db.php';
 
 class OrderManager {
