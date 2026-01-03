@@ -1,7 +1,7 @@
+<?php
 // fichier PHP qui permet de se connecter à la base de données
 // il permet de retourner la connexion à la base de données
 
-<?php
 class Database {
     private $host = "localhost";
     private $dbname = "sae_301_303";

@@ -16,6 +16,9 @@ interface User {
   lastname: string;
   email: string;
   type_compte?: boolean | string;
+  telephone?: string;
+  coordonnees_bancaires?: string;
+  adresse_livraison?: string;
 }
 
 interface LoginResponse {
@@ -94,5 +97,31 @@ export class AuthService {
   // partie déconnexion
   logout() {
     sessionStorage.clear();
+  }
+
+  // partie mise à jour des informations utilisateur
+  updateUser(userData: {
+    id: number;
+    firstname: string;
+    lastname: string;
+    email: string;
+    telephone?: string;
+    coordonnees_bancaires?: string;
+    adresse_livraison?: string;
+  }): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}/users/update_user.php`,
+      userData,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(res => {
+        // Mettre à jour le sessionStorage avec les nouvelles informations
+        if (res.user) {
+          const currentUser = this.getCurrentUser();
+          const updatedUser = { ...currentUser, ...res.user };
+          sessionStorage.setItem('user', JSON.stringify(updatedUser));
+        }
+      })
+    );
   }
 }

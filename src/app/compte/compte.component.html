@@ -22,25 +22,60 @@
             <span class="chevron" [class.open]="openSection === 'mes-informations'">&#9660;</span>
           </div>
           <div class="accordion-content" *ngIf="openSection === 'mes-informations'">
+            <!-- Message de succès ou d'erreur -->
+            <div *ngIf="message" class="message" [class.success]="messageType === 'success'"
+              [class.error]="messageType === 'error'">
+              {{ message }}
+            </div>
+
             <form>
-              <div class="form-group">
-                <label>Prénom</label>
-                <input type="text" [value]="user.firstname" readonly>
-              </div>
-              <div class="form-group">
-                <label>Nom</label>
-                <input type="text" [value]="user.lastname" readonly>
-              </div>
-              <div class="form-group">
-                <label>Adresse e-mail</label>
-                <input type="email" [value]="user.email" readonly>
-              </div>
-              <div class="form-group">
-                <label>Type de compte</label>
-                <input type="text" [value]="user.type_compte" readonly
-                  style="text-transform: capitalize; font-weight: bold; color: #ff8c00;">
-              </div>
-              <button type="button" class="action-btn orange-btn">Modifier mes informations</button>
+              <!-- Mode lecture (readonly) -->
+              <ng-container *ngIf="!isEditing">
+                <div class="form-group">
+                  <label>Prénom</label>
+                  <input type="text" [value]="user.firstname" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" [value]="user.lastname" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Adresse e-mail</label>
+                  <input type="email" [value]="user.email" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Type de compte</label>
+                  <input type="text" [value]="user.type_compte" readonly
+                    style="text-transform: capitalize; font-weight: bold; color: #ff8c00;">
+                </div>
+                <button type="button" class="action-btn orange-btn" (click)="startEdit()">Modifier mes
+                  informations</button>
+              </ng-container>
+
+              <!-- Mode édition -->
+              <ng-container *ngIf="isEditing">
+                <div class="form-group">
+                  <label>Prénom</label>
+                  <input type="text" [(ngModel)]="editForm.firstname" name="firstname" required>
+                </div>
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" [(ngModel)]="editForm.lastname" name="lastname" required>
+                </div>
+                <div class="form-group">
+                  <label>Adresse e-mail</label>
+                  <input type="email" [(ngModel)]="editForm.email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label>Type de compte</label>
+                  <input type="text" [value]="user.type_compte" readonly
+                    style="text-transform: capitalize; font-weight: bold; color: #ff8c00;">
+                </div>
+                <div class="button-group">
+                  <button type="button" class="action-btn cancel-btn" (click)="cancelEdit()">Annuler</button>
+                  <button type="button" class="action-btn orange-btn" (click)="saveChanges()">Enregistrer</button>
+                </div>
+              </ng-container>
             </form>
           </div>
         </div>
@@ -91,24 +126,65 @@
             <span class="chevron" [class.open]="openSection === 'confidentialite'">&#9660;</span>
           </div>
           <div class="accordion-content" *ngIf="openSection === 'confidentialite'">
+            <!-- Message de succès ou d'erreur -->
+            <div *ngIf="message && openSection === 'confidentialite'" class="message"
+              [class.success]="messageType === 'success'" [class.error]="messageType === 'error'">
+              {{ message }}
+            </div>
+
             <form>
-              <div class="form-group">
-                <label>Mot de passe</label>
-                <input type="password" value="**********">
-              </div>
-              <div class="form-group">
-                <label>Adresse de livraison</label>
-                <input type="text" value="1 Rue de Meaux, 77100 Meaux">
-              </div>
-              <div class="form-group">
-                <label>Coordonnées Bancaires</label>
-                <input type="text" value="**** **** **** **01">
-              </div>
-              <div class="form-group rgpd">
-                <label>RGPD</label>
-                <span>Lire</span>
-              </div>
-              <button type="button" class="action-btn orange-btn">Modifier mes informations</button>
+              <!-- Mode lecture -->
+              <ng-container *ngIf="!isEditingConfidentialite">
+                <div class="form-group">
+                  <label>Téléphone</label>
+                  <input type="text" [value]="user.telephone || 'Non renseigné'" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Adresse de livraison</label>
+                  <input type="text" [value]="user.adresse_livraison || 'Non renseignée'" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Coordonnées Bancaires (4 derniers chiffres)</label>
+                  <input type="text"
+                    [value]="user.coordonnees_bancaires ? '**** **** **** ' + user.coordonnees_bancaires : 'Non renseignées'"
+                    readonly>
+                </div>
+                <div class="form-group rgpd">
+                  <label>RGPD</label>
+                  <span class="rgpd-link" (click)="openRgpd()">Lire</span>
+                </div>
+                <button type="button" class="action-btn orange-btn" (click)="startEditConfidentialite()">Modifier mes
+                  informations</button>
+              </ng-container>
+
+              <!-- Mode édition -->
+              <ng-container *ngIf="isEditingConfidentialite">
+                <div class="form-group">
+                  <label>Téléphone</label>
+                  <input type="tel" [(ngModel)]="editFormConfidentialite.telephone" name="telephone"
+                    placeholder="06 12 34 56 78">
+                </div>
+                <div class="form-group">
+                  <label>Adresse de livraison</label>
+                  <input type="text" [(ngModel)]="editFormConfidentialite.adresse_livraison" name="adresse_livraison"
+                    placeholder="1 Rue de la Paix, 75000 Paris">
+                </div>
+                <div class="form-group">
+                  <label>Coordonnées Bancaires (4 derniers chiffres)</label>
+                  <input type="text" [(ngModel)]="editFormConfidentialite.coordonnees_bancaires"
+                    name="coordonnees_bancaires" placeholder="1234" maxlength="4" pattern="[0-9]{4}">
+                </div>
+                <div class="form-group rgpd">
+                  <label>RGPD</label>
+                  <span class="rgpd-link" (click)="openRgpd()">Lire</span>
+                </div>
+                <div class="button-group">
+                  <button type="button" class="action-btn cancel-btn"
+                    (click)="cancelEditConfidentialite()">Annuler</button>
+                  <button type="button" class="action-btn orange-btn"
+                    (click)="saveConfidentialite()">Enregistrer</button>
+                </div>
+              </ng-container>
             </form>
           </div>
         </div>
@@ -129,5 +205,67 @@
 
     </div>
 
+  </div>
+</div>
+
+<!-- Modal RGPD -->
+<div class="rgpd-modal-overlay" *ngIf="showRgpdModal" (click)="closeRgpd()">
+  <div class="rgpd-modal" (click)="$event.stopPropagation()">
+    <div class="rgpd-modal-header">
+      <h2>Protection des données personnelles (RGPD)</h2>
+      <button class="close-btn" (click)="closeRgpd()">&times;</button>
+    </div>
+    <div class="rgpd-modal-content">
+      <h3>Introduction</h3>
+      <p>Notre site accorde une grande importance à la protection de vos données personnelles. Conformément au Règlement
+        Général sur la Protection des Données (RGPD), nous nous engageons à garantir la confidentialité et la sécurité
+        des informations que vous nous confiez.</p>
+
+      <h3>Données collectées</h3>
+      <p>Lors de l'utilisation de notre site, certaines données peuvent être collectées, notamment :</p>
+      <ul>
+        <li>vos informations d'identification (nom, prénom, adresse e-mail, etc.) ;</li>
+        <li>vos données de connexion et de navigation (adresse IP, cookies).</li>
+      </ul>
+      <p>Ces données sont recueillies uniquement pour assurer le bon fonctionnement du site et améliorer la qualité de
+        nos services.</p>
+
+      <h3>Utilisation des données</h3>
+      <p>Les informations collectées sont utilisées dans le cadre suivant :</p>
+      <ul>
+        <li>création et gestion de comptes utilisateurs ;</li>
+        <li>amélioration de la navigation et de l'expérience utilisateur ;</li>
+        <li>communication avec les utilisateurs lorsque cela est nécessaire.</li>
+      </ul>
+      <p>Nous ne partageons jamais vos données à des tiers sans votre accord préalable.</p>
+
+      <h3>Vos droits</h3>
+      <p>Conformément à la législation en vigueur, vous disposez à tout moment du droit :</p>
+      <ul>
+        <li>d'accéder à vos données personnelles ;</li>
+        <li>de demander leur rectification ou leur suppression ;</li>
+        <li>de retirer votre consentement à leur utilisation.</li>
+      </ul>
+      <p>Pour toute demande relative à vos données, vous pouvez nous contacter à l'adresse suivante : <a
+          href="mailto:itsushi@gmail.com">it'sushi&#64;gmail.com</a></p>
+
+      <h3>Cookies</h3>
+      <p>Notre site utilise des cookies pour améliorer votre expérience de navigation. Vous pouvez accepter ou refuser
+        l'utilisation des cookies lors de votre première visite via la bannière dédiée.</p>
+
+      <h3>Sécurité et responsable du traitement</h3>
+      <p>Nous mettons en place des mesures techniques et organisationnelles afin d'assurer la sécurité et la
+        confidentialité de vos données.</p>
+      <p>Le responsable du traitement est : <strong>It'SUSHI</strong> – <a
+          href="mailto:itsushi@gmail.com">it'sushi&#64;gmail.com</a></p>
+
+      <h3>Mise à jour de la politique</h3>
+      <p>Cette politique de confidentialité peut être modifiée à tout moment afin de rester conforme à la réglementation
+        en vigueur.</p>
+      <p><em>Dernière mise à jour : 26/10/2025</em></p>
+    </div>
+    <div class="rgpd-modal-footer">
+      <button class="action-btn orange-btn" (click)="closeRgpd()">J'ai compris</button>
+    </div>
   </div>
 </div>

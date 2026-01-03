@@ -1,8 +1,9 @@
 <!-- ce fichier sert à afficher le panier de l'utilisateur -->
 <div class="panier-container">
-    <h2>Votre Panier</h2>
+    <h2>{{ checkoutStep === 'panier' ? 'Votre Panier' : 'Informations de livraison' }}</h2>
 
-    <div *ngIf="articles.length > 0; else emptyCart">
+    <!-- ÉTAPE 1 : Affichage du panier -->
+    <div *ngIf="checkoutStep === 'panier' && articles.length > 0">
         <div class="cart-items">
             <table>
                 <thead>
@@ -15,7 +16,6 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of articles">
-                        <!-- afficher le nom de l'article grâce à la boucle for -->
                         <td>{{ item.nom_article }}</td>
                         <td>{{ item.quantite }}</td>
                         <td>{{ item.prix_unitaire | number:'1.2-2' }} €</td>
@@ -24,21 +24,17 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <!-- afficher le sous-total grâce à la fonction detailsTotal -->
                         <td colspan="3" class="text-right">Sous-total</td>
                         <td>{{ detailsTotal.total | number:'1.2-2' }} €</td>
                     </tr>
-                    <!-- afficher la remise si elle est supérieure à 0 -->
                     <tr *ngIf="detailsTotal.remiseSomme > 0" class="remise-row">
                         <td colspan="3" class="text-right">Remise commande > 50€ (1.5%)</td>
                         <td>-{{ detailsTotal.remiseSomme | number:'1.2-2' }} €</td>
                     </tr>
-                    <!-- afficher la remise étudiant si elle est supérieure à 0 -->
                     <tr *ngIf="detailsTotal.remiseEtudiant > 0" class="remise-row">
                         <td colspan="3" class="text-right">Remise Étudiant (10%)</td>
                         <td>-{{ detailsTotal.remiseEtudiant | number:'1.2-2' }} €</td>
                     </tr>
-                    <!-- afficher le total final grâce à la fonction detailsTotal -->
                     <tr class="total-final-row">
                         <td colspan="3" class="text-right"><strong>Total Final</strong></td>
                         <td><strong>{{ detailsTotal.totalFinal | number:'1.2-2' }} €</strong></td>
@@ -48,35 +44,76 @@
         </div>
 
         <div class="actions" *ngIf="!orderSuccess">
-            <!-- bouton pour vider le panier -->
             <button class="btn-clear" (click)="viderPanier()">Vider le panier</button>
-            <!-- bouton pour confirmer la commande -->
-            <button class="btn-confirm" (click)="confirmerCommande()">Confirmer la commande</button>
+            <button class="btn-confirm" (click)="passerAuCheckout()">Passer à la livraison</button>
         </div>
     </div>
 
+    <!-- ÉTAPE 2 : Formulaire de livraison -->
+    <div *ngIf="checkoutStep === 'livraison'" class="livraison-form">
+        <div class="order-summary">
+            <p><strong>Total à payer :</strong> {{ detailsTotal.totalFinal | number:'1.2-2' }} €</p>
+        </div>
+
+        <form>
+            <div class="form-group">
+                <label for="telephone">Numéro de téléphone *</label>
+                <input type="tel" id="telephone" [(ngModel)]="livraisonForm.telephone" name="telephone"
+                    placeholder="06 12 34 56 78" required>
+            </div>
+
+            <div class="form-group">
+                <label for="adresse">Adresse de livraison *</label>
+                <input type="text" id="adresse" [(ngModel)]="livraisonForm.adresse_livraison" name="adresse_livraison"
+                    placeholder="1 Rue de la Paix, 75000 Paris" required>
+            </div>
+
+            <div class="form-group">
+                <label for="carte">Coordonnées bancaires (4 derniers chiffres) *</label>
+                <input type="text" id="carte" [(ngModel)]="livraisonForm.coordonnees_bancaires"
+                    name="coordonnees_bancaires" placeholder="1234" maxlength="4" required>
+                <small>Pour des raisons de sécurité, seuls les 4 derniers chiffres sont demandés.</small>
+            </div>
+
+            <div class="actions-livraison">
+                <button type="button" class="btn-back" (click)="retourPanier()">← Retour au panier</button>
+                <button type="button" class="btn-confirm" (click)="confirmerCommande()" [disabled]="!isFormValid()">
+                    Confirmer et payer
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Panier vide -->
     <ng-template #emptyCart>
-        <div class="empty-message" *ngIf="!orderSuccess">
-            <!-- sert à afficher un message si le panier est vide -->
+        <div class="empty-message" *ngIf="!orderSuccess && checkoutStep === 'panier'">
             <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
                 class="empty-icon">
                 <circle cx="9" cy="21" r="1"></circle>
                 <circle cx="20" cy="21" r="1"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                <!-- icone panier -->
             </svg>
             <p>Votre panier est pour l'instant vide.</p>
-            <button (click)="retour()">Je commence mes achats</button>
         </div>
     </ng-template>
 
-    <div *ngIf="message" class="message-banner" [class.success]="orderSuccess">
+    <!-- Afficher panier vide si c'est le cas -->
+    <div *ngIf="articles.length === 0 && !orderSuccess && checkoutStep === 'panier'">
+        <ng-container *ngTemplateOutlet="emptyCart"></ng-container>
+    </div>
+
+    <!-- Message de statut -->
+    <div *ngIf="message" class="message-banner" [class.success]="orderSuccess" [class.error]="!orderSuccess && message">
         {{ message }}
     </div>
 
     <div *ngIf="orderSuccess" class="post-order">
-        <!-- si la commande a fonctionné, on affiche un bouton pour retourner au menu -->
+        <!-- sert à afficher un message si la commande est réussie -->
         <button (click)="retour()">Retour au catalogue</button>
+    </div>
+    <div *ngIf="orderSuccess" class="post-order">
+        <!-- si la commande a fonctionné, on affiche un bouton pour retourner au menu -->
+        <button (click)="retour_menu()">Retour au menu</button>
     </div>
 </div>

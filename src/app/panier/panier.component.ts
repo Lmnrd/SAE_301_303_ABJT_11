@@ -4,9 +4,9 @@
 // il permet de vider le panier
 // il permet de retourner au catalogue / menu
 
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { CommandesService, ArticleCommande } from '../services/commandes.service';
 import { AuthService } from '../services/auth.service';
 import { PanierService } from '../services/panier.service';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-panier',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './panier.component.html',
   styleUrl: './panier.component.css'
 })
@@ -27,47 +27,117 @@ export class PanierComponent implements OnInit {
   // orderSuccess est un boolean qui indique si la commande a été confirmée
   orderSuccess = false;
 
+  // Étape de checkout : 'panier' ou 'livraison'
+  checkoutStep: 'panier' | 'livraison' = 'panier';
+
+  // Formulaire de livraison
+  livraisonForm = {
+    telephone: '',
+    adresse_livraison: '',
+    coordonnees_bancaires: ''
+  };
+
   constructor(
     private commandeService: CommandesService,
     private authService: AuthService,
-    private panierService: PanierService, // Inject Service
+    private panierService: PanierService,
     private router: Router
   ) { }
 
   ngOnInit() {
     // récupérer le panier via le service
     this.articles = this.panierService.getPanier();
+
+    // Pré-remplir avec les infos existantes de l'utilisateur
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      this.livraisonForm = {
+        telephone: user.telephone || '',
+        adresse_livraison: user.adresse_livraison || '',
+        coordonnees_bancaires: user.coordonnees_bancaires || ''
+      };
+    }
   }
 
   get detailsTotal() {
     // récupérer le total final
     const user = this.authService.getCurrentUser();
-    const isEtudiant = user?.type_compte === 'etudiant'; // si l'utilisateur est étudiant
-    return this.panierService.calculerTotalFinal(isEtudiant); // retourner le total final
+    const isEtudiant = user?.type_compte === 'etudiant';
+    return this.panierService.calculerTotalFinal(isEtudiant);
   }
 
   get total(): number {
-    // récupérer le total final après les autres calculs
     return this.detailsTotal.totalFinal;
   }
 
-  confirmerCommande() {
-    // confirmer la commande finale
+  // Passer à l'étape de livraison
+  passerAuCheckout() {
     const user = this.authService.getCurrentUser();
-    if (!user) { // si l'utilisateur n'est pas connecté
+    if (!user) {
+      this.message = 'Veuillez vous connecter pour valider votre commande.';
+      return;
+    }
+    this.message = '';
+    this.checkoutStep = 'livraison';
+  }
+
+  // Retourner au panier
+  retourPanier() {
+    this.checkoutStep = 'panier';
+    this.message = '';
+  }
+
+  // Vérifier si le formulaire est valide
+  isFormValid(): boolean {
+    return (
+      this.livraisonForm.telephone.trim() !== '' &&
+      this.livraisonForm.adresse_livraison.trim() !== '' &&
+      this.livraisonForm.coordonnees_bancaires.trim() !== ''
+    );
+  }
+
+  // Confirmer la commande avec les infos de livraison
+  confirmerCommande() {
+    const user = this.authService.getCurrentUser();
+    if (!user) {
       this.message = 'Veuillez vous connecter pour valider votre commande.';
       return;
     }
 
-    this.commandeService.creerCommande(this.articles, user.id).subscribe({ // créer la commande finale
-      next: (res) => {
-        this.message = `Commande réussie !`;
-        this.orderSuccess = true;
-        this.panierService.viderPanier(); // vider le panier via le service
-        this.articles = [];
+    // Vérifier que tous les champs sont remplis
+    if (!this.isFormValid()) {
+      this.message = 'Veuillez remplir tous les champs de livraison.';
+      return;
+    }
+
+    // Sauvegarder les infos de livraison dans le profil utilisateur
+    this.authService.updateUser({
+      id: user.id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      telephone: this.livraisonForm.telephone,
+      coordonnees_bancaires: this.livraisonForm.coordonnees_bancaires,
+      adresse_livraison: this.livraisonForm.adresse_livraison
+    }).subscribe({
+      next: () => {
+        // Créer la commande après avoir sauvegardé les infos
+        this.commandeService.creerCommande(this.articles, user.id).subscribe({
+          next: (res) => {
+            this.message = 'Commande réussie ! Livraison prévue à : ' + this.livraisonForm.adresse_livraison;
+            this.orderSuccess = true;
+            this.panierService.viderPanier();
+            this.articles = [];
+            this.checkoutStep = 'panier';
+          },
+          error: (err) => {
+            this.message = 'Erreur lors de la commande.';
+            console.error(err);
+          }
+        });
       },
       error: (err) => {
-        this.message = 'Erreur lors de la commande.';
+        this.message = 'Erreur lors de la sauvegarde des informations.';
         console.error(err);
       }
     });
@@ -79,11 +149,13 @@ export class PanierComponent implements OnInit {
   }
 
 
-  retour() {
-    this.router.navigate(['/home']);
-  }
+  // pas utile si on ne garde pas le commande.component
+  // retour() {
+  //   this.router.navigate(['/commande']);
+  // }
 
   retour_menu() {
     this.router.navigate(['/home']);
   }
 }
+

@@ -44,6 +44,9 @@ echo json_encode([
         "firstname" => $user['firstname'],
         "lastname" => $user['lastname'],
         "email" => $user['email'],
-        "type_compte" => $user['type_compte']
+        "type_compte" => $user['type_compte'],
+        "telephone" => $user['telephone'] ?? null,
+        "coordonnees_bancaires" => $user['coordonnees_bancaires'] ?? null,
+        "adresse_livraison" => $user['adresse_livraison'] ?? null
     ]
 ]);

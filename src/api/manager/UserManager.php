@@ -1,6 +1,7 @@
+<?php
 // fichier PHP qui permet de gérer les utilisateurs
 // il permet de recevoir les informations de l'utilisateur et de les stocker dans la base de données
-<?php
+
 require_once __DIR__ . '/../config/db.php';
 
 class UserManager {
@@ -52,5 +53,37 @@ class UserManager {
         );
         $stmt->execute([':token' => $token]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Met à jour les informations d'un utilisateur
+     * @param int $id - ID de l'utilisateur
+     * @param string $firstname - Nouveau prénom
+     * @param string $lastname - Nouveau nom
+     * @param string $email - Nouvel email
+     * @param string|null $telephone - Numéro de téléphone
+     * @param string|null $coordonnees_bancaires - Derniers chiffres de la carte
+     * @param string|null $adresse_livraison - Adresse de livraison
+     */
+    public function updateUser($id, $firstname, $lastname, $email, $telephone = null, $coordonnees_bancaires = null, $adresse_livraison = null) {
+        $stmt = $this->pdo->prepare(
+            "UPDATE users SET 
+                firstname = :firstname, 
+                lastname = :lastname, 
+                email = :email,
+                telephone = :telephone,
+                coordonnees_bancaires = :coordonnees_bancaires,
+                adresse_livraison = :adresse_livraison
+            WHERE id = :id"
+        );
+        $stmt->execute([
+            ':firstname' => $firstname,
+            ':lastname' => $lastname,
+            ':email' => $email,
+            ':telephone' => $telephone,
+            ':coordonnees_bancaires' => $coordonnees_bancaires,
+            ':adresse_livraison' => $adresse_livraison,
+            ':id' => $id
+        ]);
     }
 }
