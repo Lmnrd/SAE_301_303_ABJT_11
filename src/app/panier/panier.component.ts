@@ -48,7 +48,7 @@ export class PanierComponent implements OnInit {
     // récupérer le panier via le service
     this.articles = this.panierService.getPanier();
 
-    // Pré-remplir avec les infos existantes de l'utilisateur
+    // on remplit les infos existantes de l'utilisateur
     const user = this.authService.getCurrentUser();
     if (user) {
       this.livraisonForm = {
@@ -70,7 +70,7 @@ export class PanierComponent implements OnInit {
     return this.detailsTotal.totalFinal;
   }
 
-  // Passer à l'étape de livraison
+  // on passe à l'étape de livraison
   passerAuCheckout() {
     const user = this.authService.getCurrentUser();
     if (!user) {
@@ -81,13 +81,13 @@ export class PanierComponent implements OnInit {
     this.checkoutStep = 'livraison';
   }
 
-  // Retourner au panier
+  // on retourne au panier
   retourPanier() {
     this.checkoutStep = 'panier';
     this.message = '';
   }
 
-  // Vérifier si le formulaire est valide
+  // on vérifie si le formulaire est valide
   isFormValid(): boolean {
     return (
       this.livraisonForm.telephone.trim() !== '' &&
@@ -96,7 +96,7 @@ export class PanierComponent implements OnInit {
     );
   }
 
-  // Confirmer la commande avec les infos de livraison
+  // on confirme la commande avec les infos de livraison
   confirmerCommande() {
     const user = this.authService.getCurrentUser();
     if (!user) {
@@ -104,13 +104,13 @@ export class PanierComponent implements OnInit {
       return;
     }
 
-    // Vérifier que tous les champs sont remplis
+    // on vérifie que tous les champs sont remplis
     if (!this.isFormValid()) {
       this.message = 'Veuillez remplir tous les champs de livraison.';
       return;
     }
 
-    // sauvegarder les infos de livraison dans le profil utilisateur
+    // on sauvegarde les infos de livraison dans le profil utilisateur
     this.authService.updateUser({
       id: user.id,
       firstname: user.firstname,
@@ -127,7 +127,7 @@ export class PanierComponent implements OnInit {
             this.message = 'Commande réussie ! Livraison prévue à : ' + this.livraisonForm.adresse_livraison;
             this.orderSuccess = true;
 
-            // sauvegarder dans le LocalStorage
+            // on sauvegarde dans le LocalStorage
             const commandeLocale = {
               id: (res as any).commande_id || 'TEMP-' + Date.now(),
               date: new Date(),
@@ -159,12 +159,6 @@ export class PanierComponent implements OnInit {
     this.panierService.viderPanier();
     this.articles = [];
   }
-
-
-  // pas utile si on ne garde pas le commande.component
-  // retour() {
-  //   this.router.navigate(['/commande']);
-  // }
 
   retour_menu() {
     this.router.navigate(['/home']);
