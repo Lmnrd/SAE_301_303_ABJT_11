@@ -110,7 +110,7 @@ export class PanierComponent implements OnInit {
       return;
     }
 
-    // Sauvegarder les infos de livraison dans le profil utilisateur
+    // sauvegarder les infos de livraison dans le profil utilisateur
     this.authService.updateUser({
       id: user.id,
       firstname: user.firstname,
@@ -121,11 +121,22 @@ export class PanierComponent implements OnInit {
       adresse_livraison: this.livraisonForm.adresse_livraison
     }).subscribe({
       next: () => {
-        // Créer la commande après avoir sauvegardé les infos
+        // une fois les infos mises à jour, on crée la commande
         this.commandeService.creerCommande(this.articles, user.id).subscribe({
           next: (res) => {
             this.message = 'Commande réussie ! Livraison prévue à : ' + this.livraisonForm.adresse_livraison;
             this.orderSuccess = true;
+
+            // sauvegarder dans le LocalStorage
+            const commandeLocale = {
+              id: (res as any).commande_id || 'TEMP-' + Date.now(),
+              date: new Date(),
+              total: this.detailsTotal.totalFinal,
+              articles: [...this.articles],
+              adresse: this.livraisonForm.adresse_livraison
+            };
+            this.panierService.sauvegarderCommandeLocale(commandeLocale);
+
             this.panierService.viderPanier();
             this.articles = [];
             this.checkoutStep = 'panier';
@@ -142,6 +153,7 @@ export class PanierComponent implements OnInit {
       }
     });
   }
+
 
   viderPanier() {
     this.panierService.viderPanier();

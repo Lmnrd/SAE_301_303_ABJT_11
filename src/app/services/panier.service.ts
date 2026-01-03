@@ -12,11 +12,16 @@ export class PanierService {
     /**
      * Récupère le panier actuel depuis le sessionStorage
      */
+    private readonly CLE_HISTORIQUE = 'historique_commandes';
+
+    /**
+     * Récupère le panier actuel depuis le localStorage
+     */
     getPanier(): ArticleCommande[] {
-        if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+        if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
             return [];
         }
-        const data = sessionStorage.getItem(this.CLE_SESSION);
+        const data = localStorage.getItem(this.CLE_SESSION);
         return data ? JSON.parse(data) : [];
     }
 
@@ -24,20 +29,43 @@ export class PanierService {
      * Ajoute des articles au panier
      */
     ajouterArticles(nouveauxArticles: ArticleCommande[]) {
-        if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+        if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
             return;
         }
-        sessionStorage.setItem(this.CLE_SESSION, JSON.stringify(nouveauxArticles));
+        localStorage.setItem(this.CLE_SESSION, JSON.stringify(nouveauxArticles));
     }
 
     /**
      * Vide le panier
      */
     viderPanier() {
-        if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+        if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
             return;
         }
-        sessionStorage.removeItem(this.CLE_SESSION);
+        localStorage.removeItem(this.CLE_SESSION);
+    }
+
+    /**
+     * Sauvegarde une commande dans l'historique local
+     */
+    sauvegarderCommandeLocale(commande: any) {
+        if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+            return;
+        }
+        const historique = this.getCommandesLocales();
+        historique.push(commande);
+        localStorage.setItem(this.CLE_HISTORIQUE, JSON.stringify(historique));
+    }
+
+    /**
+     * Récupère l'historique des commandes locales
+     */
+    getCommandesLocales(): any[] {
+        if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+            return [];
+        }
+        const data = localStorage.getItem(this.CLE_HISTORIQUE);
+        return data ? JSON.parse(data) : [];
     }
 
     /**

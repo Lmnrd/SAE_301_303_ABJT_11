@@ -87,33 +87,24 @@
             <span class="chevron" [class.open]="openSection === 'mes-commandes'">&#9660;</span>
           </div>
           <div class="accordion-content" *ngIf="openSection === 'mes-commandes'">
-            <div class="order-item">
-              <div class="order-header">
-                <span>02/12/2025 - 12:10</span>
-                <a href="#" class="order-link">Voir les détails de la commande</a>
-              </div>
-              <div class="order-details">
-                <p>Boxes :</p>
-                <p>Suppléments :</p>
-                <p>Prix :</p>
-              </div>
-              <div class="order-action">
-                <strong>Repasser la commande</strong>
-              </div>
+            <div *ngIf="localOrders.length === 0" class="no-orders">
+              <p>Aucune commande enregistrée localement.</p>
             </div>
 
-            <div class="order-item">
+            <div class="order-item" *ngFor="let order of localOrders">
               <div class="order-header">
-                <span>02/12/2025 - 12:10</span>
-                <a href="#" class="order-link">Voir les détails de la commande</a>
+                <span>{{ order.date | date:'dd/MM/yyyy - HH:mm' }}</span>
+                <span class="order-id">#{{ order.id }}</span>
               </div>
               <div class="order-details">
-                <p>Boxes :</p>
-                <p>Suppléments :</p>
-                <p>Prix :</p>
-              </div>
-              <div class="order-actions-btn">
-                <button class="action-btn orange-btn">Repasser une commande</button>
+                <p><strong>Articles :</strong></p>
+                <ul>
+                  <li *ngFor="let item of order.articles">
+                    {{ item.nom_article }} x{{ item.quantite }}
+                  </li>
+                </ul>
+                <p class="total-price"><strong>Total : {{ order.total | number:'1.2-2' }} €</strong></p>
+                <p class="delivery-address">Livré à : {{ order.adresse }}</p>
               </div>
             </div>
           </div>

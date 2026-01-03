@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { PanierService } from '../services/panier.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -19,6 +20,7 @@ import { AuthService } from '../services/auth.service';
 export class CompteComponent implements OnInit {
   user: any = null;
   openSection: string | null = 'mes-informations';
+  localOrders: any[] = [];
 
   // Mode édition pour les informations personnelles
   isEditing = false;
@@ -31,10 +33,19 @@ export class CompteComponent implements OnInit {
   message = '';
   messageType: 'success' | 'error' | '' = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private panierService: PanierService
+  ) { }
 
   ngOnInit() {
     this.user = this.authService.getCurrentUser();
+    this.loadLocalHistory();
+  }
+
+  loadLocalHistory() {
+    this.localOrders = this.panierService.getCommandesLocales();
   }
 
   toggleSection(section: string) {

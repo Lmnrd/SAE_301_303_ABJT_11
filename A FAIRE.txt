@@ -1,1 +1,0 @@
-quand on ajoute les commandes depuis l'accueil, ça met plus les détails dans le base sql que la commande de base avec le prix.
