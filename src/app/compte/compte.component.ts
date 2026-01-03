@@ -128,6 +128,17 @@ export class CompteComponent implements OnInit {
     });
   }
 
+  // Modal RGPD
+  showRgpdModal = false;
+
+  openRgpd() {
+    this.showRgpdModal = true;
+  }
+
+  closeRgpd() {
+    this.showRgpdModal = false;
+  }
+
   logout() {
     //Cette fonction permet de se deconnecter
     this.authService.logout();
