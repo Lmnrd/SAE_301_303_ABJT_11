@@ -79,10 +79,9 @@ export class PanierComponent implements OnInit {
   }
 
 
-  // pas utile si on ne garde pas le commande.component
-  // retour() {
-  //   this.router.navigate(['/commande']);
-  // }
+  retour() {
+    this.router.navigate(['/home']);
+  }
 
   retour_menu() {
     this.router.navigate(['/home']);
