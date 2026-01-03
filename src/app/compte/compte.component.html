@@ -22,25 +22,60 @@
             <span class="chevron" [class.open]="openSection === 'mes-informations'">&#9660;</span>
           </div>
           <div class="accordion-content" *ngIf="openSection === 'mes-informations'">
+            <!-- Message de succès ou d'erreur -->
+            <div *ngIf="message" class="message" [class.success]="messageType === 'success'"
+              [class.error]="messageType === 'error'">
+              {{ message }}
+            </div>
+
             <form>
-              <div class="form-group">
-                <label>Prénom</label>
-                <input type="text" [value]="user.firstname" readonly>
-              </div>
-              <div class="form-group">
-                <label>Nom</label>
-                <input type="text" [value]="user.lastname" readonly>
-              </div>
-              <div class="form-group">
-                <label>Adresse e-mail</label>
-                <input type="email" [value]="user.email" readonly>
-              </div>
-              <div class="form-group">
-                <label>Type de compte</label>
-                <input type="text" [value]="user.type_compte" readonly
-                  style="text-transform: capitalize; font-weight: bold; color: #ff8c00;">
-              </div>
-              <button type="button" class="action-btn orange-btn">Modifier mes informations</button>
+              <!-- Mode lecture (readonly) -->
+              <ng-container *ngIf="!isEditing">
+                <div class="form-group">
+                  <label>Prénom</label>
+                  <input type="text" [value]="user.firstname" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" [value]="user.lastname" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Adresse e-mail</label>
+                  <input type="email" [value]="user.email" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Type de compte</label>
+                  <input type="text" [value]="user.type_compte" readonly
+                    style="text-transform: capitalize; font-weight: bold; color: #ff8c00;">
+                </div>
+                <button type="button" class="action-btn orange-btn" (click)="startEdit()">Modifier mes
+                  informations</button>
+              </ng-container>
+
+              <!-- Mode édition -->
+              <ng-container *ngIf="isEditing">
+                <div class="form-group">
+                  <label>Prénom</label>
+                  <input type="text" [(ngModel)]="editForm.firstname" name="firstname" required>
+                </div>
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" [(ngModel)]="editForm.lastname" name="lastname" required>
+                </div>
+                <div class="form-group">
+                  <label>Adresse e-mail</label>
+                  <input type="email" [(ngModel)]="editForm.email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label>Type de compte</label>
+                  <input type="text" [value]="user.type_compte" readonly
+                    style="text-transform: capitalize; font-weight: bold; color: #ff8c00;">
+                </div>
+                <div class="button-group">
+                  <button type="button" class="action-btn cancel-btn" (click)="cancelEdit()">Annuler</button>
+                  <button type="button" class="action-btn orange-btn" (click)="saveChanges()">Enregistrer</button>
+                </div>
+              </ng-container>
             </form>
           </div>
         </div>
@@ -91,24 +126,65 @@
             <span class="chevron" [class.open]="openSection === 'confidentialite'">&#9660;</span>
           </div>
           <div class="accordion-content" *ngIf="openSection === 'confidentialite'">
+            <!-- Message de succès ou d'erreur -->
+            <div *ngIf="message && openSection === 'confidentialite'" class="message"
+              [class.success]="messageType === 'success'" [class.error]="messageType === 'error'">
+              {{ message }}
+            </div>
+
             <form>
-              <div class="form-group">
-                <label>Mot de passe</label>
-                <input type="password" value="**********">
-              </div>
-              <div class="form-group">
-                <label>Adresse de livraison</label>
-                <input type="text" value="1 Rue de Meaux, 77100 Meaux">
-              </div>
-              <div class="form-group">
-                <label>Coordonnées Bancaires</label>
-                <input type="text" value="**** **** **** **01">
-              </div>
-              <div class="form-group rgpd">
-                <label>RGPD</label>
-                <span>Lire</span>
-              </div>
-              <button type="button" class="action-btn orange-btn">Modifier mes informations</button>
+              <!-- Mode lecture -->
+              <ng-container *ngIf="!isEditingConfidentialite">
+                <div class="form-group">
+                  <label>Téléphone</label>
+                  <input type="text" [value]="user.telephone || 'Non renseigné'" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Adresse de livraison</label>
+                  <input type="text" [value]="user.adresse_livraison || 'Non renseignée'" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Coordonnées Bancaires (4 derniers chiffres)</label>
+                  <input type="text"
+                    [value]="user.coordonnees_bancaires ? '**** **** **** ' + user.coordonnees_bancaires : 'Non renseignées'"
+                    readonly>
+                </div>
+                <div class="form-group rgpd">
+                  <label>RGPD</label>
+                  <span>Lire</span>
+                </div>
+                <button type="button" class="action-btn orange-btn" (click)="startEditConfidentialite()">Modifier mes
+                  informations</button>
+              </ng-container>
+
+              <!-- Mode édition -->
+              <ng-container *ngIf="isEditingConfidentialite">
+                <div class="form-group">
+                  <label>Téléphone</label>
+                  <input type="tel" [(ngModel)]="editFormConfidentialite.telephone" name="telephone"
+                    placeholder="06 12 34 56 78">
+                </div>
+                <div class="form-group">
+                  <label>Adresse de livraison</label>
+                  <input type="text" [(ngModel)]="editFormConfidentialite.adresse_livraison" name="adresse_livraison"
+                    placeholder="1 Rue de la Paix, 75000 Paris">
+                </div>
+                <div class="form-group">
+                  <label>Coordonnées Bancaires (4 derniers chiffres)</label>
+                  <input type="text" [(ngModel)]="editFormConfidentialite.coordonnees_bancaires"
+                    name="coordonnees_bancaires" placeholder="1234" maxlength="4" pattern="[0-9]{4}">
+                </div>
+                <div class="form-group rgpd">
+                  <label>RGPD</label>
+                  <span>Lire</span>
+                </div>
+                <div class="button-group">
+                  <button type="button" class="action-btn cancel-btn"
+                    (click)="cancelEditConfidentialite()">Annuler</button>
+                  <button type="button" class="action-btn orange-btn"
+                    (click)="saveConfidentialite()">Enregistrer</button>
+                </div>
+              </ng-container>
             </form>
           </div>
         </div>
