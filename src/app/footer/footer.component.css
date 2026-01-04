@@ -3,7 +3,11 @@
     /* Slightly darker than main bg or same */
     color: white;
     padding: 40px 0 20px 0;
+<<<<<<< HEAD
     margin-top: 0;
+=======
+    margin-top: 50px;
+>>>>>>> 52ed14d931d384581b7c2e1e0565db03f4794db6
     border-top: 1px solid #333;
     font-size: 0.9rem;
 }
@@ -84,6 +88,7 @@
     font-size: 1.2rem;
 }
 
+<<<<<<< HEAD
 .social-icons a {
     display: inline-block;
     transition: opacity 0.2s, transform 0.2s;
@@ -100,6 +105,8 @@
     object-fit: contain;
 }
 
+=======
+>>>>>>> 52ed14d931d384581b7c2e1e0565db03f4794db6
 .footer-bottom {
     text-align: center;
     margin-top: 40px;

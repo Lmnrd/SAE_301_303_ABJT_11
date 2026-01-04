@@ -24,7 +24,11 @@ export class CompteComponent implements OnInit {
 
   // Mode édition pour les informations personnelles
   isEditing = false;
+<<<<<<< HEAD
   editForm = { firstname: '', lastname: '', email: '', password: '' };
+=======
+  editForm = { firstname: '', lastname: '', email: '' };
+>>>>>>> 52ed14d931d384581b7c2e1e0565db03f4794db6
 
   // Mode édition pour la section confidentialité
   isEditingConfidentialite = false;
@@ -63,8 +67,12 @@ export class CompteComponent implements OnInit {
     this.editForm = {
       firstname: this.user.firstname,
       lastname: this.user.lastname,
+<<<<<<< HEAD
       email: this.user.email,
       password: ''
+=======
+      email: this.user.email
+>>>>>>> 52ed14d931d384581b7c2e1e0565db03f4794db6
     };
     this.message = '';
   }
@@ -77,7 +85,11 @@ export class CompteComponent implements OnInit {
 
   // Sauvegarder les informations personnelles
   saveChanges() {
+<<<<<<< HEAD
     const updateData: any = {
+=======
+    this.authService.updateUser({
+>>>>>>> 52ed14d931d384581b7c2e1e0565db03f4794db6
       id: this.user.id,
       firstname: this.editForm.firstname,
       lastname: this.editForm.lastname,
@@ -85,6 +97,7 @@ export class CompteComponent implements OnInit {
       telephone: this.user.telephone,
       coordonnees_bancaires: this.user.coordonnees_bancaires,
       adresse_livraison: this.user.adresse_livraison
+<<<<<<< HEAD
     };
     
     // Ajouter le mot de passe seulement s'il a été modifié
@@ -97,6 +110,12 @@ export class CompteComponent implements OnInit {
         this.user = this.authService.getCurrentUser();
         this.isEditing = false;
         this.editForm.password = ''; // Réinitialiser le champ mot de passe
+=======
+    }).subscribe({
+      next: (res) => {
+        this.user = this.authService.getCurrentUser();
+        this.isEditing = false;
+>>>>>>> 52ed14d931d384581b7c2e1e0565db03f4794db6
         this.message = 'Informations mises à jour avec succès !';
         this.messageType = 'success';
       },

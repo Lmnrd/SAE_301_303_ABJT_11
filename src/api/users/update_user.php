@@ -50,12 +50,15 @@ try {
     $telephone = isset($data['telephone']) ? $data['telephone'] : null;
     $coordonnees_bancaires = isset($data['coordonnees_bancaires']) ? $data['coordonnees_bancaires'] : null;
     $adresse_livraison = isset($data['adresse_livraison']) ? $data['adresse_livraison'] : null;
+<<<<<<< HEAD
     
     // Gérer le mot de passe s'il est fourni
     $hashedPassword = null;
     if (isset($data['password']) && !empty($data['password'])) {
         $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
     }
+=======
+>>>>>>> 52ed14d931d384581b7c2e1e0565db03f4794db6
 
     // Mettre à jour l'utilisateur dans la base de données
     $manager->updateUser(
@@ -65,8 +68,12 @@ try {
         $data['email'],
         $telephone,
         $coordonnees_bancaires,
+<<<<<<< HEAD
         $adresse_livraison,
         $hashedPassword
+=======
+        $adresse_livraison
+>>>>>>> 52ed14d931d384581b7c2e1e0565db03f4794db6
     );
 
     // Retourner les nouvelles informations

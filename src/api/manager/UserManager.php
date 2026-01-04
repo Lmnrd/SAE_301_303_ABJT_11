@@ -64,19 +64,33 @@ class UserManager {
      * @param string|null $telephone - Numéro de téléphone
      * @param string|null $coordonnees_bancaires - Derniers chiffres de la carte
      * @param string|null $adresse_livraison - Adresse de livraison
+<<<<<<< HEAD
      * @param string|null $password - Nouveau mot de passe (hashé)
      */
     public function updateUser($id, $firstname, $lastname, $email, $telephone = null, $coordonnees_bancaires = null, $adresse_livraison = null, $password = null) {
         // Construire la requête SQL dynamiquement selon si le mot de passe est fourni
         $sql = "UPDATE users SET 
+=======
+     */
+    public function updateUser($id, $firstname, $lastname, $email, $telephone = null, $coordonnees_bancaires = null, $adresse_livraison = null) {
+        $stmt = $this->pdo->prepare(
+            "UPDATE users SET 
+>>>>>>> 52ed14d931d384581b7c2e1e0565db03f4794db6
                 firstname = :firstname, 
                 lastname = :lastname, 
                 email = :email,
                 telephone = :telephone,
                 coordonnees_bancaires = :coordonnees_bancaires,
+<<<<<<< HEAD
                 adresse_livraison = :adresse_livraison";
         
         $params = [
+=======
+                adresse_livraison = :adresse_livraison
+            WHERE id = :id"
+        );
+        $stmt->execute([
+>>>>>>> 52ed14d931d384581b7c2e1e0565db03f4794db6
             ':firstname' => $firstname,
             ':lastname' => $lastname,
             ':email' => $email,
@@ -84,6 +98,7 @@ class UserManager {
             ':coordonnees_bancaires' => $coordonnees_bancaires,
             ':adresse_livraison' => $adresse_livraison,
             ':id' => $id
+<<<<<<< HEAD
         ];
         
         // Ajouter le mot de passe seulement s'il est fourni
@@ -96,5 +111,8 @@ class UserManager {
         
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
+=======
+        ]);
+>>>>>>> 52ed14d931d384581b7c2e1e0565db03f4794db6
     }
 }
