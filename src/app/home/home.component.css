@@ -143,25 +143,23 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: white;
-    border: 1px solid #e0e0e0;
+    background: transparent;
+    border: 1px solid #ddd;
     cursor: pointer;
-    color: #1a1a1a;
+    color: #666;
     font-size: 1.1rem;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .details-btn:hover {
-    background: #ff8c00;
+    color: #ff8c00;
     border-color: #ff8c00;
-    color: white;
-    transform: rotate(360deg);
-    box-shadow: 0 4px 8px rgba(255, 140, 0, 0.3);
+    background: white;
+    transform: scale(1.1);
 }
 
 .box-image {
