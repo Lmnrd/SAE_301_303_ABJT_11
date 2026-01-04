@@ -34,10 +34,9 @@
         <div class="box-header">
           <span class="brand-name">IT'SUSHI</span>
 
-          <!-- bouton pour ajouter une box au panier -->
-          <!-- le bouton ouvre le modal de quantité pour choisir avant la quantité puis ajouter au panier -->
-          <button class="add-to-cart-btn" title="Ajouter au panier" (click)="openQuantityModal(box)">
-            🛒
+          <!-- bouton pour voir les détails (anciennement ajouter au panier) -->
+          <button class="details-btn" title="Détails" (click)="openDetails(box)">
+            ℹ️
           </button>
         </div>
 
@@ -62,8 +61,8 @@
           <p class="box-price">{{ box.prix | currency:'EUR' }}</p>
           <br>
 
-          <!-- le bouton ouvre le modal de détails pour voir les détails de la box -->
-          <button (click)="openDetails(box)">Détails</button>
+          <!-- le bouton ouvre le modal de quantité pour ajouter au panier (anciennement détails) -->
+          <button (click)="openQuantityModal(box)">Ajouter au panier</button>
         </div>
 
       </div>
