@@ -1,0 +1,443 @@
+[
+    {
+        "id": 1,
+        "nom": "Tasty Blend",
+        "pieces": 12,
+        "prix": 12.50,
+        "image": "tasty-blend",
+        "details": "Une box savoureuse combinant une variété de californias, sushis et springs pour une expérience gustative équilibrée.",
+        "aliments": [
+            {
+                "nom": "California Saumon Avocat",
+                "quantite": 3
+            },
+            {
+                "nom": "Sushi Saumon",
+                "quantite": 3
+            },
+            {
+                "nom": "Spring Avocat Cheese",
+                "quantite": 3
+            },
+            {
+                "nom": "California pacific",
+                "quantite": 3
+            },
+            {
+                "nom": "Edamame/Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "saumon",
+            "avocat",
+            "cheese"
+        ]
+    },
+    {
+        "id": 2,
+        "nom": "Amateur Mix",
+        "pieces": 18,
+        "aliments": [
+            {
+                "nom": "Maki Salmon Roll",
+                "quantite": 3
+            },
+            {
+                "nom": "Spring Saumon Avocat",
+                "quantite": 3
+            },
+            {
+                "nom": "Maki Cheese Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "California Saumon Avocat",
+                "quantite": 3
+            },
+            {
+                "nom": "Edamame/Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "coriandre",
+            "saumon",
+            "avocat",
+            "cheese"
+        ],
+        "prix": 15.90,
+        "image": "amateur-mix",
+        "details": "Une box variée pour les amateurs de saveurs diverses, combinant makis, springs et californias."
+    },
+    {
+        "id": 3,
+        "nom": "Saumon Original",
+        "pieces": 11,
+        "aliments": [
+            {
+                "nom": "California Saumon Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "Sushi Saumon",
+                "quantite": 5
+            },
+            {
+                "nom": "Edamame/Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "saumon",
+            "avocat"
+        ],
+        "prix": 12.50,
+        "image": "saumon-original",
+        "details": "Une box classique pour les amateurs de saumon, avec une combinaison de californias et sushis."
+    },
+    {
+        "id": 4,
+        "nom": "Salmon Lovers",
+        "pieces": 18,
+        "aliments": [
+            {
+                "nom": "California Saumon Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "Spring Saumon Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "Sushi Saumon",
+                "quantite": 6
+            },
+            {
+                "nom": "Edamame/Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "coriandre",
+            "saumon",
+            "avocat"
+        ],
+        "prix": 15.90,
+        "image": "salmon-lovers",
+        "details": "Une box généreuse pour les vrais amateurs de saumon, avec une variété de californias, springs et sushis."
+    },
+    {
+        "id": 5,
+        "nom": "Salmon Classic",
+        "pieces": 10,
+        "aliments": [
+            {
+                "nom": "Sushi Saumon",
+                "quantite": 10
+            },
+            {
+                "nom": "Edamame/Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "saumon"
+        ],
+        "prix": 15.90,
+        "image": "salmon-classic",
+        "details": "Une box simple et délicieuse pour les amateurs de saumon, avec 10 sushis au saumon frais."
+    },
+    {
+        "id": 6,
+        "nom": "Master Mix",
+        "pieces": 12,
+        "aliments": [
+            {
+                "nom": "Sushi Saumon",
+                "quantite": 4
+            },
+            {
+                "nom": "Sushi Thon",
+                "quantite": 2
+            },
+            {
+                "nom": "California Thon Avocat",
+                "quantite": 3
+            },
+            {
+                "nom": "California Saumon Avocat",
+                "quantite": 3
+            },
+            {
+                "nom": "Edamame / Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "saumon",
+            "thon",
+            "avocat"
+        ],
+        "prix": 15.90,
+        "image": "master-mix",
+        "details": "Une box équilibrée avec une sélection de sushis et californias pour les amateurs de saumon et de thon."
+    },
+    {
+        "id": 7,
+        "nom": "Sunrise",
+        "pieces": 18,
+        "aliments": [
+            {
+                "nom": "Maki Salmon Roll",
+                "quantite": 6
+            },
+            {
+                "nom": "California Saumon Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "California Thon Cuit Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "Edamame / Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "saumon",
+            "thon",
+            "avocat",
+            "cheese"
+        ],
+        "prix": 15.90,
+        "image": "sunrise",
+        "details": "Un mélange savoureux de makis et de californias, parfait pour les amateurs de saumon et de thon."
+    },
+    {
+        "id": 8,
+        "nom": "Sando Box Chicken Katsu",
+        "pieces": 13,
+        "aliments": [
+            {
+                "nom": "Sando Chicken Katsu",
+                "quantite": 0.5
+            },
+            {
+                "nom": "Maki Salmon Roll",
+                "quantite": 6
+            },
+            {
+                "nom": "California Saumon Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "California Thon Cuit Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "Edamame / Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "saumon",
+            "viande",
+            "avocat",
+            "cheese"
+        ],
+        "prix": 15.90,
+        "image": "sando-box-chicken-katsu",
+        "details": "Une box gourmande combinant le croustillant du chicken katsu avec la fraîcheur des makis et californias."
+
+    },
+    {
+        "id": 9,
+        "nom": "Sando Box Salmon Aburi",
+        "pieces": 13,
+        "aliments": [
+            {
+                "nom": "Sando Salmon Aburi",
+                "quantite": 0.5
+            },
+            {
+                "nom": "California Saumon Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "California Thon Cuit Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "Edamame / Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "saumon",
+            "thon",
+            "avocat"
+        ],
+        "prix": 15.90,
+        "image": "sando-box-salmon-aburi",
+        "details": "Une box raffinée mettant en avant le saumon aburi accompagné de californias classiques."
+    },
+    {
+        "id": 10,
+        "nom": "Super Salmon",
+        "pieces": 24,
+        "aliments": [
+            {
+                "nom": "California Saumon Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "Maki Salmon Roll",
+                "quantite": 6
+            },
+            {
+                "nom": "Maki Salmon",
+                "quantite": 6
+            },
+            {
+                "nom": "Spring Saumon Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "Edamame / Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "coriandre",
+            "saumon",
+            "avocat",
+            "cheese"
+        ],
+        "prix": 19.90,
+        "image": "super-salmon",
+        "details": "Une box généreuse pour les amateurs de saumon, avec une variété de makis et de springs."
+    },
+    {
+        "id": 11,
+        "nom": "California Dream",
+        "pieces": 24,
+        "aliments": [
+            {
+                "nom": "California Saumon Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "California Crevette",
+                "quantite": 6
+            },
+            {
+                "nom": "California Thon Cuit Avocat",
+                "quantite": 6
+            },
+            {
+                "nom": "California Chicken Katsu",
+                "quantite": 6
+            },
+            {
+                "nom": "Edamame / Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "spicy",
+            "saumon",
+            "thon",
+            "crevette",
+            "viande",
+            "avocat"
+        ],
+        "prix": 19.90,
+        "image": "california-dream",
+        "details": "Un rêve californien avec une sélection de californias variés, parfait pour partager."
+    },
+    {
+        "id": 12,
+        "nom": "Gourmet Mix",
+        "pieces": 22,
+        "aliments": [
+            {
+                "nom": "Spring tataki Saumon",
+                "quantite": 6
+            },
+            {
+                "nom": "Signature Dragon Roll",
+                "quantite": 4
+            },
+            {
+                "nom": "California French Touch",
+                "quantite": 3
+            },
+            {
+                "nom": "California French salmon",
+                "quantite": 6
+            },
+            {
+                "nom": "California Yellowtail Ponzu",
+                "quantite": 3
+            },
+            {
+                "nom": "Edamame / Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "coriande",
+            "spicy",
+            "saumon",
+            "viande",
+            "avocat",
+            "seriole lalandi"
+        ],
+        "prix": 24.50,
+        "image": "gourmet-mix",
+        "details": "Une box gourmande avec une sélection raffinée de springs, rolls et californias pour les palais exigeants."
+    },
+    {
+        "id": 13,
+        "nom": "Fresh Mix",
+        "pieces": 22,
+        "aliments": [
+            {
+                "nom": "Signature Rock'n Roll",
+                "quantite": 4
+            },
+            {
+                "nom": "Maki Salmon Roll",
+                "quantite": 6
+            },
+            {
+                "nom": "California Pacific",
+                "quantite": 6
+            },
+            {
+                "nom": "Sushi Salmon",
+                "quantite": 4
+            },
+            {
+                "nom": "Sushi Saumon Tsukudani",
+                "quantite": 2
+            },
+            {
+                "nom": "Edamame / Salade de chou",
+                "quantite": 1
+            }
+        ],
+        "saveurs": [
+            "spicy",
+            "saumon",
+            "thon",
+            "avocat",
+            "cheese"
+        ],
+        "prix": 24.50,
+        "image": "fresh-mix",
+        "details": "Une box fraîcheur combinant des makis, californias et sushis pour une expérience gustative variée."
+    }
+]

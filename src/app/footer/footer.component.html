@@ -1,0 +1,62 @@
+<!--ce fichier contient le footer, qui apparait sur toutes les pages -->
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <!-- le logo permet de retourner sur la page d'accueil -->
+            <a routerLink="/" class="logo-placeholder" aria-label="Accueil">
+                <img src="assets/logo_blanc.png" alt="USHI Logo" style="height: 60px;">
+            </a>
+        </div>
+
+        <div class="footer-links">
+            <div class="column">
+                <h4>Promotion</h4>
+                <ul>
+                    <li>Etudiant</li>
+                    <li>Commande > 50€</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h4>Menu</h4>
+                <ul>
+                    <li><a routerLink="/" fragment="commandes" class="menu-link">Sushi</a></li>
+                    <li><a routerLink="/panier" class="menu-link">Panier</a></li>
+                </ul>
+            </div>
+            <div class="column">
+                <h4>À propos</h4>
+                <ul>
+                    <li><a routerLink="/about" class="menu-link">À propos</a></li>
+                    <li><a routerLink="/about" fragment="tableau-de-bord" class="menu-link">Revenu</a></li>
+                </ul>
+            </div>
+            <div class="column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a routerLink="/about" fragment="contact-form" class="menu-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-contact-info">
+            <p class="email">it'sushi&#64;gmail.com</p>
+            <p class="phone">+33 6 00 00 00 00</p>
+            <div class="social-icons">
+                <a href="#" aria-label="Twitter">
+                    <img src="assets/images/icons-twitter.png" alt="Twitter" class="social-icon">
+                </a>
+                <a href="#" aria-label="Facebook">
+                    <img src="assets/images/icons-facebook.png" alt="Facebook" class="social-icon">
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <img src="assets/images/icons-instagram.png" alt="Instagram" class="social-icon">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&#64;All rights It'SUSHI</p>
+    </div>
+</footer>

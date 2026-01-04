@@ -1,0 +1,422 @@
+/* Main Container */
+.account-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 150px);
+  /* Adjust based on header/footer */
+  background-color: #1a1a1a;
+  /* Match global dark theme */
+  padding: 40px 20px;
+}
+
+/* Card Structure */
+.account-card {
+  display: flex;
+  width: 900px;
+  max-width: 100%;
+  background-color: white;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  min-height: 500px;
+}
+
+/* Left Panel (Logo) */
+.card-left {
+  flex: 1;
+  background-color: #161616;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.logo-box {
+  width: 80%;
+  max-width: 250px;
+}
+
+.card-logo {
+  width: 100%;
+  height: auto;
+}
+
+/* Right Panel (Content) */
+.card-right {
+  flex: 1.5;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  color: black;
+  /* Text on white bg */
+}
+
+/* Typography */
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  columns: #000;
+}
+
+/* Accordion Styles */
+.accordion-section {
+  margin-bottom: 20px;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+.accordion-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  padding-left: 10px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 1rem;
+  color: #333;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-bottom-color: #ff8c00;
+}
+
+.rgpd {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Order List Styles */
+.order-item {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.order-link {
+  color: #ff8c00;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.order-details p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.order-actions-btn {
+  margin-top: 15px;
+  text-align: right;
+}
+
+/* Action Buttons */
+.action-btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-block;
+}
+
+.orange-btn {
+  background-color: #ff8c00;
+  color: white;
+}
+
+.orange-btn:hover {
+  background-color: #e67e00;
+}
+
+/* Cancel Button */
+.cancel-btn {
+  background-color: #666;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #555;
+}
+
+/* Button Group (for edit mode) */
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Success/Error Messages */
+.message {
+  padding: 12px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Editable input (not readonly) */
+.form-group input:not([readonly]) {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-group input:not([readonly]):focus {
+  border-color: #ff8c00;
+  box-shadow: 0 0 5px rgba(255, 140, 0, 0.3);
+}
+
+
+/* Guest Content (Not Logged In) */
+.guest-content p {
+  margin-bottom: 30px;
+  color: #666;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.auth-btn {
+  display: block;
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.login-btn {
+  background-color: #333;
+  color: white;
+}
+
+.login-btn:hover {
+  background-color: #555;
+}
+
+.register-btn {
+  background-color: #ff8c00;
+  color: white;
+}
+
+.register-btn:hover {
+  background-color: #e67e00;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .account-card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .card-left {
+    padding: 30px;
+    min-height: 200px;
+  }
+
+  .card-logo {
+    max-width: 150px;
+  }
+
+  .card-right {
+    padding: 30px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RGPD Link Style */
+.rgpd-link {
+  color: #ff8c00;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.rgpd-link:hover {
+  color: #e67e00;
+}
+
+/* RGPD Modal Overlay */
+.rgpd-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+/* RGPD Modal */
+.rgpd-modal {
+  background: #1a1a1a;
+  border-radius: 16px;
+  max-width: 700px;
+  width: 90%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid #333;
+}
+
+.rgpd-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  border-bottom: 1px solid #333;
+}
+
+.rgpd-modal-header h2 {
+  color: #ff8c00;
+  font-size: 1.3rem;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.rgpd-modal-header .close-btn {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.rgpd-modal-header .close-btn:hover {
+  color: white;
+}
+
+.rgpd-modal-content {
+  padding: 25px;
+  overflow-y: auto;
+  color: #ccc;
+  line-height: 1.7;
+}
+
+.rgpd-modal-content h3 {
+  color: #ff8c00;
+  font-size: 1.1rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.rgpd-modal-content h3:first-child {
+  margin-top: 0;
+}
+
+.rgpd-modal-content p {
+  margin-bottom: 15px;
+}
+
+.rgpd-modal-content ul {
+  margin: 10px 0 15px 20px;
+  padding: 0;
+}
+
+.rgpd-modal-content li {
+  margin-bottom: 8px;
+}
+
+.rgpd-modal-content a {
+  color: #ff8c00;
+  text-decoration: none;
+}
+
+.rgpd-modal-content a:hover {
+  text-decoration: underline;
+}
+
+.rgpd-modal-footer {
+  padding: 20px 25px;
+  border-top: 1px solid #333;
+  text-align: center;
+}

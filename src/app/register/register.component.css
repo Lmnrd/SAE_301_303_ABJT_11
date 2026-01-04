@@ -1,0 +1,185 @@
+/* Main Container - Dark Background */
+.page-inscription {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Card Container */
+.carte-globale {
+    display: flex;
+    width: 900px;
+    min-height: 600px;
+    background-color: white;
+    border-radius: 30px;
+    overflow: visible;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+}
+
+.panneau-gauche {
+    flex: 1;
+    background-color: #161616;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 5%;
+}
+
+.logo {
+    width: 60%;
+    max-width: 250px;
+    height: auto;
+}
+
+.panneau-droit {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+/* Typography */
+h2 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin: 0 0 10px 0;
+    color: #000;
+}
+
+.sous-titre {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.separateur {
+    height: 1px;
+    background-color: #ddd;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+/* Form Elements */
+.groupe-champ {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input {
+    padding: 12px 15px;
+    border: 1px solid #777;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #ff7f00;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+/* Button */
+.bouton-valider {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    background-color: #ff8c00;
+    /* Orange */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.bouton-valider:hover:not(:disabled) {
+    background-color: #e67e00;
+}
+
+.bouton-valider:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.message-erreur {
+    color: red;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* Responsive Design */
+.bouton-login {
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    box-sizing: border-box;
+}
+
+.bouton-login:hover {
+    background-color: #555;
+}
+
+@media (max-width: 768px) {
+    .carte-globale {
+        flex-direction: column;
+        width: 90%;
+        min-height: auto;
+        max-width: 400px;
+        padding: 20px;
+    }
+
+    .panneau-gauche {
+        height: 120px;
+        margin-bottom: 20px;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    .panneau-droit {
+        padding: 20px;
+        justify-content: flex-start;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .sous-titre {
+        font-size: 0.85rem;
+    }
+}

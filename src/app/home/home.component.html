@@ -1,0 +1,133 @@
+<!-- ce fichier contient la page d'accueil -->
+
+<div class="hero-section">
+  <div class="hero-left">
+    <img src="assets/images/accueil.png" alt="">
+  </div>
+
+  <div class="hero-right">
+    <div class="content-wrapper">
+      <img src="assets/logo_blanc.png" class="brand-logo" alt="Logo It'Sushi">
+
+      <div class="text-content">
+        <h2>De la nourriture appétissante<br>pour un maximum de saveurs</h2>
+        <p>
+          Bienvenue sur <strong>It'SUSHI</strong>, nous vous proposons une expérience
+          sushi authentique avec des produits frais.
+        </p>
+        <a routerLink="/about" class="see-more">voir plus →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- partie de commande -->
+<!-- toutes les boxes contiennent des boutons, des informations pour intéragir et ajouter les boxes au panier. -->
+<section class="boxes-section" id="commandes">
+  <h1>PASSER COMMANDE</h1><br><br>
+  <div class="boxes-container">
+    <div class="boxes-grid">
+
+      <!-- on affiche les boxes avec une boucle ngFor pour toutes les avoir -->
+      <div *ngFor="let box of boxes" class="box-card">
+
+        <div class="box-header">
+          <span class="brand-name">IT'SUSHI</span>
+
+          <!-- bouton pour ajouter une box au panier -->
+          <!-- le bouton ouvre le modal de quantité pour choisir avant la quantité puis ajouter au panier -->
+          <button class="add-to-cart-btn" title="Ajouter au panier" (click)="openQuantityModal(box)">
+            🛒
+          </button>
+        </div>
+
+        <div class="box-image">
+          <!-- on affiche l'image liée à chaque box -->
+          <img [src]="'assets/images/' + box.image + '.png'" [alt]="box.nom" class="product-image">
+        </div>
+
+        <div class="box-details">
+          <!-- on affiche le nom de la box et quelques informations -->
+          <h3 class="box-name">{{ box.nom }}</h3>
+          <p class="box-info">{{ box.pieces }} pièces</p>
+
+          <div class="box-flavors">
+            <!-- on affiche les saveurs de la box -->
+            <span *ngFor="let saveur of box.saveurs" class="flavor-tag">
+              {{ saveur }}
+            </span>
+          </div>
+
+          <!-- on affiche le prix de la box -->
+          <p class="box-price">{{ box.prix | currency:'EUR' }}</p>
+          <br>
+
+          <!-- le bouton ouvre le modal de détails pour voir les détails de la box -->
+          <button (click)="openDetails(box)">Détails</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- partie détails de la boxe -->
+<div class="modal-overlay" *ngIf="isDetailsModalOpen" (click)="closeDetailsModal()">
+
+  <div class="modal-content" (click)="$event.stopPropagation()">
+
+    <button class="close-btn" (click)="closeDetailsModal()">✕</button>
+
+    <!-- on affiche seulement les informations de la box cliquée -->
+    <h2>{{ selectedBox?.nom }}</h2>
+    <p>{{ selectedBox?.details }}</p>
+
+    <h3>Composition ({{ selectedBox?.pieces }} pièces)</h3>
+    <ul>
+      <li *ngFor="let aliment of selectedBox?.aliments">
+        {{ aliment.quantite }} × {{ aliment.nom }}
+      </li>
+    </ul>
+
+    <h3>Saveurs</h3>
+    <div>
+      <span *ngFor="let saveur of selectedBox?.saveurs" class="flavor-tag">
+        {{ saveur }}
+      </span>
+    </div><br>
+
+    <p class="box-price">
+      {{ selectedBox?.prix | currency:'EUR' }}
+    </p>
+
+    <button class="add-to-cart-modal-btn" (click)="addToCartFromDetails()">
+      Ajouter au panier
+    </button>
+
+  </div>
+</div>
+
+<!-- partie quantité de la boxe -->
+<!-- cette partie permet de choisir la quantité de la boxe avant de l'ajouter au panier -->
+<div class="modal-overlay" *ngIf="isQuantityModalOpen" (click)="closeQuantityModal()">
+
+  <div class="modal-content quantity-modal" (click)="$event.stopPropagation()">
+
+    <button class="close-btn" (click)="closeQuantityModal()">✕</button>
+
+    <h2>Ajouter au panier</h2>
+    <p>{{ selectedBoxForCart?.nom }}</p>
+
+    <div class="quantity-controls">
+      <button (click)="decreaseQty()">−</button>
+      <span>{{ quantite }}</span>
+      <button (click)="increaseQty()">+</button>
+    </div>
+
+    <button class="confirm-btn" (click)="confirmAddToCart()">
+      Ajouter ({{ quantite * (selectedBoxForCart?.prix || 0) | currency:'EUR' }})
+    </button>
+
+  </div>
+</div>
