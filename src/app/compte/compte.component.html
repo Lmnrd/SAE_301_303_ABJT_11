@@ -72,7 +72,7 @@
                 </div>
                 <div class="form-group">
                   <label>Nouveau mot de passe</label>
-                  <input type="password" [(ngModel)]="editForm.password" name="password" 
+                  <input type="password" [(ngModel)]="editForm.password" name="password"
                     placeholder="Laisser vide pour ne pas modifier">
                 </div>
                 <div class="form-group">
@@ -97,7 +97,7 @@
           </div>
           <div class="accordion-content" *ngIf="openSection === 'mes-commandes'">
             <div *ngIf="localOrders.length === 0" class="no-orders">
-              <p>Aucune commande enregistrée localement.</p>
+              <p>Aucune commande enregistrée.</p>
             </div>
 
             <div class="order-item" *ngFor="let order of localOrders">

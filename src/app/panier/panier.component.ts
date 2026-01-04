@@ -48,7 +48,7 @@ export class PanierComponent implements OnInit {
     // récupérer le panier via le service
     this.articles = this.panierService.getPanier();
 
-    // on remplit les infos existantes de l'utilisateur
+    // Pré-remplir avec les infos existantes de l'utilisateur
     const user = this.authService.getCurrentUser();
     if (user) {
       this.livraisonForm = {
@@ -62,15 +62,16 @@ export class PanierComponent implements OnInit {
   get detailsTotal() {
     // récupérer le total final
     const user = this.authService.getCurrentUser();
-    const isEtudiant = user?.type_compte === 'etudiant';
-    return this.panierService.calculerTotalFinal(isEtudiant);
+    const isEtudiant = user?.type_compte === 'etudiant'; // si l'utilisateur est étudiant
+    return this.panierService.calculerTotalFinal(isEtudiant); // retourner le total final
   }
 
   get total(): number {
+    // récupérer le total final après les autres calculs
     return this.detailsTotal.totalFinal;
   }
 
-  // on passe à l'étape de livraison
+  // Passer à l'étape de livraison
   passerAuCheckout() {
     const user = this.authService.getCurrentUser();
     if (!user) {
@@ -81,13 +82,13 @@ export class PanierComponent implements OnInit {
     this.checkoutStep = 'livraison';
   }
 
-  // on retourne au panier
+  // Retourner au panier
   retourPanier() {
     this.checkoutStep = 'panier';
     this.message = '';
   }
 
-  // on vérifie si le formulaire est valide
+  // Vérifier si le formulaire est valide
   isFormValid(): boolean {
     return (
       this.livraisonForm.telephone.trim() !== '' &&
@@ -96,21 +97,22 @@ export class PanierComponent implements OnInit {
     );
   }
 
-  // on confirme la commande avec les infos de livraison
+  // Confirmer la commande avec les infos de livraison
   confirmerCommande() {
+    // confirmer la commande finale
     const user = this.authService.getCurrentUser();
-    if (!user) {
+    if (!user) { // si l'utilisateur n'est pas connecté
       this.message = 'Veuillez vous connecter pour valider votre commande.';
       return;
     }
 
-    // on vérifie que tous les champs sont remplis
+    // Vérifier que tous les champs sont remplis
     if (!this.isFormValid()) {
       this.message = 'Veuillez remplir tous les champs de livraison.';
       return;
     }
 
-    // on sauvegarde les infos de livraison dans le profil utilisateur
+    // Sauvegarder les infos de livraison dans le profil utilisateur
     this.authService.updateUser({
       id: user.id,
       firstname: user.firstname,
@@ -121,23 +123,22 @@ export class PanierComponent implements OnInit {
       adresse_livraison: this.livraisonForm.adresse_livraison
     }).subscribe({
       next: () => {
-        // une fois les infos mises à jour, on crée la commande
+        // Créer la commande après avoir sauvegardé les infos
         this.commandeService.creerCommande(this.articles, user.id).subscribe({
           next: (res) => {
             this.message = 'Commande réussie ! Livraison prévue à : ' + this.livraisonForm.adresse_livraison;
             this.orderSuccess = true;
 
-            // on sauvegarde dans le LocalStorage
-            const commandeLocale = {
-              id: (res as any).commande_id || 'TEMP-' + Date.now(),
-              date: new Date(),
-              total: this.detailsTotal.totalFinal,
+            // Sauvegarder la commande dans l'historique local
+            const commandeHistorique = {
+              date: new Date().toISOString(),
               articles: [...this.articles],
-              adresse: this.livraisonForm.adresse_livraison
+              total: this.total,
+              adresse_livraison: this.livraisonForm.adresse_livraison
             };
-            this.panierService.sauvegarderCommandeLocale(commandeLocale);
+            this.panierService.sauvegarderCommandeLocale(commandeHistorique);
 
-            this.panierService.viderPanier();
+            this.panierService.viderPanier(); // vider le panier via le service
             this.articles = [];
             this.checkoutStep = 'panier';
           },
@@ -154,11 +155,16 @@ export class PanierComponent implements OnInit {
     });
   }
 
-
   viderPanier() {
     this.panierService.viderPanier();
     this.articles = [];
   }
+
+
+  // pas utile si on ne garde pas le commande.component
+  // retour() {
+  //   this.router.navigate(['/commande']);
+  // }
 
   retour_menu() {
     this.router.navigate(['/home']);

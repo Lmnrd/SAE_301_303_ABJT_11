@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { ArticleCommande } from './commandes.service';
 
 @Injectable({
@@ -6,13 +7,39 @@ import { ArticleCommande } from './commandes.service';
 })
 export class PanierService {
     private readonly CLE_SESSION = 'temp_panier';
+    private readonly CLE_HISTORIQUE_PREFIX = 'historique_commandes_';
 
-    constructor() { }
+    constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
+    /**
+     * Récupère l'ID de l'utilisateur connecté depuis le sessionStorage
+     */
+    private getCurrentUserId(): number | null {
+        if (!isPlatformBrowser(this.platformId)) {
+            return null;
+        }
+        const userStr = sessionStorage.getItem('user');
+        if (userStr) {
+            const user = JSON.parse(userStr);
+            return user.id || null;
+        }
+        return null;
+    }
+
+    /**
+     * Génère la clé de stockage unique pour l'historique de l'utilisateur
+     */
+    private getHistoriqueKey(): string | null {
+        const userId = this.getCurrentUserId();
+        if (userId) {
+            return `${this.CLE_HISTORIQUE_PREFIX}${userId}`;
+        }
+        return null;
+    }
 
     /**
      * Récupère le panier actuel depuis le sessionStorage
      */
-    private readonly CLE_HISTORIQUE = 'historique_commandes';
 
     /**
      * Récupère le panier actuel depuis le localStorage
@@ -49,22 +76,31 @@ export class PanierService {
      * Sauvegarde une commande dans l'historique local
      */
     sauvegarderCommandeLocale(commande: any) {
-        if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+        const historiqueKey = this.getHistoriqueKey();
+        if (!historiqueKey) {
+            console.warn('Aucun utilisateur connecté, historique non sauvegardé');
             return;
         }
         const historique = this.getCommandesLocales();
         historique.push(commande);
-        localStorage.setItem(this.CLE_HISTORIQUE, JSON.stringify(historique));
+        localStorage.setItem(historiqueKey, JSON.stringify(historique));
     }
 
     /**
      * Récupère l'historique des commandes locales
      */
     getCommandesLocales(): any[] {
-        if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+        if (!isPlatformBrowser(this.platformId)) {
             return [];
         }
-        const data = localStorage.getItem(this.CLE_HISTORIQUE);
+        const historiqueKey = this.getHistoriqueKey();
+        if (!historiqueKey) {
+            return [];
+        }
+        const data = localStorage.getItem(historiqueKey);
         return data ? JSON.parse(data) : [];
     }
 
