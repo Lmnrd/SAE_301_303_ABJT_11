@@ -1,1 +1,0 @@
-ALTER TABLE users ADD COLUMN api_token VARCHAR(255) NULL;
