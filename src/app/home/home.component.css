@@ -1,19 +1,19 @@
-/* Hero Container */
+/* Conteneur Hero */
 .hero-section {
     display: flex;
     min-height: calc(100vh - 80px);
-    /* Adjust for header height */
+    /* Ajuster pour la hauteur de l'en-tête */
     color: white;
 }
 
-/* Left Side */
+/* Côté Gauche */
 .hero-left {
     flex: 1;
     display: flex;
     align-items: center;
-    /* Center vertically */
+    /* Centrer verticalement */
     justify-content: center;
-    /* Center horizontally */
+    /* Centrer horizontalement */
     padding: 50px;
 }
 
@@ -34,7 +34,7 @@
     margin: 0;
 }
 
-/* Right Side */
+/* Côté Droit */
 .hero-right {
     margin-left: 3%;
     flex: 1;
@@ -52,7 +52,6 @@
     max-width: 100%;
     height: auto;
     margin-bottom: 30px;
-    /* Adjust if the logo needs specific sizing */
     max-height: 200px;
 }
 
@@ -84,7 +83,7 @@
     color: #ff8c00;
 }
 
-/* Boxes Section */
+/* Section des boxes */
 .boxes-section {
     background: #2a2a2a;
     padding: 60px 20px;
@@ -236,7 +235,7 @@
     background-color: #cd5601;
 }
 
-/* Responsive */
+/* Responsive (Adaptatif) */
 @media (max-width: 900px) {
     .hero-section {
         flex-direction: column;
@@ -284,7 +283,7 @@
     }
 }
 
-/* MODAL */
+/* MODALE */
 .modal-overlay {
     position: fixed;
     inset: 0;

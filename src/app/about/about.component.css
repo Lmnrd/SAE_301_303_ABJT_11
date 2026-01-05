@@ -6,7 +6,7 @@
   background: transparent;
 }
 
-/* HERO / BRAND SECTION */
+/* SECTION HERO / MARQUE */
 .hero-section {
   width: 100%;
   padding: 60px 20px;
@@ -66,12 +66,12 @@
   width: 220px;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  background: rgba(255,255,255,0.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.02);
   padding: 12px;
 }
 
-/* STORY SECTION STYLES */
+/* STYLES DE LA SECTION HISTOIRE */
 .story-section {
   max-width: 1400px;
   margin: 20px auto 40px auto;
@@ -105,7 +105,7 @@
   height: auto;
   display: block;
   border-radius: 6px;
-  box-shadow: 0 14px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
 }
 
 .story-text {
@@ -127,7 +127,7 @@
   font-size: 1.1rem;
 }
 
-/* DASHBOARD STYLES */
+/* STYLES DU TABLEAU DE BORD */
 .dashboard-section {
   width: 100%;
   margin: 20px 0 60px 0;
@@ -135,7 +135,7 @@
   box-sizing: border-box;
   background: linear-gradient(180deg, #2b2b2b 0%, #232323 100%);
   border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.03);
+  border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .dashboard-title {
@@ -188,7 +188,7 @@
   width: 100%;
 }
 
-/* ABOUT CONTENT STYLES */
+/* STYLES DU CONTENU À PROPOS */
 .about-content {
   display: flex;
   width: 100%;
@@ -346,4 +346,3 @@ form {
     padding: 30px 0;
   }
 }
-

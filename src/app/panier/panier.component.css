@@ -1,3 +1,4 @@
+/* Conteneur Principal du Panier */
 .panier-container {
   max-width: 900px;
   margin: 4rem auto;
@@ -9,6 +10,7 @@
   color: white;
 }
 
+/* Titre de la Page */
 h2 {
   text-align: center;
   color: white;
@@ -21,11 +23,13 @@ h2 {
   padding-bottom: 1rem;
 }
 
+/* Liste des Articles */
 .cart-items {
   margin-top: 1.5rem;
   overflow-x: auto;
 }
 
+/* Styles du Tableau */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -61,6 +65,7 @@ tr:hover td {
   text-align: right;
 }
 
+/* Zone des Actions */
 .actions {
   display: flex;
   justify-content: flex-end;
@@ -70,6 +75,7 @@ tr:hover td {
   padding-top: 2rem;
 }
 
+/* Styles des Boutons */
 button {
   padding: 1rem 2rem;
   border: none;
@@ -81,6 +87,7 @@ button {
   letter-spacing: 0.5px;
 }
 
+/* Bouton Vider le Panier */
 .btn-clear {
   background-color: transparent;
   color: #aaa;
@@ -93,6 +100,7 @@ button {
   border-color: white;
 }
 
+/* Bouton Confirmer */
 .btn-confirm {
   background-color: #ff8c00;
   color: white;
@@ -104,6 +112,7 @@ button {
   box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
 }
 
+/* Message Panier Vide */
 .empty-message {
   text-align: center;
   padding: 5rem 2rem;
@@ -138,6 +147,7 @@ button {
   transform: translateY(-2px);
 }
 
+/* Bannière de Message (Succès/Erreur) */
 .message-banner {
   margin-top: 2rem;
   padding: 1rem;
@@ -151,6 +161,7 @@ button {
   border: 1px solid #2ecc71;
 }
 
+/* Section Après Commande */
 .post-order {
   margin-top: 2rem;
   text-align: center;
@@ -167,6 +178,7 @@ button {
   color: white;
 }
 
+/* Ligne de Remise */
 .remise-row td {
   color: #2ecc71 !important;
   font-size: 0.9rem;
@@ -174,6 +186,7 @@ button {
   padding: 0.5rem 1.2rem;
 }
 
+/* Ligne du Total Final */
 .total-final-row td {
   font-size: 1.2rem;
   border-top: 2px solid #ff8c00;
@@ -185,6 +198,7 @@ button {
   margin-top: 1.5rem;
 }
 
+/* Résumé de la Commande */
 .order-summary {
   background: rgba(255, 140, 0, 0.1);
   border: 1px solid #ff8c00;
@@ -200,6 +214,7 @@ button {
   margin: 0;
 }
 
+/* Groupe de Champs du Formulaire */
 .form-group {
   margin-bottom: 1.5rem;
 }
@@ -240,6 +255,7 @@ button {
   margin-top: 0.5rem;
 }
 
+/* Actions du Formulaire de Livraison */
 .actions-livraison {
   display: flex;
   justify-content: space-between;
@@ -249,6 +265,7 @@ button {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Bouton Retour */
 .btn-back {
   background-color: transparent;
   color: #aaa;

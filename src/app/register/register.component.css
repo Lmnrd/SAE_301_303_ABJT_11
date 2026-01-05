@@ -1,4 +1,4 @@
-/* Main Container - Dark Background */
+/* Conteneur Principal avec fond sombre */
 .page-inscription {
     display: flex;
     justify-content: center;
@@ -8,7 +8,7 @@
     font-family: 'Inter', sans-serif;
 }
 
-/* Card Container */
+/* Conteneur de la Carte */
 .carte-globale {
     display: flex;
     width: 900px;
@@ -46,7 +46,7 @@
     overflow-y: auto;
 }
 
-/* Typography */
+/* Typographie */
 h2 {
     font-size: 2.5rem;
     font-weight: 500;
@@ -67,7 +67,7 @@ h2 {
     width: 100%;
 }
 
-/* Form Elements */
+/* Éléments du Formulaire */
 .groupe-champ {
     margin-bottom: 20px;
     display: flex;
@@ -98,13 +98,13 @@ input::placeholder {
     color: #aaa;
 }
 
-/* Button */
+/* Bouton */
 .bouton-valider {
     margin-top: 20px;
     width: 100%;
     padding: 15px;
     background-color: #ff8c00;
-    /* Orange */
+
     color: white;
     border: none;
     border-radius: 8px;
@@ -129,7 +129,7 @@ input::placeholder {
     text-align: center;
 }
 
-/* Responsive Design */
+/* Design Responsive (Adaptatif) */
 .bouton-login {
     display: block;
     margin-top: 10px;

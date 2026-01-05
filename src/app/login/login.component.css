@@ -1,4 +1,4 @@
-/* Main Container - Dark Background */
+/* Conteneur Principal avec fond sombre */
 .page-inscription {
     display: flex;
     justify-content: center;
@@ -8,7 +8,7 @@
     font-family: 'Inter', sans-serif;
 }
 
-/* Card Container */
+/* Conteneur de la Carte */
 .carte-globale {
     display: flex;
     width: 900px;
@@ -16,12 +16,12 @@
     background-color: white;
     border-radius: 30px;
     overflow: hidden;
-    /* To clip the left panel corners */
+    /* Pour rogner les coins du panneau gauche */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     padding: 30px;
 }
 
-/* Left Panel - Logo Area */
+/* Panneau Gauche - Zone du Logo */
 .panneau-gauche {
     flex: 1;
     background-color: #161616;
@@ -32,14 +32,14 @@
     border-radius: 5%;
 }
 
-/* You may need to adjust image size based on actual asset */
+/* Logo */
 .logo {
     width: 60%;
     max-width: 250px;
     height: auto;
 }
 
-/* Right Panel - Form Area */
+/* Panneau Droit - Zone du Formulaire */
 .panneau-droit {
     flex: 1;
     padding: 50px;
@@ -49,7 +49,7 @@
     background-color: #fff;
 }
 
-/* Typography */
+/* Typographie */
 h2 {
     font-size: 2.5rem;
     font-weight: 500;
@@ -70,7 +70,7 @@ h2 {
     width: 100%;
 }
 
-/* Form Elements */
+/* Éléments du Formulaire */
 .groupe-champ {
     margin-bottom: 20px;
     display: flex;
@@ -101,13 +101,12 @@ input::placeholder {
     color: #aaa;
 }
 
-/* Button */
+/* Bouton */
 .bouton-valider {
     margin-top: 20px;
     width: 100%;
     padding: 15px;
     background-color: #ff8c00;
-    /* Orange */
     color: white;
     border: none;
     border-radius: 8px;
@@ -132,7 +131,7 @@ input::placeholder {
     text-align: center;
 }
 
-/* Responsive Design */
+/* Design Responsive (Adaptatif) */
 .bouton-login {
     display: block;
     margin-top: 10px;

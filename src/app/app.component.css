@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-/* Global Dark Theme */
+/* Thème Sombre Global */
 :host {
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@
     width: 100%;
 }
 
-/* Header */
+/* En-tête */
 header {
     display: flex;
     justify-content: space-between;
@@ -35,7 +35,7 @@ header {
     width: auto;
 }
 
-/* Navigation & Icons */
+/* Navigation & Icônes */
 .main-nav {
     display: flex;
     align-items: center;
@@ -84,8 +84,7 @@ header {
     color: #ff8c00;
 }
 
-/* Burger Menu Overlay */
-/* Burger Menu & Cart Overlay Shared Styles */
+/* Menu Burger & Overlay Panier - Styles Partagés */
 .menu-overlay,
 .cart-overlay {
     backdrop-filter: blur(15px);
@@ -103,16 +102,15 @@ header {
     animation: slideInRight 0.3s ease-out;
 }
 
-/* Burger Menu Specific Alignment */
+/* Alignement Spécifique du Menu Burger */
 .menu-overlay {
     justify-content: center;
     align-items: center;
 }
 
-/* Cart Overlay Specific Alignment */
+/* Alignement Spécifique de l'Overlay Panier */
 .cart-overlay {
     padding: 80px 20px 20px 20px;
-    /* Top padding for close button space */
     color: white;
 }
 
