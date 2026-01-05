@@ -1,3 +1,10 @@
+//Il récupère les articles du panier et les stocke dans le localStorage
+//Il permet de calculer le montant total des avant remises
+//Il permet de calculer les remises
+//Il permet de calculer le total final
+//Il permet de sauvegarder une commande dans l'historique local
+//Il permet de récupérer l'historique des commandes locales
+
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ArticleCommande } from './commandes.service';

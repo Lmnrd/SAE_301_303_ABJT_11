@@ -1,3 +1,5 @@
+//Il récupère les données des commandes et les transforme en données pour les graphiques
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
