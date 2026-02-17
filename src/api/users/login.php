@@ -37,7 +37,7 @@ $token = bin2hex(random_bytes(32));
 $manager->updateToken($user['id'], $token);
 
 echo json_encode([
-    "message" => "Connexion réussie",
+    "message" => "Connexion réussie", 
     "token" => $token,
     "user" => [
         "id" => (int)$user['id'],
